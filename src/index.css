@@ -1,3 +1,22 @@
+:root {
+  --clr-grey-1: #A4A4A4;
+  --clr-grey-2: #EBEBEB;
+  --clr-grey-9: #F3F3F3;
+  --clr-grey-10: hsla(213, 35%, 94%, 0.753);
+  --radius: 0.5rem;
+  --clr-primary-10: hsla(288, 78%, 39%, 0.87);
+  --clr-primary-11: #8D28AD;
+  --clr-primary-5: hsl(281, 63%, 48%);
+  --clr-primary-4: #CA8FDD;
+  --clr-white: #fff;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +24,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
