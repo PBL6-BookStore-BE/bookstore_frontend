@@ -1,11 +1,9 @@
 import React from 'react'
-import Footer from './components/Footer/Footer';
-import StoreFeatures from './components/Features/StoreFeatures';
+import { ChakraProvider } from '@chakra-ui/react'
 function App() {
   return (
-    <div className="App">
-
-    </div>
+    <ChakraProvider className="App">
+    </ChakraProvider>
   );
 }
 
