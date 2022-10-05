@@ -1,23 +1,22 @@
-import React from "react";
 import { Helmet } from "react-helmet";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import LayoutAuthentication from "../../layout/LayoutAuthentication";
 import RegisterForm from "../../modules/auth/RegisterForm";
 import { Link } from "react-router-dom";
 import './style.css';
 import { Button } from "@chakra-ui/react";
 import { GoogleIcon } from "../../components/icons";
+import * as yup from "yup";
 
 const schema = yup.object({
-  firstName: yup.string().required("Please provide a full name."),
+  fullname: yup.string().required("Please provide a full name."),
   email: yup.string()
     .email("Please enter a valid email address.")
     .required("Please provide an email address."),
   password: yup.string()
     .required("Please provide a password.")
-    .min(6, "Your password must be at least 6 characters long."),
+    .min(8, "Your password must be at least 8 characters long."),
   confirmPassword: yup.string()
     .required("Please provide a confirm password.")
     .oneOf([yup.ref("password")], "Confirm Password must match with Password."),
@@ -27,16 +26,14 @@ function Register()  {
   const methods = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      fulllName: '',
+      fullname: '',
       email: '',
-      pass: '',
+      password: '',
     },
     mode: 'onSubmit',
   });
 
-  const onSubmit = () => {
-
-  }
+  const onSubmit = (data) => console.log(data);
 
   return (
     <LayoutAuthentication heading="Sign Up">
