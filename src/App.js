@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Audiobooks from "./pages/Audiobooks";
 import Register from "./pages/auth/Register";
+import Login from "./pages/auth/Login";
 import Books from "./pages/Books";
 import Home from "./pages/Home";
 import Magazine from "./pages/Magazine";
@@ -13,6 +14,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/books/*" element={<Books />} />
         <Route path="/magazine/*" element={<Magazine />} />
