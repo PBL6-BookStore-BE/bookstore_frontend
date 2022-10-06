@@ -1,0 +1,158 @@
+#footer {
+    height:70px;
+    background: var(--clr-white);
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    color: rgb(19, 18, 18);
+    padding: 30px 0;
+}
+
+#footer h3 {
+    font-weight: 600;
+}
+
+#footer .row {
+    width: 85%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+#footer .row-01 p {
+    margin-top: 24px;
+}
+
+#footer .row-02 {
+    margin-top: 35px;
+}
+
+#footer .col {
+    flex-basis: 25%;
+    padding: 10px;
+}
+
+#footer .col:nth-child(2),
+#footer .col:nth-child(3) {
+    flex-basis: 15%
+}
+
+#footer .social li {
+    font-size: 0.8rem;
+}
+
+#footer .social i {
+    border-color: var(--clr-primary-9);
+    display: inline-block;
+    line-height: 40px;
+    height: 40px;
+    width: 40px;
+    margin: 0 10px 10px 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--clr-grey-10);
+    text-align: center;
+    cursor: pointer;
+    color: var(--clr-primary-4);
+    position: relative;
+}
+
+#footer .social i svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 40px;
+}
+
+#footer .social i:hover {
+    color: var(--clr-white);
+    background-color: var(--clr-primary-10);
+}
+
+#footer .logo {
+    width: 80px;
+    margin-bottom: 10px;
+}
+
+#footer .col h3 {
+    width: fit-content;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+#footer ul li {
+    list-style: none;
+    margin-bottom: 12px
+}
+
+#footer ul.social {
+    padding-left: 0px;
+}
+
+#footer .col form {
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-top: 25px;
+}
+
+#footer .col form input {
+    padding: 14px 14px;
+    width: 100%;
+    border-radius: var(--radius);
+    border: none;
+    margin-right: 10px;
+    font-size: 1rem;
+    background-color: var(--clr-grey-9)
+}
+
+#footer .col input::placeholder {
+    color: var(--clr-grey-1)
+}
+
+#footer .col button {
+    background: var(--clr-primary-11);
+}
+
+#footer .col .btn-sub {
+    padding: 0.78rem 1rem;
+    font-size: 1rem;
+    border-color: transparent;
+    border-radius: var(--radius);
+    text-transform: capitalize;
+    color: var(--clr-white);
+    cursor: pointer;
+}
+
+hr {
+    border: 0;
+    border-bottom: 0.5px solid var(--clr-grey-2);
+}
+
+#footer .row.copyright {
+    padding: 7px 0 15px 0;
+    margin: 12px auto;
+}
+
+#footer .row.copyright .heart {
+    color: red;
+}
+
+/*responsive*/
+@media(max-width: 767px) {
+    #footer {
+        bottom: unset;
+    }
+
+    #footer .col {
+        flex-basis: 100%;
+    }
+
+    #footer .col:nth-child(2),
+    #footer .col:nth-child(3) {
+        flex-basis: 100%
+    }
+}
