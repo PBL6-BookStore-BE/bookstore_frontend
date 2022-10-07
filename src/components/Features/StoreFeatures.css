@@ -1,6 +1,4 @@
 .features-center {
-    padding-left: 100px;
-    padding-right: 100px;
     background: var(--clr-grey-3);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

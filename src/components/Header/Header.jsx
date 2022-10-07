@@ -19,7 +19,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Box paddingTop='20px'>
-      <Box display="flex" alignItems="center" justifyContent="space-evenly" marginBottom='16px'>
+      <Box display="flex" alignItems="center" justifyContent="space-between" marginBottom='16px'>
         <Link w="176px" h="45px">
           <BookLogo />
         </Link>

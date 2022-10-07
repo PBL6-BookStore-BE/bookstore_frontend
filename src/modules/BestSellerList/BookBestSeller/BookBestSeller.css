@@ -1,0 +1,30 @@
+.book-category {
+  padding: 7px 27px;
+  color: #8d28ad;
+  background-color: rgba(141, 40, 173, 0.15);
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.book-rating {
+    display: flex;
+    align-items: center;
+    background-color: #FFD782;
+    color: #FF7A00;
+    padding: 4px 24px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    border-radius: 10px;
+}
+.book-rating > span {
+    margin-left: 5px;
+}
+.book-author {
+    color: rgba(0, 0, 0, 0.8);
+}
+.book-price {
+    color: #8D28AD;
+}
