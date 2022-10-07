@@ -5,8 +5,8 @@ import StoreFeatures from "../components/Features/StoreFeatures";
 import Footer from "../components/Footer/Footer";
 const Home = () => {
     return (
-        <div class='container'>
-            <Header />
+        <div>
+            <Header  />
             <BestSellerList />
             <StoreFeatures />
             <Footer />

@@ -14,6 +14,7 @@ const BestSellerList = () => {
         pauseOnHover
         nextArrow={<CarouselNextArrow />}
         prevArrow={<CarouselPrevArrow />}
+        className='container'
     >
       <BookBestSeller />
       <BookBestSeller />
