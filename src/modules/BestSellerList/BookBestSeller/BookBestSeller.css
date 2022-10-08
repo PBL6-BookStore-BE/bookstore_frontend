@@ -1,5 +1,8 @@
+.book-item:hover .book-title {
+    text-decoration: underline;
+}
 .book-category {
-  padding: 7px 27px;
+  padding: 7px 22px;
   color: #8d28ad;
   background-color: rgba(141, 40, 173, 0.15);
   border-radius: 10px;
@@ -13,7 +16,7 @@
     align-items: center;
     background-color: #FFD782;
     color: #FF7A00;
-    padding: 4px 24px;
+    padding: 4px 19px;
     font-weight: 400;
     font-size: 14px;
     line-height: 24px;

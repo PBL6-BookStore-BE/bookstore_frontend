@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import { ArrowRightIcon } from "../icons";
+import './style.css';
 
 const CarouselNextArrow = (props) => {
   const { onClick } = props;
@@ -14,9 +15,9 @@ const CarouselNextArrow = (props) => {
       textAlign="center"
       zIndex={1}
       onClick={onClick}
-      backgroundColor="#8D28AD"
-      width="35px"
-      height="35px"
+      backgroundColor="#FFFFFF"
+      width="40px"
+      height="40px"
       borderRadius="50%"
       _hover={{
         bg: "#8D28AD",
@@ -25,6 +26,7 @@ const CarouselNextArrow = (props) => {
       display='flex'
       alignItems='center'
       justifyContent='center'
+      className="c-next-arrow"
     >
       <ArrowRightIcon  />
     </Box>

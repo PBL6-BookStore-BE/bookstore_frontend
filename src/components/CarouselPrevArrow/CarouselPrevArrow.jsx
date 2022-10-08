@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import { PrevRightIcon } from "../icons";
+import './style.css';
 
 const CarouselPrevArrow = (props) => {
   const { onClick } = props;
@@ -16,18 +17,19 @@ const CarouselPrevArrow = (props) => {
       zIndex={1}
       onClick={onClick}
       backgroundColor="#FFFFFF"
-      w="35px"
-      h="35px"
+      w="40px"
+      h="40px"
       borderRadius="50%"
-      _hover={{
-        bg: "#FFFFFF",
-      }}
       boxShadow="0px 14px 26px rgba(39, 13, 48, 0.25)"
       display='flex'
       alignItems='center'
       justifyContent='center'
+      _hover={{
+        bg: "#8D28AD",
+      }}
+      className='c-prev-arrow'
     >
-      <PrevRightIcon/>
+      <PrevRightIcon />
     </Box>
   );
 };

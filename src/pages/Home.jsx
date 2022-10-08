@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <div>
             <Header  />
-            <BestSellerList />
+            <BestSellerList headerContent='Best Sellers'/>
             <StoreFeatures />
             <Footer />
         </div>
