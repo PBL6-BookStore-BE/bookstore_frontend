@@ -4,7 +4,7 @@ import { StarIcon } from "../../../components/icons";
 import "./BookBestSeller.css";
 import { Link } from "react-router-dom";
 
-const BookBestSeller = () => {
+const BookBestSeller = ({bookData}) => {
   return (
     <Link to="/books/book-detail">
       <Grid
@@ -16,46 +16,48 @@ const BookBestSeller = () => {
         className="book-item"
         marginLeft='30px'
       >
-        <GridItem w="100%" h="100%">
+        <GridItem h="100%">
           <Image
-            src="./static-data/dummy-image-book.jpg"
+            src={bookData.imageUrl}
             alt="Image book"
             borderRadius="20px"
           />
         </GridItem>
-        <GridItem h="100%" marginLeft="20px">
-          <Flex justifyContent="space-between" marginBottom="30px">
-            <Box className="book-category">Nature</Box>
-            <Box className="book-rating">
+        <GridItem w="100%" h="100%" marginLeft="20px">
+          <Flex marginBottom="30px">
+            <Box className="book-category">{bookData.category}</Box>
+            <Box className="book-rating" marginLeft='10px'>
               <StarIcon />
-              <span>4.3</span>
+              <span>{bookData.rating}</span>
             </Box>
           </Flex>
-          <Box
-            fontSize="24px"
-            fontWeight="500"
-            lineHeight="24px"
-            marginBottom="14px"
-            className="book-title"
-          >
-            Life of Wilds
-          </Box>
-          <Box
-            fontSize="16px"
-            fontWeight="400"
-            lineHeight="24px"
-            marginBottom="60px"
-            className="book-author"
-          >
-            Jasmine Belle
+          <Box minH='86px' marginBottom='50px'>
+            <Box
+              fontSize="22px"
+              fontWeight="500"
+              lineHeight="24px"
+              minH='48px'
+              marginBottom="14px"
+              className="book-title"
+            >
+              {bookData.title}
+            </Box>
+            <Box
+              fontSize="16px"
+              fontWeight="400"
+              lineHeight="24px"
+              className="book-author"
+            >
+              {bookData.author}
+            </Box>
           </Box>
           <Box
             fontSize="26px"
             fontWeight="600"
             lineHeight="24px"
-            className="book-price"
+            color='#8d28ad'
           >
-            $24,99
+            ${bookData.price}
           </Box>
         </GridItem>
       </Grid>

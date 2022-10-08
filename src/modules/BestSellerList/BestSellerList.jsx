@@ -7,7 +7,7 @@ import CarouselPrevArrow from "../../components/CarouselPrevArrow/CarouselPrevAr
 import { ArrowRightIcon } from "../../components/icons";
 import BookBestSeller from "./BookBestSeller/BookBestSeller";
 
-const BestSellerList = ({ headerContent }) => {
+const BestSellerList = ({ headerContent, booksData }) => {
   return (
     <Box className="container">
       <Flex alignItems="center" justifyContent="space-between">
@@ -31,18 +31,12 @@ const BestSellerList = ({ headerContent }) => {
         infinite
         slidesToShow={3}
         slidesToScroll={1}
-        autoplay
         autoplaySpeed={2000}
         pauseOnHover
         nextArrow={<CarouselNextArrow />}
         prevArrow={<CarouselPrevArrow />}
       >
-        <BookBestSeller />
-        <BookBestSeller />
-        <BookBestSeller />
-        <BookBestSeller />
-        <BookBestSeller />
-        <BookBestSeller />
+        {booksData.map((item, key) => <BookBestSeller key={key} bookData={item} />)}
       </Slider>
     </Box>
   );
