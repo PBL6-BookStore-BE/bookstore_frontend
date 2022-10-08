@@ -1,0 +1,36 @@
+.book-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.book-item:hover .book-title {
+  text-decoration: underline;
+}
+.book-category {
+  padding: 7px 22px;
+  color: #8d28ad;
+  background-color: rgba(141, 40, 173, 0.15);
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.book-rating {
+  display: flex;
+  align-items: center;
+  background-color: #ffd782;
+  color: #ff7a00;
+  padding: 4px 19px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  border-radius: 10px;
+}
+.book-rating > span {
+  margin-left: 5px;
+}
+.book-author {
+  color: rgba(0, 0, 0, 0.8);
+}

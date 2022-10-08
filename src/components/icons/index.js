@@ -7,3 +7,7 @@ export { default as TimeIcon } from './cases/TimeIcon';
 export { default as PayIcon } from './cases/PayIcon';
 export { default as QualityIcon } from './cases/QualityIcon';
 export { default as GuardIcon } from './cases/GuardIcon';
+
+export { default as StarIcon } from './cases/StarIcon'
+export { default as ArrowRightIcon } from './cases/ArrowRightIcon';
+export { default as PrevRightIcon } from './cases/PrevRightIcon';
