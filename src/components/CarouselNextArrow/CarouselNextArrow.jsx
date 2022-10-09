@@ -13,7 +13,7 @@ const CarouselNextArrow = (props) => {
       transform="translateY(-50%)"
       cursor="pointer"
       textAlign="center"
-      zIndex={1}
+      zIndex={2}
       onClick={onClick}
       backgroundColor="#FFFFFF"
       width="40px"
