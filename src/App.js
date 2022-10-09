@@ -9,6 +9,7 @@ import Magazine from "./pages/Magazine";
 import Recommended from "./pages/Recommended";
 import Sale from "./pages/Sale";
 import Textbooks from "./pages/Textbooks";
+import Checkout from "./pages/Checkout";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import './App.css';
@@ -24,6 +25,7 @@ function App() {
         <Route path="/textbooks/*" element={<Textbooks />} />
         <Route path="/audiobooks/*" element={<Audiobooks />} />
         <Route path="/recommended/*" element={<Recommended />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/sale/*" element={<Sale />} />
       </Routes>
     </div>

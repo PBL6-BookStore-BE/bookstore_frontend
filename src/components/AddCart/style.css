@@ -1,0 +1,13 @@
+.a-cart-icon path {
+    fill: #fff;
+}
+
+.a-cart-icon svg {
+    width: 18px;
+    height: 15px;
+    padding-right: -5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

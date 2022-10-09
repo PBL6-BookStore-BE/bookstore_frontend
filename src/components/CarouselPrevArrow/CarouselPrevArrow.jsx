@@ -14,7 +14,7 @@ const CarouselPrevArrow = (props) => {
       cursor="pointer"
       width="40px"
       textAlign="center"
-      zIndex={1}
+      zIndex={2}
       onClick={onClick}
       backgroundColor="#FFFFFF"
       w="40px"
