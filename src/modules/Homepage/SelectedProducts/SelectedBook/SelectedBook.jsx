@@ -22,7 +22,7 @@ const SelectedBook = ( {imageUrl, imageAuthor, author, rating} ) => {
             />
           </AspectRatio>
         </HStack>
-        <HStack  h='75px' w='100%' display='block' position='absolute' top='65%' margin='0 auto' >
+        <HStack  h='75px' w='100%' display='block' position='absolute' top='62%' margin='0 auto' >
             <Image 
                 w='60px'
                 src={imageAuthor}
@@ -38,7 +38,7 @@ const SelectedBook = ( {imageUrl, imageAuthor, author, rating} ) => {
             >
                 {author}
             </Text>
-            <Flex spacing={1} justifyContent='center' >
+            <Flex spacing={1} justifyContent='center'>
             {
                 Array.from(Array(rating), (e, i) => {
                     return (<StarIcon key={i} /> )
