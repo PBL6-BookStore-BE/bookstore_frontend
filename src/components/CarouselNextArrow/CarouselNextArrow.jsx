@@ -27,6 +27,7 @@ const CarouselNextArrow = (props) => {
       alignItems='center'
       justifyContent='center'
       className="c-next-arrow"
+      marginRight={{base:"65px", sm:'0'}}
     >
       <ArrowRightIcon  />
     </Box>

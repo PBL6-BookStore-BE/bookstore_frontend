@@ -68,3 +68,12 @@ li {
   }
   
 }
+@media (max-width: 768px) {
+  .top10-book-overlay {
+    display: none;
+  }
+  .heading-text-top10 {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+}
