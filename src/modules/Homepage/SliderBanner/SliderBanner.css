@@ -1,0 +1,28 @@
+.slick-custom {
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 4px;
+  position: relative;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.slick-active > .slick-custom {
+    background: #FFFFFF;
+}
+
+.slick-dots li {
+  width: 29px !important;
+  height: 5px !important;
+}
+
+.slider-banner-overlay {
+  width: 100px;
+  height: 400px;
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translate(-5%,-50%) rotate(180deg);
+  background: linear-gradient(90deg, #451355 0.01%, rgba(69, 19, 85, 0) 142.57%);
+  z-index: 3;
+}
