@@ -8,12 +8,29 @@ import BookTop10 from './BookTop10/BookTop10';
 import Slider from "react-slick";
 
 const Top10List = ({headerContent, books}) => {
+    var settings = {
+        infinite: true,
+        slidesToShow:6,
+        slidesToScroll:1,
+        autoplaySpeed:2000,
+        pauseOnHover: true,
+        nextArrow:<CarouselNextArrow />,
+        prevArrow:<CarouselPrevArrow />,
+
+        responsive :[{
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 1
+
+            }
+        }]
+    }
 return (
     <Box backgroundColor='#FCF8FD' w='100%' position='relative'>
         <Box className='container' marginTop='32px'>
-            <Flex alignItems="center" justifyContent="space-between" marginBottom="32px" >
+            <Flex className='heading-text-top10' alignItems="center" justifyContent="space-between" marginBottom="32px" >
                 <Box
-                marginTop='32px'
+                marginTop='10px'
                 fontWeight="600"
                 fontSize="24px"
                 lineHeight="50px"
@@ -29,16 +46,9 @@ return (
                 </Button>
                 </Link>
             </Flex>
-            <Box className='top10-list' h='470px' w='86px'  position='absolute' top='20%' zIndex='1' bgGradient='linear(to-r, #FCF8FD, rgba(255, 255, 255, 0.404))'>
+            <Box className='top10-book-overlay' h='470px' w='86px'  position='absolute' top='15%' zIndex='1' bgGradient='linear(to-r, #FCF8FD, rgba(255, 255, 255, 0.404))'>
             </Box>
-            <Slider
-                infinite
-                slidesToShow={6}
-                slidesToScroll={1}
-                autoplaySpeed={2000}
-                pauseOnHover
-                nextArrow={<CarouselNextArrow />}
-                prevArrow={<CarouselPrevArrow />}
+            <Slider {...settings} className='book-top10'
             >
                 {books.map((item, key) => {
                     return (
@@ -46,7 +56,7 @@ return (
                     )
                     })}
             </Slider>
-            <Box className='top10-list' h='470px' w='150px'  position='absolute' top='20%' right='5%' zIndex='1' bgGradient='linear(to-l, #FCF8FD, rgba(255, 255, 255, 0.404))'>
+            <Box className='top10-book-overlay' h='470px' w='150px'  position='absolute' top='15%' right='5%' zIndex='1' bgGradient='linear(to-l, #FCF8FD, rgba(255, 255, 255, 0.404))'>
             </Box>
         </Box>
     </Box>

@@ -4,6 +4,7 @@ import BestSellerList from "../modules/BestSellerList/BestSellerList";
 import StoreFeatures from "../components/Features/StoreFeatures";
 import Footer from "../components/Footer/Footer";
 import Top10List from "../modules/Homepage/Top10List/Top10List";
+import SelectedBooks from "../modules/Homepage/SelectedProducts/SelectedBooks";
 import { listbook } from "../modules/Homepage/Top10List/listbook";
 import SliderBanner from "../modules/Homepage/SliderBanner/SliderBanner";
 
@@ -63,6 +64,8 @@ const Home = () => {
     <div>
       <Header />
       <SliderBanner />
+      <StoreFeatures />
+      <SelectedBooks books={listbook} />
       <Top10List headerContent="10 Top Rated Books" books={listbook}/>
       <BestSellerList headerContent="Best Sellers" booksData={DUMMY_BOOK_DATA} />
       <StoreFeatures />

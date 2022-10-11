@@ -5,6 +5,7 @@ export const listbook = [
     author: "Alan Runner",
     price: "15.63",
     imageUrl: "./static-data/img-none.jpg",
+    imageAuthor: "./static-data/img-none.jpg",
   },
   {
     rating: 4,
@@ -12,6 +13,7 @@ export const listbook = [
     author: "Jess Steve",
     price: "15.63",
     imageUrl: "./static-data/img-none.jpg",
+    imageAuthor: "./static-data/img-none.jpg",
   },
   {
     rating: 3,
@@ -19,6 +21,7 @@ export const listbook = [
     author: "Elsa Max",
     price: "19.99",
     imageUrl: "./static-data/img-none.jpg",
+    imageAuthor: "./static-data/img-none.jpg",
   },
   {
     rating: 4,
@@ -26,6 +29,7 @@ export const listbook = [
     author: "Samuel Lee",
     price: "18.13",
     imageUrl: "./static-data/img-none.jpg",
+    imageAuthor: "./static-data/img-none.jpg",
   },
   {
     rating: 5,
@@ -33,6 +37,7 @@ export const listbook = [
     author: "Lunaric Axe",
     price: "13.77",
     imageUrl: "./static-data/img-none.jpg",
+    imageAuthor: "./static-data/img-none.jpg",
   },
   {
     rating: 4,
@@ -40,6 +45,7 @@ export const listbook = [
     author: "Ijeoma Oluo",
     price: "23.44",
     imageUrl: "./static-data/img-none.jpg",
+    imageAuthor: "./static-data/img-none.jpg",
   },
   {
     rating: 2,
@@ -47,5 +53,6 @@ export const listbook = [
     author: "Jasmine Belle",
     price: "23.44",
     imageUrl: "./static-data/img-none.jpg",
+    imageAuthor: "./static-data/img-none.jpg",
   },
 ];
