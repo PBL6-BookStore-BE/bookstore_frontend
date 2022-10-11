@@ -23,7 +23,7 @@ const Header = () => {
         <Link w="176px" h="45px">
           <BookLogo />
         </Link>
-        <NavigationButton onClick={() => setIsOpen((prevState) => !prevState)} />
+        <NavigationButton onClick={() => setIsOpen((prevState) => !prevState)} isOpen={isOpen} />
         <InputGroup w="500px">
           <Input pr="4.5rem" type="text" placeholder="Find books here..." />
           <InputRightElement children={<SearchIcon color="#A4A4A4" />} />
