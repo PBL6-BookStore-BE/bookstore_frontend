@@ -11,3 +11,8 @@ export { default as GuardIcon } from './cases/GuardIcon';
 export { default as StarIcon } from './cases/StarIcon'
 export { default as ArrowRightIcon } from './cases/ArrowRightIcon';
 export { default as PrevRightIcon } from './cases/PrevRightIcon';
+
+export { default as BookIcon } from './cases/BookIcon';
+export { default as CustomerIcon } from './cases/CustomerIcon';
+
+export { default as CircleElement } from './sliderbanner/CircleElement';

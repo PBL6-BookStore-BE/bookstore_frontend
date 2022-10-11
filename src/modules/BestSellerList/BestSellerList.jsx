@@ -31,6 +31,7 @@ const BestSellerList = ({ headerContent, booksData }) => {
         infinite
         slidesToShow={3}
         slidesToScroll={1}
+        autoplay
         autoplaySpeed={2000}
         pauseOnHover
         nextArrow={<CarouselNextArrow />}
