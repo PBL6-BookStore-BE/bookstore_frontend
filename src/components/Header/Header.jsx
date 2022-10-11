@@ -26,7 +26,7 @@ const Header = () => {
         marginBottom="16px"
         className="container"
       >
-        <Link w="176px" h="45px">
+        <Link w="176px" h="45px" to='/'>
           <BookLogo />
         </Link>
         <NavigationButton
