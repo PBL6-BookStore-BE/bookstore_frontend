@@ -10,23 +10,32 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import Slider from "react-slick";
-import { BookIcon, CircleElement, CustomerIcon } from "../../../components/icons";
+import {
+  BookIcon,
+  CircleElement,
+  CustomerIcon,
+} from "../../../components/icons";
 import CircleElementSmall from "../../../components/icons/sliderbanner/CircleElementSmall";
 import LabelBestSeller from "../../../components/LabelBestSeller/LabelBestSeller";
-import './SliderBanner.css';
+import "./SliderBanner.css";
 
 const SliderBanner = () => {
   return (
-    <Box bg="#451355" color="#FFFFFF" pos='relative'>
-      <CircleElement position='absolute' bottom='0' zIndex='0'/>
-      <CircleElementSmall position='absolute' top='10%' left='50%' transform='translate(-50%, -10%)' />
+    <Box bg="#451355" color="#FFFFFF" pos="relative">
+      <CircleElement position="absolute" bottom="0" zIndex="0" />
+      <CircleElementSmall
+        position="absolute"
+        top="10%"
+        left="50%"
+        transform="translate(-50%, -10%)"
+      />
       {/* <Box className="slider-banner-overlay" /> */}
       <Grid
         templateColumns="repeat(5, 1fr)"
         gap={10}
         padding="100px 0"
         className="container"
-        isolation='isolate'
+        isolation="isolate"
       >
         <GridItem className="heading" colSpan={2} w={600}>
           <Box
@@ -86,34 +95,31 @@ const SliderBanner = () => {
             variant="solid"
             rightIcon={<ArrowForwardIcon />}
             size="lg"
-            width='300px'
-            padding='30px 20px'
-            textAlign='start'
-            justifyContent='space-between'
+            width="300px"
+            padding="30px 20px"
+            textAlign="start"
+            justifyContent="space-between"
           >
             Go to Collections
           </Button>
         </GridItem>
-        <GridItem colSpan={3} mt={3}>
+        <GridItem colSpan={3}>
           <Slider
             infinite
             autoplay
             autoplaySpeed={2000}
-            slidesToShow={3}
+            slidesToShow={2}
             slidesToScroll={1}
             arrows={false}
             dots
-            appendDots={dots => <ul>{dots}</ul>}
-            customPaging={i => (
-              <div className="slick-custom">
-              </div>
-            )}
-            className='slider'
+            appendDots={(dots) => <ul>{dots}</ul>}
+            customPaging={(i) => <div className="slick-custom"></div>}
+            className="slider"
           >
             <Box pos="relative">
               <Image
-                w="95%"
-                h="375px"
+                w="286px"
+                h="395px"
                 borderRadius="20px"
                 src="./static-data/img-none.jpg"
               />
@@ -121,8 +127,8 @@ const SliderBanner = () => {
             </Box>
             <Box pos="relative">
               <Image
-                w="95%"
-                h="375px"
+                w="286px"
+                h="395px"
                 borderRadius="20px"
                 src="./static-data/img-none.jpg"
               />
@@ -130,8 +136,8 @@ const SliderBanner = () => {
             </Box>
             <Box pos="relative">
               <Image
-                w="95%"
-                h="375px"
+                w="286px"
+                h="395px"
                 borderRadius="20px"
                 src="./static-data/img-none.jpg"
                 pos="relative"
@@ -140,8 +146,8 @@ const SliderBanner = () => {
             </Box>
             <Box pos="relative">
               <Image
-                w="95%"
-                h="375px"
+                w="286px"
+                h="395px"
                 borderRadius="20px"
                 src="./static-data/img-none.jpg"
                 pos="relative"
