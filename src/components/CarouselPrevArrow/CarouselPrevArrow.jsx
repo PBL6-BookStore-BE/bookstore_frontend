@@ -28,6 +28,7 @@ const CarouselPrevArrow = (props) => {
         bg: "#8D28AD",
       }}
       className='c-prev-arrow'
+      marginLeft={{base:"45px", sm:'0'}}
     >
       <PrevRightIcon />
     </Box>
