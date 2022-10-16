@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import BestSellerList from "../modules/BestSellerList/BestSellerList";
 import StoreFeatures from "../components/Features/StoreFeatures";
@@ -7,59 +7,69 @@ import Top10List from "../modules/Homepage/Top10List/Top10List";
 import SelectedBooks from "../modules/Homepage/SelectedProducts/SelectedBooks";
 import { listbook } from "../modules/Homepage/Top10List/listbook";
 import SliderBanner from "../modules/Homepage/SliderBanner/SliderBanner";
+import { getListBook } from "../apis/list-book.api";
 
-
-const DUMMY_BOOK_DATA = [
-  {
-    rating: 4.3,
-    title: "Life of Wilds",
-    author: "Jasmine Belle",
-    price: "23.44",
-    imageUrl: "./static-data/dummy-image-book.jpg",
-    category: "Nature",
-  },
-  {
-    rating: 4.1,
-    title: "So You Want To Talk About Race",
-    author: "Henry Martopo",
-    price: "23.44",
-    imageUrl: "./static-data/dummy-image-book.jpg",
-    category: "Biography",
-  },
-  {
-    rating: 4.1,
-    title: "So You Want To Talk About Race",
-    author: "Ijeoma Oluo",
-    price: "23.44",
-    imageUrl: "./static-data/dummy-image-book.jpg",
-    category: "Biography",
-  },
-  {
-    rating: 4.3,
-    title: "Life of Wilds",
-    author: "Jasmine Belle",
-    price: "23.44",
-    imageUrl: "./static-data/dummy-image-book.jpg",
-    category: "Nature",
-  },
-  {
-    rating: 4.1,
-    title: "So You Want To Talk About Race",
-    author: "Henry Martopo",
-    price: "23.44",
-    imageUrl: "./static-data/dummy-image-book.jpg",
-    category: "Biography",
-  },
-  {
-    rating: 4.1,
-    title: "So You Want To Talk About Race",
-    author: "Ijeoma Oluo",
-    price: "23.44",
-    imageUrl: "./static-data/dummy-image-book.jpg",
-    category: "Biography",
-  },
-];
+// const DUMMY_BOOK_DATA = [
+//   {
+//     rating: 4.3,
+//     name: "Life of Wilds",
+//     author: "Jasmine Belle",
+//     price: "23.44",
+//     imageUrl: "./static-data/dummy-image-book.jpg",
+//     category: "Nature",
+//   },
+//   {
+//     rating: 4.1,
+//     name: "So You Want To Talk About Race",
+//     author: "Henry Martopo",
+//     price: "23.44",
+//     imageUrl: "./static-data/dummy-image-book.jpg",
+//     category: "Biography",
+//   },
+//   {
+//     rating: 4.1,
+//     name: "So You Want To Talk About Race",
+//     author: "Ijeoma Oluo",
+//     price: "23.44",
+//     imageUrl: "./static-data/dummy-image-book.jpg",
+//     category: "Biography",
+//   },
+//   {
+//     rating: 4.3,
+//     name: "Life of Wilds",
+//     author: "Jasmine Belle",
+//     price: "23.44",
+//     imageUrl: "./static-data/dummy-image-book.jpg",
+//     category: "Nature",
+//   },
+//   {
+//     rating: 4.1,
+//     name: "So You Want To Talk About Race",
+//     author: "Henry Martopo",
+//     price: "23.44",
+//     imageUrl: "./static-data/dummy-image-book.jpg",
+//     category: "Biography",
+//   },
+//   {
+//     rating: 4.1,
+//     name: "So You Want To Talk About Race",
+//     author: "Ijeoma Oluo",
+//     price: "23.44",
+//     imageUrl: "./static-data/dummy-image-book.jpg",
+//     category: "Biography",
+//   },
+// ];
 const Home = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res  = await getListBook();
+      setData(res)
+    };
+
+    fetchData();
+  }, []);
   return (
     <div>
       <Header />
@@ -67,7 +77,7 @@ const Home = () => {
       <StoreFeatures />
       <SelectedBooks books={listbook} />
       <Top10List headerContent="10 Top Rated Books" books={listbook}/>
-      <BestSellerList headerContent="Best Sellers" booksData={DUMMY_BOOK_DATA} />
+      <BestSellerList headerContent="Best Sellers" booksData={data} />
       <StoreFeatures />
       <Footer />
     </div>
