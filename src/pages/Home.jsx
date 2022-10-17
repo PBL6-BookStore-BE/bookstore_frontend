@@ -63,7 +63,7 @@ const Home = () => {
   return (
     <div>
       <Header />
-      {/* <SliderBanner /> */}
+      <SliderBanner />
       <StoreFeatures />
       <SelectedBooks books={listbook} />
       <Top10List headerContent="10 Top Rated Books" books={listbook}/>

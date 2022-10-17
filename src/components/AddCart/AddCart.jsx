@@ -3,7 +3,7 @@ import { Box } from "@chakra-ui/react";
 import { CartIcon } from "../icons";
 import './style.css';
 
-const AddCart = ({}) => {
+const AddCart = () => {
   return (
     <Box
         right='-20px'
