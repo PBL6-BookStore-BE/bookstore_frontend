@@ -68,7 +68,7 @@ const Home = () => {
       <SelectedBooks books={listbook} />
       <Top10List headerContent="10 Top Rated Books" books={listbook}/>
       <BestSellerList headerContent="Best Sellers" booksData={DUMMY_BOOK_DATA} />
-      <FeaturedBookList headerContent="Fetured Book" books={listbook} />
+      <FeaturedBookList headerContent="Featured Book" books={listbook} />
       <Footer />
     </div>
   );
