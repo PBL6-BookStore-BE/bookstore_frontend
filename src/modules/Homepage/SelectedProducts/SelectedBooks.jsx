@@ -35,7 +35,7 @@ return (
             </Box>
             {/* marginLeft='360px' width='80%' */}
             <Box  alignItems='center' height='400px' >
-                <Carousel slides={arr} goToSlide={focus} offsetRadius={5}  />
+                <Carousel slides={arr} goToSlide={focus} offsetRadius={5} />
             </Box>
             <Button 
                 onClick={nextBook} 

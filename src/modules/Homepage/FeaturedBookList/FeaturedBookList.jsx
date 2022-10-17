@@ -1,16 +1,16 @@
 import React from 'react'
 import { Box, Button, Flex } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 import CarouselNextArrow from "../../../components/CarouselNextArrow/CarouselNextArrow";
 import CarouselPrevArrow from "../../../components/CarouselPrevArrow/CarouselPrevArrow";
 import { ArrowRightIcon } from "../../../components/icons";
-import BookTop10 from './BookTop10/BookTop10';
+import { Link } from "react-router-dom";
+import FeaturedBook from './FeaturedBook/FeatureBook';
 import Slider from "react-slick";
 
-const Top10List = ({headerContent, books}) => {
+const FeaturedBookList = ({ headerContent, books }) => {
     var settings = {
         infinite: true,
-        slidesToShow:6,
+        slidesToShow:2,
         slidesToScroll:1,
         autoplaySpeed:2000,
         pauseOnHover: true,
@@ -25,9 +25,9 @@ const Top10List = ({headerContent, books}) => {
             }
         }]
     }
-return (
-    <Box backgroundColor='#FCF8FD' w='100%' position='relative'>
-        <Box className='container' marginTop='32px'>
+  return (
+    <Box backgroundColor='#FCF8FD' w='100%' >
+        <Box className='container' marginTop='32px' >
             <Flex className='heading-text-top10' alignItems="center" justifyContent="space-between" marginBottom="32px" >
                 <Box
                 marginTop='10px'
@@ -46,20 +46,17 @@ return (
                 </Button>
                 </Link>
             </Flex>
-            <Box className='top10-book-overlay' h='470px' w='86px'  position='absolute' top='15%' zIndex='1' bgGradient='linear(to-r, #FCF8FD, rgba(255, 255, 255, 0.404))'>
-            </Box>
-            <Slider {...settings}
-            >
+            <Slider {...settings}>
                 {books.map((item, key) => {
                     return (
-                        <BookTop10 key={key} {...item} />
+                        <FeaturedBook key={key} {...item} />
                     )
-                    })}
+                })}
             </Slider>
-            <Box className='top10-book-overlay' h='470px' w='150px'  position='absolute' top='15%' right='5%' zIndex='1' bgGradient='linear(to-l, #FCF8FD, rgba(255, 255, 255, 0.404))'>
-            </Box>
+
         </Box>
     </Box>
-)}
+  )
+}
 
-export default Top10List;
+export default FeaturedBookList

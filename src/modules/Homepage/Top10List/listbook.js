@@ -6,6 +6,7 @@ export const listbook = [
     price: "15.63",
     imageUrl: "./static-data/img-none.jpg",
     imageAuthor: "./static-data/img-none.jpg",
+    category: "Nature",
   },
   {
     rating: 4,
@@ -14,6 +15,7 @@ export const listbook = [
     price: "15.63",
     imageUrl: "./static-data/img-none.jpg",
     imageAuthor: "./static-data/img-none.jpg",
+    category: "Biography",
   },
   {
     rating: 3,
@@ -22,6 +24,7 @@ export const listbook = [
     price: "19.99",
     imageUrl: "./static-data/img-none.jpg",
     imageAuthor: "./static-data/img-none.jpg",
+    category: "Biography",
   },
   {
     rating: 4,
@@ -30,6 +33,7 @@ export const listbook = [
     price: "18.13",
     imageUrl: "./static-data/img-none.jpg",
     imageAuthor: "./static-data/img-none.jpg",
+    category: "Nature",
   },
   {
     rating: 5,
@@ -38,6 +42,7 @@ export const listbook = [
     price: "13.77",
     imageUrl: "./static-data/img-none.jpg",
     imageAuthor: "./static-data/img-none.jpg",
+    category: "Biography",
   },
   {
     rating: 4,
@@ -46,6 +51,7 @@ export const listbook = [
     price: "23.44",
     imageUrl: "./static-data/img-none.jpg",
     imageAuthor: "./static-data/img-none.jpg",
+    category: "Nature",
   },
   {
     rating: 2,
@@ -54,5 +60,6 @@ export const listbook = [
     price: "23.44",
     imageUrl: "./static-data/img-none.jpg",
     imageAuthor: "./static-data/img-none.jpg",
+    category: "Biography",
   },
 ];
