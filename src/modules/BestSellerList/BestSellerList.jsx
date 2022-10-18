@@ -29,7 +29,7 @@ const BestSellerList = ({ headerContent, booksData }) => {
       </Flex>
       <Slider
         infinite
-        slidesToShow={(booksData.length>=3) ? 3 : 2}
+        slidesToShow={(booksData.length>=3) ? 3 : 1}
         slidesToScroll={1}
         autoplay
         autoplaySpeed={2000}
