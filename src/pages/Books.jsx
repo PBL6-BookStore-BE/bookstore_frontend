@@ -2,6 +2,8 @@ import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/reac
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header/Header";
+import Pagination from "../components/Pagination/Pagination";
+import { listbook } from "../modules/Homepage/Top10List/listbook";
 
 const Books = () => {
   return (
@@ -22,6 +24,8 @@ const Books = () => {
         </Breadcrumb>
       </Box>
       Books page
+      <Pagination itemsPerPage={3} items={listbook}/>
+
     </div>
   );
 };

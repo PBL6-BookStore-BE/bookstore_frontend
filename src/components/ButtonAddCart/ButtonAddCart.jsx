@@ -3,15 +3,16 @@ import { Text, Button, Box } from "@chakra-ui/react";
 import { CartIcon } from "../icons";
 import './style.css'
 
-const ButtonAddCart = () => {
+const ButtonAddCart = ({ text }) => {
   return (
     <Button
         bg="#8D28AD"
         color='#fff'
-        borderRadius='6px'
-        minWidth="150px"
+        borderRadius='8px'
+        minWidth="100px"
         alignItems='center'
-        paddingLeft={0}
+        padding={8,6}
+        paddingLeft={2}
         _hover={{opacity: '0.6'}}
         
     >
@@ -25,7 +26,7 @@ const ButtonAddCart = () => {
       >
         <CartIcon />
       </Box>
-        <Text fontWeight='400' marginLeft='8px'>Add to cart</Text>
+        <Text fontWeight='400' marginLeft='8px'>{text}</Text>
     </Button>
   )
 }

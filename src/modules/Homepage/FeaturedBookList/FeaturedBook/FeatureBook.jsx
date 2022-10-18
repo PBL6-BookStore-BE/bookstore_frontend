@@ -35,7 +35,7 @@ const FeatureBook = ({ imageUrl, title, price, rating, category  }) => {
               459 Reviews
             </Text>
         </Flex>
-        <VStack align='flex-start' spacing={3} >
+        <VStack align='flex-start' spacing={2} >
           <Text className='book-title'
             marginTop='8px'
             fontSize='21px' 
@@ -60,7 +60,7 @@ const FeatureBook = ({ imageUrl, title, price, rating, category  }) => {
         </HStack>
         <HStack spacing={5}>
           <Link to="/checkout">
-            <ButtonAddCart />
+            <ButtonAddCart text='Add to cart' />
           </Link>
           <Link to="/books/book-detail">
             <Text className='book-title'

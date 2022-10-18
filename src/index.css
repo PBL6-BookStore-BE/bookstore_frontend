@@ -62,6 +62,36 @@ li {
 .container {
   margin: 0 auto;
 }
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+  margin-top: 32px;
+}
+
+.page-item {
+  padding: 8px 16px;
+  border-radius: 6px;
+  background-color: #EEDFF3;
+  color: #8D28AD;
+  margin-left: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.page-item:hover,
+.pagination .active {
+  background-color: #8D28AD;
+  color: #fff;
+}
+
+.prev {
+  margin-right: 16px;
+}
+
+.next {
+  margin-left: 24px;
+}
 @media (min-width: 1024px) {
   .container {
     max-width: 1320px;
