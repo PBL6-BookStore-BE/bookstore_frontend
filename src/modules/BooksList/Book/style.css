@@ -1,0 +1,38 @@
+.column-layout {
+    margin-top: 36px;
+    padding: 12px 0;
+    background-color: #fff;
+    display: flex;
+    width: 70%;
+}
+
+.column-item {
+    padding: 0 16px;
+}
+
+.one {
+    flex: 0.75;
+}
+
+.two {
+    flex: 3;
+
+}
+.two .title:hover {
+    text-decoration: underline;
+}
+.three {
+    flex: 1;
+    line-height: 64px;
+    margin-left: 32px;
+    margin-top: 32px;
+}
+
+.book-category {
+    padding: 7px 22px;
+    color: #8d28ad;
+    background-color: rgba(141, 40, 173, 0.15);
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 24px;
+}
