@@ -9,7 +9,7 @@ function CircleElementSmall(props) {
       fill="none"
       {...props}
     >
-      <circle cx="96.5" cy="96.5" r="96.5" fill="#9D5747" fill-opacity="0.2" />
+      <circle cx="96.5" cy="96.5" r="96.5" fill="#9D5747" fillOpacity="0.2" />
     </Icon>
   );
 }

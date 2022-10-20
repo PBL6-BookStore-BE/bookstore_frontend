@@ -18,17 +18,19 @@ const BookBestSeller = ({bookData}) => {
       >
         <GridItem h="100%">
           <Image
-            src={bookData.imageUrl}
+            src={bookData.urlImage || './static-data/img-none.jpg'}
             alt="Image book"
             borderRadius="20px"
+            w='190px'
+            h='100%'
           />
         </GridItem>
         <GridItem w="100%" h="100%" marginLeft="20px">
           <Flex marginBottom="30px">
-            <Box className="book-category">{bookData.category}</Box>
+            <Box className="book-category">{bookData.categoryName || 'None'}</Box>
             <Box className="book-rating" marginLeft='10px'>
               <StarIcon />
-              <span>{bookData.rating}</span>
+              <span>{bookData.rating ? bookData.rating : 0}</span>
             </Box>
           </Flex>
           <Box minH='86px' marginBottom='50px'>
@@ -40,7 +42,7 @@ const BookBestSeller = ({bookData}) => {
               marginBottom="14px"
               className="book-title"
             >
-              {bookData.title}
+              {bookData.name || 'Null'}
             </Box>
             <Box
               fontSize="16px"
@@ -48,7 +50,7 @@ const BookBestSeller = ({bookData}) => {
               lineHeight="24px"
               className="book-author"
             >
-              {bookData.author}
+              {bookData.authors || 'Null'}
             </Box>
           </Box>
           <Box
@@ -57,7 +59,7 @@ const BookBestSeller = ({bookData}) => {
             lineHeight="24px"
             color='#8d28ad'
           >
-            ${bookData.price}
+            ${bookData.price || '0'}
           </Box>
         </GridItem>
       </Grid>
