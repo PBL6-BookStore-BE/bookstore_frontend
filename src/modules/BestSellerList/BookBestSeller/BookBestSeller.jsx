@@ -18,7 +18,7 @@ const BookBestSeller = ({bookData}) => {
       >
         <GridItem h="100%">
           <Image
-            src={bookData.imageUrl || './static-data/img-none.jpg'}
+            src={bookData.urlImage || './static-data/img-none.jpg'}
             alt="Image book"
             borderRadius="20px"
             w='190px'
