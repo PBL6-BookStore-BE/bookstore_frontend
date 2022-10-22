@@ -1,10 +1,11 @@
 import React from "react";
-import { Box, Flex, Grid, GridItem, Image } from "@chakra-ui/react";
+import { Box, Flex, Grid, GridItem, Image, AspectRatio } from "@chakra-ui/react";
 import { StarIcon } from "../../../components/icons";
 import "./BookBestSeller.css";
 import { Link } from "react-router-dom";
 
 const BookBestSeller = ({bookData}) => {
+  
   return (
     <Link to="/books/book-detail">
       <Grid
@@ -16,14 +17,17 @@ const BookBestSeller = ({bookData}) => {
         className="book-item"
         marginLeft='30px'
       >
-        <GridItem h="100%">
-          <Image
-            src={bookData.urlImage || './static-data/img-none.jpg'}
-            alt="Image book"
-            borderRadius="20px"
-            w='190px'
-            h='100%'
-          />
+        <GridItem >
+          <AspectRatio ratio={2/3} w={190}>
+            <Image
+              src={bookData.urls[0] || './static-data/img-none.jpg'}
+              alt="Image book"
+              borderRadius="20px"
+              // w='190px'
+              // h='100%'
+            />
+
+          </AspectRatio>
         </GridItem>
         <GridItem w="100%" h="100%" marginLeft="20px">
           <Flex marginBottom="30px">
@@ -50,7 +54,12 @@ const BookBestSeller = ({bookData}) => {
               lineHeight="24px"
               className="book-author"
             >
-              {bookData.authors || 'Null'}
+              {/* {bookData.authors || 'Null'} */}
+              {bookData.authors.map((item, key) =>{
+                return (
+                  <span key={key}>{item}</span>
+                )
+              })}
             </Box>
           </Box>
           <Box
