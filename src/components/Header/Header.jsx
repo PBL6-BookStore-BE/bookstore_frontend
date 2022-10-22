@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import AccountButton from "../AccountButton/AccountButton";
 import BookLogo from "../common/BookLogo";
@@ -17,6 +18,8 @@ import NavigationButton from "../NavigationButton/NavigationButton";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <Box paddingTop="20px">
       <Box
@@ -44,7 +47,7 @@ const Header = () => {
             icon={<CartIcon />}
           />
         </Link>
-        <AccountButton />
+        <AccountButton username={user} />
       </Box>
       {isOpen && <NavBar />}
     </Box>
