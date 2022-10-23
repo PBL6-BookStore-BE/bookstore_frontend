@@ -87,7 +87,7 @@ const Login = () => {
             variant="link"
             colorScheme="purple"
           >
-            Forgot Password
+            <Link to='/forgot-password'>Forgot Password</Link>
           </Button>
           <Button
             isLoading={isLoading}

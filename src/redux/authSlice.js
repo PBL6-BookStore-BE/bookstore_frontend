@@ -20,6 +20,14 @@ export const login = createAsyncThunk("auth/login", async (data) =>
   authAPI.login(data)
 );
 
+export const forgotPassword = createAsyncThunk("auth/forgotPassword", (data) =>
+  authAPI.forgotPassword(data)
+);
+
+export const resetPassword = createAsyncThunk("auth/resetPassword", (data) =>
+  authAPI.resetPassword(data)
+);
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -41,10 +49,10 @@ export const authSlice = createSlice({
     },
     [register.fulfilled]: (state, action) => {
       state.loading = false;
-      if(!action.payload.isSuccess){
+      if (!action.payload.isSuccess) {
         state.error = action.payload.message;
       } else {
-        state.error = '';
+        state.error = "";
         state.message = action.payload.message;
       }
     },
@@ -60,7 +68,7 @@ export const authSlice = createSlice({
       if (!action.payload.data.isSuccess) {
         state.error = action.payload.data.message;
       } else {
-        state.error = '';
+        state.error = "";
         state.message = action.payload.data.message;
         state.token = action.payload.data.token;
         state.user = action.payload.data.userName;
@@ -73,6 +81,36 @@ export const authSlice = createSlice({
       }
     },
     [login.rejected]: (state) => {
+      state.loading = true;
+    },
+    [forgotPassword.pending]: (state) => {
+      state.loading = true;
+    },
+    [forgotPassword.fulfilled]: (state, action) => {
+      state.loading = false;
+      if (!action.payload.isSuccess) {
+        state.error = action.payload.message;
+      } else {
+        state.error = "";
+        state.message = action.payload.message;
+      }
+    },
+    [forgotPassword.rejected]: (state) => {
+      state.loading = true;
+    },
+    [resetPassword.pending]: (state) => {
+      state.loading = true;
+    },
+    [resetPassword.fulfilled]: (state, action) => {
+      state.loading = false;
+      if (!action.payload.isSuccess) {
+        state.error = action.payload.message;
+      } else {
+        state.error = "";
+        state.message = action.payload.message;
+      }
+    },
+    [resetPassword.rejected]: (state) => {
       state.loading = true;
     },
   },

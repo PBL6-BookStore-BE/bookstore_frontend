@@ -5,12 +5,13 @@ import StoreFeatures from "../components/Features/StoreFeatures";
 import Footer from "../components/Footer/Footer";
 import Top10List from "../modules/Homepage/Top10List/Top10List";
 import SelectedBooks from "../modules/Homepage/SelectedProducts/SelectedBooks";
-import { listbook } from "../modules/Homepage/Top10List/listbook";
 import SliderBanner from "../modules/Homepage/SliderBanner/SliderBanner";
-import FeaturedBookList from "../modules/Homepage/FeaturedBookList/FeaturedBookList"
 import { getListBook } from "../apis/list-book.api";
 import { getListBookTop10 } from "../apis/list-book-top10.api";
 import Loading from '../components/Loading/Loading'
+import FeaturedBookList from "../modules/Homepage/FeaturedBookList/FeaturedBookList";
+import { Box } from "@chakra-ui/react";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -33,7 +34,11 @@ const Home = () => {
     return <Loading />
   }
   return (
-    <div>
+    <Box>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Home page</title>
+      </Helmet>
       <Header />
       <SliderBanner booksData={data} />
       <StoreFeatures />
@@ -42,7 +47,7 @@ const Home = () => {
       <BestSellerList headerContent="Best Sellers" booksData={data} />
       <FeaturedBookList headerContent="Featured Book" books={data} />
       <Footer />
-    </div>
+    </Box>
   );
 };
 

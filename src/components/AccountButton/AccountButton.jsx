@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
-import { LogoutIcon, UserIcon } from "../icons";
+import { UserIcon } from "../icons";
 import "./AccountButton.css";
 
 const AccountButton = ({ username, props }) => {
@@ -24,7 +24,7 @@ const AccountButton = ({ username, props }) => {
       </MenuButton>
       <MenuList>
         <MenuItem>
-          <Link to="/logout">Log out</Link>
+          <Link to="/logout" className="link-button">Log out</Link>
         </MenuItem>
       </MenuList>
     </Menu>

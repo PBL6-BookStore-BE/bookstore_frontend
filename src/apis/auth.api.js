@@ -9,9 +9,19 @@ const login = (data) => {
     return apiClient.post('/login', data);
 };
 
+const forgotPassword = (email) => {
+    return apiClient.post('/forget-password', email);
+}
+
+const resetPassword = (data) => {
+    return apiClient.post('/reset-password', data);
+}
+
 const authAPI = {
     register,
     login,
+    forgotPassword,
+    resetPassword,
 }
 
 export default authAPI;
