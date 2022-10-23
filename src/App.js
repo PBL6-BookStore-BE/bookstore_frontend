@@ -15,6 +15,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './App.css';
 import Logout from "./pages/auth/Logout";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import ResetPassword from "./pages/auth/ResetPassword";
 function App() {
   return (
     <div className="App">
@@ -22,6 +24,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/" element={<Home />} />
         <Route path="/books/*" element={<Books />} />
         <Route path="/magazine/*" element={<Magazine />} />

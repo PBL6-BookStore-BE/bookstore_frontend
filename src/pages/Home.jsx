@@ -8,6 +8,8 @@ import SelectedBooks from "../modules/Homepage/SelectedProducts/SelectedBooks";
 import { listbook } from "../modules/Homepage/Top10List/listbook";
 import SliderBanner from "../modules/Homepage/SliderBanner/SliderBanner";
 import FeaturedBookList from "../modules/Homepage/FeaturedBookList/FeaturedBookList";
+import { Box } from "@chakra-ui/react";
+import { Helmet } from "react-helmet";
 
 const DUMMY_BOOK_DATA = [
   {
@@ -61,7 +63,11 @@ const DUMMY_BOOK_DATA = [
 ];
 const Home = () => {
   return (
-    <div>
+    <Box>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Home page</title>
+      </Helmet>
       <Header />
       <SliderBanner />
       <StoreFeatures />
@@ -73,7 +79,7 @@ const Home = () => {
       />
       <FeaturedBookList headerContent="Featured Book" books={listbook} />
       <Footer />
-    </div>
+    </Box>
   );
 };
 

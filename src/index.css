@@ -107,3 +107,8 @@ li {
     margin-right: 12px;
   }
 }
+
+.link-button {
+  display: inline-block;
+  width: 100%;
+}
