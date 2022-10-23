@@ -5,7 +5,7 @@ import AddCart from '../../../../components/AddCart/AddCart';
 import { Link } from "react-router-dom";
 import './style.css';
 
-const BookTop10 = ({ imageUrl, title, author, price, rating }) => {
+const BookTop10 = ({ urls, name, authors, price, rating }) => {
     return (
     
       <VStack
@@ -18,14 +18,15 @@ const BookTop10 = ({ imageUrl, title, author, price, rating }) => {
         <AspectRatio ratio={2/3} w={170}>
             <Image 
                 borderRadius='20px'
-                src={imageUrl}
+                src={urls[0] || './static-data/img-none.jpg'}
             />
         </AspectRatio>
         <Flex spacing={1} marginTop='15px' >
-        {
-            Array.from(Array(rating), (e, i) => {
+        { rating ? 
+            Array.from(Array(Math.floor(rating)), (e, i) => {
                 return (<StarIcon key={i} /> )
             })
+            : <span>0 <StarIcon /></span> 
         }
         </Flex>
         <Box display='' h='115px' marginTop='10px'>
@@ -35,14 +36,18 @@ const BookTop10 = ({ imageUrl, title, author, price, rating }) => {
                 lineHeight="30px"
                 className="book-title"
             >
-                {title}
+                {name || 'Null' }
             </Text>
             <Text 
                 marginTop='8px'
                 fontSize="16px" 
                 lineHeight="24px"
             >
-                {author}
+                {authors.map((item, key) =>{
+                return (
+                  <span key={key}>{item}</span>
+                )
+              })}
             </Text>
         </Box>
     </Link>
@@ -60,7 +65,7 @@ const BookTop10 = ({ imageUrl, title, author, price, rating }) => {
                 marginLeft='35px' 
                 position="relative"
                 >
-                ${price}
+                ${price || '0'}
                 </Text>
                 <Link to="/checkout">
                     <Box marginTop='4px'>

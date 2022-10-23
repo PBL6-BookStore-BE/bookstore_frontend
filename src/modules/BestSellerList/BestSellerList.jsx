@@ -9,7 +9,7 @@ import BookBestSeller from "./BookBestSeller/BookBestSeller";
 
 const BestSellerList = ({ headerContent, booksData }) => {
   return (
-    <Box className="container">
+    <Box className="container" marginTop={8}>
       <Flex alignItems="center" justifyContent="space-between">
         <Box
           fontWeight="600"
@@ -31,8 +31,8 @@ const BestSellerList = ({ headerContent, booksData }) => {
         infinite
         slidesToShow={(booksData.length>=3) ? 3 : 1}
         slidesToScroll={1}
-        autoplay
-        autoplaySpeed={2000}
+        // autoplay
+        // autoplaySpeed={2000}
         pauseOnHover
         nextArrow={<CarouselNextArrow />}
         prevArrow={<CarouselPrevArrow />}

@@ -9,27 +9,38 @@ import { listbook } from "../modules/Homepage/Top10List/listbook";
 import SliderBanner from "../modules/Homepage/SliderBanner/SliderBanner";
 import FeaturedBookList from "../modules/Homepage/FeaturedBookList/FeaturedBookList"
 import { getListBook } from "../apis/list-book.api";
+import { getListBookTop10 } from "../apis/list-book-top10.api";
+import Loading from '../components/Loading/Loading'
 
 const Home = () => {
   const [data, setData] = useState([]);
+  const [booktop10, setDataBookTop10] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       const res  = await getListBook();
-      setData(res)
+      const databooktop10 = await getListBookTop10();
+      setData(res);
+      setDataBookTop10(databooktop10);
+      setLoading(false);
+
     };
 
     fetchData();
   }, []);
+  if(loading){
+    return <Loading />
+  }
   return (
     <div>
       <Header />
-      <SliderBanner />
+      <SliderBanner booksData={data} />
       <StoreFeatures />
-      <SelectedBooks books={listbook} />
-      <Top10List headerContent="10 Top Rated Books" books={listbook}/>
-      <FeaturedBookList headerContent="Featured Book" books={listbook} />
+      <SelectedBooks books={data} />
+      <Top10List headerContent="10 Top Rated Books" books={booktop10}/>
       <BestSellerList headerContent="Best Sellers" booksData={data} />
+      <FeaturedBookList headerContent="Featured Book" books={data} />
       <StoreFeatures />
       <Footer />
     </div>

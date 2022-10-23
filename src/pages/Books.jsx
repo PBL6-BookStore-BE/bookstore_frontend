@@ -1,11 +1,30 @@
 import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Pagination from "../components/Pagination/Pagination";
 import { listbook } from "../modules/Homepage/Top10List/listbook";
+import { getListBook } from "../apis/list-book.api";
+import StoreFeatures from "../components/Features/StoreFeatures";
+import Footer from "../components/Footer/Footer";
+import Loading from '../components/Loading/Loading'
 
 const Books = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res  = await getListBook();
+      setData(res);
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
+  if(loading){
+    return <Loading />
+  }
   return (
     <div>
       <Header />
@@ -24,8 +43,9 @@ const Books = () => {
         </Breadcrumb>
       </Box>
       Books page
-      <Pagination itemsPerPage={3} items={listbook}/>
-
+      <Pagination itemsPerPage={3} items={data}/>
+      <StoreFeatures />
+      <Footer />
     </div>
   );
 };

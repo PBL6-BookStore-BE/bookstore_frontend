@@ -5,7 +5,7 @@ import ButtonAddCart from "../../../../components/ButtonAddCart/ButtonAddCart"
 import { Link } from "react-router-dom";
 import '../../Top10List/BookTop10/style.css';
 
-const FeatureBook = ({ imageUrl, title, price, rating, category  }) => {
+const FeatureBook = ({ urls, name, price, rating, categoryName  }) => {
   return (
     <HStack
       cursor="pointer"
@@ -16,19 +16,20 @@ const FeatureBook = ({ imageUrl, title, price, rating, category  }) => {
     >
       <AspectRatio ratio={2/3} w='170px'>
         <Image
-          src={imageUrl}
+          src={urls[0]}
           alt="Image book"
           borderRadius="20px"
         />
       </AspectRatio>
       <VStack maxW='320px' position="absolute" left='30%' top='0'align="flex-start">
         <Flex>
-            <Box className="book-category">{category}</Box>
+            <Box className="book-category">{categoryName}</Box>
             <Box marginLeft='20px' marginTop='5px'>
-              {
-                Array.from(Array(rating), (e, i) => {
+              { rating ? 
+                Array.from(Array(Math.floor(rating)), (e, i) => {
                   return (<StarIcon  key={i} /> )
-              })
+                }) 
+                : <span>0 <StarIcon /></span> 
               }
             </Box>
             <Text color='#755A7D' marginLeft='16px' fontSize='14px' alignSelf='center'>
@@ -41,7 +42,7 @@ const FeatureBook = ({ imageUrl, title, price, rating, category  }) => {
             fontSize='21px' 
             fontWeight='bold'
           >
-            {title}
+            {name || 'Null'}
           </Text>
           <Text fontSize='14px'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reiciendis voluptate officiis.</Text>
@@ -55,7 +56,7 @@ const FeatureBook = ({ imageUrl, title, price, rating, category  }) => {
             color='#8d28ad'
             marginBottom={6}
           >
-            ${price}
+            ${price || '0'}
           </Text>
         </HStack>
         <HStack spacing={5}>
