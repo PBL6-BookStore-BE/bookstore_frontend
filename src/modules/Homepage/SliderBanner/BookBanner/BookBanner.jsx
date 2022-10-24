@@ -3,7 +3,6 @@ import { Box, Image, AspectRatio } from "@chakra-ui/react";
 import LabelBestSeller from "../../../../components/LabelBestSeller/LabelBestSeller";
 
 const BookBanner = ({ bookData }) => {
-  console.log(bookData);
   return (
       <Box pos="relative">
           <AspectRatio ratio={2/3} w={286}>

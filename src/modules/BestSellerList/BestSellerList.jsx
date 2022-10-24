@@ -8,9 +8,31 @@ import { ArrowRightIcon } from "../../components/icons";
 import BookBestSeller from "./BookBestSeller/BookBestSeller";
 
 const BestSellerList = ({ headerContent, booksData }) => {
+  const settings = {
+    infinite: true,
+    slidesToShow: booksData.length >= 3 ? 3 : 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    pauseOnHover: true,
+    nextArrow: <CarouselNextArrow />,
+    prevArrow: <CarouselPrevArrow />,
+    responsive: [
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
   return (
     <Box className="container" marginTop={8}>
-      <Flex alignItems="center" justifyContent="space-between">
+      <Flex
+        alignItems="center"
+        justifyContent="space-between"
+        marginBottom="32px"
+      >
         <Box
           fontWeight="600"
           fontSize="24px"
@@ -21,23 +43,22 @@ const BestSellerList = ({ headerContent, booksData }) => {
           {headerContent}
         </Box>
         <Link to="/books/books-list">
-          <Button variant="link" color="#8D28AD" fontSize="14px" display='flex' alignItems='center'>
+          <Button
+            variant="link"
+            color="#8D28AD"
+            fontSize="14px"
+            display="flex"
+            alignItems="center"
+          >
             View more
-            <ArrowRightIcon marginLeft='4px' />
+            <ArrowRightIcon marginLeft="4px" />
           </Button>
         </Link>
       </Flex>
-      <Slider
-        infinite
-        slidesToShow={(booksData.length>=3) ? 3 : 1}
-        slidesToScroll={1}
-        // autoplay
-        // autoplaySpeed={2000}
-        pauseOnHover
-        nextArrow={<CarouselNextArrow />}
-        prevArrow={<CarouselPrevArrow />}
-      >
-        {booksData.map((item, key) => <BookBestSeller key={key} bookData={item} />)}
+      <Slider {...settings}>
+        {booksData.map((item, key) => (
+          <BookBestSeller key={key} bookData={item} />
+        ))}
       </Slider>
     </Box>
   );

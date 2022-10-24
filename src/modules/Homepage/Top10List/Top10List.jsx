@@ -8,7 +8,6 @@ import BookTop10 from './BookTop10/BookTop10';
 import Slider from "react-slick";
 
 const Top10List = ({headerContent, books}) => {
-    console.log(books.length);
     var settings = {
         infinite: true,
         slidesToScroll:1,

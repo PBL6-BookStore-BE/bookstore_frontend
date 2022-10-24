@@ -1,6 +1,8 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
+  Button,
+  Flex,
   IconButton,
   Input,
   InputGroup,
@@ -8,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import AccountButton from "../AccountButton/AccountButton";
 import BookLogo from "../common/BookLogo";
@@ -17,6 +20,8 @@ import NavigationButton from "../NavigationButton/NavigationButton";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <Box paddingTop="20px">
       <Box
@@ -26,7 +31,7 @@ const Header = () => {
         marginBottom="16px"
         className="container"
       >
-        <Link w="176px" h="45px" to='/'>
+        <Link w="176px" h="45px" to="/">
           <BookLogo />
         </Link>
         <NavigationButton
@@ -37,14 +42,25 @@ const Header = () => {
           <Input pr="4.5rem" type="text" placeholder="Find books here..." />
           <InputRightElement children={<SearchIcon color="#A4A4A4" />} />
         </InputGroup>
-        <Link to='/checkout'>
+        <Link to="/checkout">
           <IconButton
             colorScheme="none"
             aria-label="Cart"
             icon={<CartIcon />}
           />
         </Link>
-        <AccountButton />
+        {user ? (
+          <AccountButton username={user} />
+        ) : (
+          <Flex alignItems="center">
+            <Button variant="link">
+              <Link to="/login">Sign in</Link>
+            </Button>
+            <Button colorScheme="purple" ml={6}>
+              <Link to="/register">Create Account</Link>
+            </Button>
+          </Flex>
+        )}
       </Box>
       {isOpen && <NavBar />}
     </Box>

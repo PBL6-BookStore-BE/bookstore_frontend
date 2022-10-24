@@ -1,30 +1,34 @@
 import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Pagination from "../components/Pagination/Pagination";
-import { listbook } from "../modules/Homepage/Top10List/listbook";
-import { getListBook } from "../apis/list-book.api";
 import StoreFeatures from "../components/Features/StoreFeatures";
 import Footer from "../components/Footer/Footer";
-import Loading from '../components/Loading/Loading'
+import { useDispatch, useSelector } from "react-redux";
+import { listBooks } from "../store/cases/book/action";
+import Loading from "../components/Loading/Loading";
 
 const Books = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const { list } = useSelector((state) => state.book);
+
+  const loadBooks = useCallback(async () => {
+    try {
+      dispatch(listBooks());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res  = await getListBook();
-      setData(res);
-      setLoading(false);
-    };
+    loadBooks();
+  }, [loadBooks]);
 
-    fetchData();
-  }, []);
-  if(loading){
-    return <Loading />
+  if (list.isFetching) {
+    return <Loading />;
   }
+
   return (
     <div>
       <Header />
@@ -42,8 +46,7 @@ const Books = () => {
           </BreadcrumbItem>
         </Breadcrumb>
       </Box>
-      Books page
-      <Pagination itemsPerPage={3} items={data}/>
+      <Pagination itemsPerPage={3} items={list.data}/>
       <StoreFeatures />
       <Footer />
     </div>
