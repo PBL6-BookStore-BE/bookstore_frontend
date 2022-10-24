@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Pagination from "../components/Pagination/Pagination";
-import { listbook } from "../modules/Homepage/Top10List/listbook";
 import { getListBook } from "../apis/list-book.api";
 import StoreFeatures from "../components/Features/StoreFeatures";
 import Footer from "../components/Footer/Footer";
@@ -42,7 +41,6 @@ const Books = () => {
           </BreadcrumbItem>
         </Breadcrumb>
       </Box>
-      Books page
       <Pagination itemsPerPage={3} items={data}/>
       <StoreFeatures />
       <Footer />

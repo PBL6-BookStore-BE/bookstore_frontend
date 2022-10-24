@@ -1,7 +1,7 @@
-import axios from "axios";
+import apiClient from "../utils/apiClient";
 
 async function getListBookTop10() {
-    return axios.get('https://localhost:6002/api/Book/Top10Rating').then(res => res.data)
+    return apiClient.get('/book/toprating').then(res => res.data)
 };
 
 export {

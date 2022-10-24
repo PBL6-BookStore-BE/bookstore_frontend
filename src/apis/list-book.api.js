@@ -1,7 +1,7 @@
-import axios from "axios";
+import apiClient from "../utils/apiClient"
 
 async function getListBook() {
-    return axios.get('https://localhost:6002/api/Book').then(res => res.data)
+    return apiClient.get('/book/list').then(res => res.data)
 };
 
 export {

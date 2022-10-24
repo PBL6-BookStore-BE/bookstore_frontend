@@ -48,7 +48,7 @@ function RegisterForm() {
           {...register("address")}
           name="address"
           type="text"
-          placeholder="Jhon Doe"
+          placeholder="Da Nang"
           onChange={() => clearErrors("address")}
         />
         {errors.phoneNumber && <ErrorMessage error={errors.phoneNumber.message} />}
@@ -59,7 +59,7 @@ function RegisterForm() {
           {...register("phoneNumber")}
           name="phoneNumber"
           type="text"
-          placeholder="Jhon Doe"
+          placeholder="0379478263"
           onChange={() => clearErrors("phoneNumber")}
         />
         {errors.phoneNumber && <ErrorMessage error={errors.phoneNumber.message} />}
