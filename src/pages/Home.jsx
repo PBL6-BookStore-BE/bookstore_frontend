@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import Header from "../components/Header/Header";
 import BestSellerList from "../modules/BestSellerList/BestSellerList";
 import StoreFeatures from "../components/Features/StoreFeatures";
@@ -6,33 +6,34 @@ import Footer from "../components/Footer/Footer";
 import Top10List from "../modules/Homepage/Top10List/Top10List";
 import SelectedBooks from "../modules/Homepage/SelectedProducts/SelectedBooks";
 import SliderBanner from "../modules/Homepage/SliderBanner/SliderBanner";
-import { getListBook } from "../apis/list-book.api";
-import { getListBookTop10 } from "../apis/list-book-top10.api";
-import Loading from '../components/Loading/Loading'
 import FeaturedBookList from "../modules/Homepage/FeaturedBookList/FeaturedBookList";
 import { Box } from "@chakra-ui/react";
 import { Helmet } from "react-helmet";
+import { useDispatch, useSelector } from "react-redux";
+import { listBooks, listTopRating } from "../store/cases/book/action";
+import Loading from "../components/Loading/Loading";
 
 const Home = () => {
-  const [data, setData] = useState([]);
-  const [booktop10, setDataBookTop10] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const { list, topRating } = useSelector((state) => state.book);
+
+  const loadBooks = useCallback(async () => {
+    try {
+      dispatch(listBooks());
+      dispatch(listTopRating());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res  = await getListBook();
-      const databooktop10 = await getListBookTop10();
-      setData(res);
-      setDataBookTop10(databooktop10);
-      setLoading(false);
+    loadBooks();
+  }, [loadBooks]);
 
-    };
-
-    fetchData();
-  }, []);
-  if(loading){
-    return <Loading />
+  if (list.isFetching || topRating.isFetching) {
+    return <Loading />;
   }
+  
   return (
     <Box>
       <Helmet>
@@ -40,13 +41,13 @@ const Home = () => {
         <title>Home page</title>
       </Helmet>
       <Header />
-      <SliderBanner booksData={data} />
+      <SliderBanner booksData={list.data} />
       <StoreFeatures />
-      <SelectedBooks books={data} />
-      <Top10List headerContent="10 Top Rated Books" books={booktop10}/>
-      <BestSellerList headerContent="Best Sellers" booksData={data} />
-      <FeaturedBookList headerContent="Featured Book" books={data} />
-      <Footer/>
+      <SelectedBooks books={list.data} />
+      <Top10List headerContent="10 Top Rated Books" books={topRating.data} />
+      <BestSellerList headerContent="Best Sellers" booksData={list.data} />
+      <FeaturedBookList headerContent="Featured Book" books={list.data} />
+      <Footer />
     </Box>
   );
 };

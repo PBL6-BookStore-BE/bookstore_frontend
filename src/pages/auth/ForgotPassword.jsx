@@ -20,9 +20,9 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { forgotPassword } from "../../redux/authSlice";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { forgotPassword } from "../../store/cases/auth/action";
 
 const schema = yup.object({
   email: yup

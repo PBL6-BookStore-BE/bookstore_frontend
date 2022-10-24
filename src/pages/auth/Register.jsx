@@ -9,9 +9,9 @@ import { Button, useDisclosure } from "@chakra-ui/react";
 import { GoogleIcon } from "../../components/icons";
 import { schema } from "./schema/schema";
 import { useDispatch } from "react-redux";
-import { register } from "../../redux/authSlice";
 import { useCallback } from "react";
 import { toast } from "react-toastify";
+import { register } from "../../store/cases/auth/action";
 
 function Register() {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ function Register() {
         toast.error(error.message);
       }
     },
-    [openLoading, closeLoading]
+    [openLoading, closeLoading, dispatch, navigate]
   );
 
   return (

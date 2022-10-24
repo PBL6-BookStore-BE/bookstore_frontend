@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import authAPI from "../apis/auth.api";
+import { createSlice } from "@reduxjs/toolkit";
+import { forgotPassword, login, register, resetPassword } from "./action";
 
 const initialState = {
   message: "",
@@ -10,23 +10,6 @@ const initialState = {
   loading: false,
   error: "",
 };
-
-export const register = createAsyncThunk("auth/register", async (data) => {
-  const response = await authAPI.register(data);
-  return response.data;
-});
-
-export const login = createAsyncThunk("auth/login", async (data) =>
-  authAPI.login(data)
-);
-
-export const forgotPassword = createAsyncThunk("auth/forgotPassword", (data) =>
-  authAPI.forgotPassword(data)
-);
-
-export const resetPassword = createAsyncThunk("auth/resetPassword", (data) =>
-  authAPI.resetPassword(data)
-);
 
 export const authSlice = createSlice({
   name: "auth",

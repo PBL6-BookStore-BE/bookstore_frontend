@@ -9,9 +9,9 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Center, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
-import { resetPassword } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { resetPassword } from "../../store/cases/auth/action";
 
 const schema = yup.object({
   email: yup
@@ -64,7 +64,6 @@ const ResetPassword = () => {
       dispatch(resetPassword(data)).then((res) => {
         const { payload } = res;
         closeLoading();
-        console.log(payload);
         if (payload.data.isSuccess) {
           toast.success("RESET PASSWORD SUCCESS", {
             autoClose: 2000,

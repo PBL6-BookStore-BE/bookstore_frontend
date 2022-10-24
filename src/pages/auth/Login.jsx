@@ -9,8 +9,8 @@ import "./style.css";
 import { Button, useDisclosure } from "@chakra-ui/react";
 import { GoogleIcon } from "../../components/icons";
 import { useDispatch } from "react-redux";
-import { login } from "../../redux/authSlice";
 import { toast } from "react-toastify";
+import { login } from "../../store/cases/auth/action";
 
 const schemaLogin = yup.object({
   email: yup
