@@ -1,3 +1,10 @@
 .book-title:hover {
     text-decoration: underline;
 }
+.a-start-icon path {
+    fill: #E0E0E0;
+}
+
+.a-start-icon path:hover {
+    fill: #FF7A00;
+}

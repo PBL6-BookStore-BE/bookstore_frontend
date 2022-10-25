@@ -21,14 +21,16 @@ const Book = ({ categoryName, publisherName, name, authors, rating, price, urls 
                 </Box>
             </Link>
             <Box className='column-item two'>
-                <VStack align='flex-start' spacing={5}>
+                <VStack align='flex-start' spacing={4}>
                     <HStack>
                         <Box fontWeight='600' className="book-category">{categoryName}</Box>
                         <Box fontWeight='600' className="book-category">{publisherName}</Box>
                     </HStack>
                     <Link to='book/book-detail'>
-                        <VStack align='flex-start' spacing={4}>
+                        <VStack align='flex-start' spacing={3}>
                             <Text
+                                marginLeft='0' 
+                                mb={0} mt={0}
                                 fontSize='21px' 
                                 fontWeight='bold'
                                 className='title'
