@@ -10,7 +10,7 @@ import Slider from "react-slick";
 const FeaturedBookList = ({ headerContent, books }) => {
     var settings = {
         infinite: true,
-        // slidesToShow:2,
+        slidesToShow: books.length>=2 ? 2 : 1,
         slidesToScroll:1,
         autoplaySpeed:2000,
         pauseOnHover: true,
@@ -46,7 +46,7 @@ const FeaturedBookList = ({ headerContent, books }) => {
                 </Button>
                 </Link>
             </Flex>
-            <Slider {...settings} slidesToShow={(books.length>=2) ? 2 : 1}>
+            <Slider {...settings}>
                 {books.map((item, key) => {
                     return (
                         <FeaturedBook key={key} {...item} />

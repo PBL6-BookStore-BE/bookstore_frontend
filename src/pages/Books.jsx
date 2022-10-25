@@ -1,4 +1,4 @@
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 import React, { useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header/Header";
@@ -8,6 +8,7 @@ import Footer from "../components/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { listBooks } from "../store/cases/book/action";
 import Loading from "../components/Loading/Loading";
+import LeftSide from '../components/LeftSide/LeftSide';
 
 const Books = () => {
   const dispatch = useDispatch();
@@ -46,7 +47,14 @@ const Books = () => {
           </BreadcrumbItem>
         </Breadcrumb>
       </Box>
-      <Pagination itemsPerPage={3} items={list.data}/>
+      <Grid templateColumns="repeat(5, 1fr)" marginLeft={20} mt={8}>
+        <GridItem colSpan={1} >
+          <LeftSide/>
+        </GridItem>
+        <GridItem colSpan={4} align='left'>
+          <Pagination itemsPerPage={3} items={list.data}/> 
+        </GridItem>
+      </Grid>
       <StoreFeatures />
       <Footer />
     </div>
