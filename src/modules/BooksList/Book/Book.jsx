@@ -2,19 +2,18 @@ import React from 'react'
 import {Box, Text, VStack, HStack, Image, AspectRatio } from "@chakra-ui/react";
 import { StarIcon } from "../../../components/icons";
 import { Link } from "react-router-dom";
-import logo from "./img-none.jpg"
 import './style.css'
 import ButtonAddCart from "../../../components/ButtonAddCart/ButtonAddCart"
 
 
-const Book = ({ category, publisher, title, author, rating, price, imageUrl }) => {
+const Book = ({ categoryName, publisherName, name, authors, rating, price, urls }) => {
     return (
         <Box className='column-layout'>
             <Link to='book/book-detail'>
                 <Box className='column-item one'>
                     <AspectRatio ratio={2/3} w='150px'>
                         <Image 
-                            src={logo}
+                            src={urls[0] || './static-data/img-none.jpg'}
                             borderRadius='20px'
                             alt="Image book"
                         />
@@ -24,8 +23,8 @@ const Book = ({ category, publisher, title, author, rating, price, imageUrl }) =
             <Box className='column-item two'>
                 <VStack align='flex-start' spacing={5}>
                     <HStack>
-                        <Box fontWeight='600' className="book-category">{category}</Box>
-                        <Box fontWeight='600' className="book-category">{publisher}</Box>
+                        <Box fontWeight='600' className="book-category">{categoryName}</Box>
+                        <Box fontWeight='600' className="book-category">{publisherName}</Box>
                     </HStack>
                     <Link to='book/book-detail'>
                         <VStack align='flex-start' spacing={4}>
@@ -34,19 +33,23 @@ const Book = ({ category, publisher, title, author, rating, price, imageUrl }) =
                                 fontWeight='bold'
                                 className='title'
                             >
-                                {title}
+                                {name}
                             </Text>
                             <HStack>
                                 <Text 
                                     color='#755A7D' 
                                     fontSize='14px' 
                                 >
-                                    {author}
+                                    {authors.map((item, key) =>{
+                                        return (
+                                        <span key={key}>{item}</span>
+                                        )
+                                    })}
                                 </Text>
                                 <Text lineHeight='12px'>
                                     <StarIcon />
                                 </Text>
-                                <Text fontWeight='bold'>4.1</Text>
+                                <Text fontWeight='bold'>{rating}</Text>
                                 <Text
                                     color='#755A7D' 
                                 >

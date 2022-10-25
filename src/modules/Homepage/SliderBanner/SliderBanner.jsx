@@ -1,13 +1,5 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Button,
-  Flex,
-  Grid,
-  GridItem,
-  Image,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import React from "react";
 import Slider from "react-slick";
 import {
@@ -16,10 +8,10 @@ import {
   CustomerIcon,
 } from "../../../components/icons";
 import CircleElementSmall from "../../../components/icons/sliderbanner/CircleElementSmall";
-import LabelBestSeller from "../../../components/LabelBestSeller/LabelBestSeller";
+import BookBanner from "./BookBanner/BookBanner";
 import "./SliderBanner.css";
 
-const SliderBanner = () => {
+const SliderBanner = ({ booksData }) => {
   return (
     <Box bg="#451355" color="#FFFFFF" pos="relative">
       <CircleElement position="absolute" bottom="0" zIndex="0" />
@@ -29,7 +21,6 @@ const SliderBanner = () => {
         left="50%"
         transform="translate(-50%, -10%)"
       />
-      {/* <Box className="slider-banner-overlay" /> */}
       <Grid
         templateColumns="repeat(5, 1fr)"
         gap={10}
@@ -116,44 +107,9 @@ const SliderBanner = () => {
             customPaging={(i) => <div className="slick-custom"></div>}
             className="slider"
           >
-            <Box pos="relative">
-              <Image
-                w="286px"
-                h="395px"
-                borderRadius="20px"
-                src="./static-data/img-none.jpg"
-              />
-              <LabelBestSeller label="Best Seller" />
-            </Box>
-            <Box pos="relative">
-              <Image
-                w="286px"
-                h="395px"
-                borderRadius="20px"
-                src="./static-data/img-none.jpg"
-              />
-              <LabelBestSeller label="Best Seller" />
-            </Box>
-            <Box pos="relative">
-              <Image
-                w="286px"
-                h="395px"
-                borderRadius="20px"
-                src="./static-data/img-none.jpg"
-                pos="relative"
-              />
-              <LabelBestSeller label="Best Seller" />
-            </Box>
-            <Box pos="relative">
-              <Image
-                w="286px"
-                h="395px"
-                borderRadius="20px"
-                src="./static-data/img-none.jpg"
-                pos="relative"
-              />
-              <LabelBestSeller label="Best Seller" />
-            </Box>
+            {booksData.map((item, key) => {
+              return <BookBanner key={key} bookData={item} />;
+            })}
           </Slider>
         </GridItem>
       </Grid>

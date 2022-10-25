@@ -1,76 +1,54 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import Header from "../components/Header/Header";
 import BestSellerList from "../modules/BestSellerList/BestSellerList";
 import StoreFeatures from "../components/Features/StoreFeatures";
 import Footer from "../components/Footer/Footer";
 import Top10List from "../modules/Homepage/Top10List/Top10List";
 import SelectedBooks from "../modules/Homepage/SelectedProducts/SelectedBooks";
-import { listbook } from "../modules/Homepage/Top10List/listbook";
 import SliderBanner from "../modules/Homepage/SliderBanner/SliderBanner";
-import FeaturedBookList from "../modules/Homepage/FeaturedBookList/FeaturedBookList"
+import FeaturedBookList from "../modules/Homepage/FeaturedBookList/FeaturedBookList";
+import { Box } from "@chakra-ui/react";
+import { Helmet } from "react-helmet";
+import { useDispatch, useSelector } from "react-redux";
+import { listBooks, listTopRating } from "../store/cases/book/action";
+import Loading from "../components/Loading/Loading";
 
-const DUMMY_BOOK_DATA = [
-  {
-    rating: 4.3,
-    title: "Life of Wilds",
-    author: "Jasmine Belle",
-    price: "23.44",
-    imageUrl: "./static-data/dummy-image-book.jpg",
-    category: "Nature",
-  },
-  {
-    rating: 4.1,
-    title: "So You Want To Talk About Race",
-    author: "Henry Martopo",
-    price: "23.44",
-    imageUrl: "./static-data/dummy-image-book.jpg",
-    category: "Biography",
-  },
-  {
-    rating: 4.1,
-    title: "So You Want To Talk About Race",
-    author: "Ijeoma Oluo",
-    price: "23.44",
-    imageUrl: "./static-data/dummy-image-book.jpg",
-    category: "Biography",
-  },
-  {
-    rating: 4.3,
-    title: "Life of Wilds",
-    author: "Jasmine Belle",
-    price: "23.44",
-    imageUrl: "./static-data/dummy-image-book.jpg",
-    category: "Nature",
-  },
-  {
-    rating: 4.1,
-    title: "So You Want To Talk About Race",
-    author: "Henry Martopo",
-    price: "23.44",
-    imageUrl: "./static-data/dummy-image-book.jpg",
-    category: "Biography",
-  },
-  {
-    rating: 4.1,
-    title: "So You Want To Talk About Race",
-    author: "Ijeoma Oluo",
-    price: "23.44",
-    imageUrl: "./static-data/dummy-image-book.jpg",
-    category: "Biography",
-  },
-];
 const Home = () => {
+  const dispatch = useDispatch();
+  const { list, topRating } = useSelector((state) => state.book);
+
+  const loadBooks = useCallback(async () => {
+    try {
+      dispatch(listBooks());
+      dispatch(listTopRating());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    loadBooks();
+  }, [loadBooks]);
+
+  if (list.isFetching || topRating.isFetching) {
+    return <Loading />;
+  }
+  
   return (
-    <div>
+    <Box>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Home page</title>
+      </Helmet>
       <Header />
-      <SliderBanner />
+      <SliderBanner booksData={list.data} />
       <StoreFeatures />
-      <SelectedBooks books={listbook} />
-      <Top10List headerContent="10 Top Rated Books" books={listbook}/>
-      <BestSellerList headerContent="Best Sellers" booksData={DUMMY_BOOK_DATA} />
-      <FeaturedBookList headerContent="Featured Book" books={listbook} />
+      <SelectedBooks books={list.data} />
+      <Top10List headerContent="10 Top Rated Books" books={topRating.data} />
+      <BestSellerList headerContent="Best Sellers" booksData={list.data} />
+      <FeaturedBookList headerContent="Featured Book" books={list.data} />
       <Footer />
-    </div>
+    </Box>
   );
 };
 
