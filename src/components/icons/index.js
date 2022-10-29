@@ -16,3 +16,6 @@ export { default as BookIcon } from './cases/BookIcon';
 export { default as CustomerIcon } from './cases/CustomerIcon';
 
 export { default as CircleElement } from './sliderbanner/CircleElement';
+
+export { default as ArrowDownIcon } from './cases/ArrowDownIcon';
+export { default as ArrowUpIcon } from './cases/ArrowUpIcon';

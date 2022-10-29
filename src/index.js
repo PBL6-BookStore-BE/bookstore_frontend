@@ -7,13 +7,14 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { Provider } from 'react-redux';
 import store from "./store/store";
 import 'react-toastify/dist/ReactToastify.css';
+import { theme } from "./theme/theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
           <App />
         </ChakraProvider>
       </BrowserRouter>

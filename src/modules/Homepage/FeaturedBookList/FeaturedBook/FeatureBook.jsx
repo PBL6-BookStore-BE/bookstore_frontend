@@ -24,13 +24,25 @@ const FeatureBook = ({ urls, name, price, rating, categoryName  }) => {
       <VStack maxW='320px' position="absolute" left='30%' top='0'align="flex-start">
         <Flex>
             <Box className="book-category">{categoryName}</Box>
-            <Box marginLeft='20px' marginTop='5px'>
+            <Box marginLeft='20px' marginTop='5px' >
               { rating ? 
                 Array.from(Array(Math.floor(rating)), (e, i) => {
-                  return (<StarIcon  key={i} /> )
+                  return (
+                    <StarIcon  key={i} /> 
+                    )
                 }) 
                 : <span>0 <StarIcon /></span> 
               }
+            </Box>
+            <Box className="a-start-icon" marginTop='5px'>
+              { rating < 5 ? 
+                  Array.from(Array(Math.ceil(5-rating)), (e, i) => {
+                  return (
+                    <StarIcon  key={i} /> 
+                    )
+                }) 
+                : <span></span> 
+            }
             </Box>
             <Text color='#755A7D' marginLeft='16px' fontSize='14px' alignSelf='center'>
               459 Reviews
