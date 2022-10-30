@@ -9,7 +9,6 @@ const SubMenu = ({ title, subMenu, iconClosed, iconOpened }) => {
     const [sliderValue2, setSliderValue2] = useState(150)
 
     const showSubnav = () => setSubnav(!subnav);
-    console.log(subMenu[0].title);
     return (
         <>
             {title !== 'Price Range' && 

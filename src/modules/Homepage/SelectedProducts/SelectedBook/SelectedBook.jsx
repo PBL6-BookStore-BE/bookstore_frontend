@@ -3,9 +3,9 @@ import { VStack, Image, HStack, Text, Flex, AspectRatio } from '@chakra-ui/react
 import { StarIcon } from "../../../../components/icons";
 import { Link } from "react-router-dom";
 
-const SelectedBook = ( {urls, authors, rating} ) => {
+const SelectedBook = ( {urls, authors, rating, id} ) => {
   return (
-    <Link to="/books/book-detail" >
+    <Link to={`/books/book-detail/${id}`}>
       <VStack position='relative'
         w='235px'
         h='450px'

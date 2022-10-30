@@ -11,7 +11,7 @@ const ButtonAddCart = ({ text }) => {
         borderRadius='8px'
         minWidth="100px"
         alignItems='center'
-        padding={8,6}
+        padding={8,4}
         paddingLeft={2}
         _hover={{opacity: '0.6'}}
         

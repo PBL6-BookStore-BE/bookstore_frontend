@@ -5,7 +5,7 @@ import ButtonAddCart from "../../../../components/ButtonAddCart/ButtonAddCart"
 import { Link } from "react-router-dom";
 import '../../Top10List/BookTop10/style.css';
 
-const FeatureBook = ({ urls, name, price, rating, categoryName  }) => {
+const FeatureBook = ({ urls, name, price, rating, categoryName, id  }) => {
   return (
     <HStack
       cursor="pointer"
@@ -14,13 +14,15 @@ const FeatureBook = ({ urls, name, price, rating, categoryName  }) => {
       align="flex-start"
       marginBottom='38px'
     >
-      <AspectRatio ratio={2/3} w='170px'>
-        <Image
-          src={urls[0]}
-          alt="Image book"
-          borderRadius="20px"
-        />
-      </AspectRatio>
+      <Link to={`/books/book-detail/${id}`}>
+        <AspectRatio ratio={2/3} w='170px'>
+          <Image
+            src={urls[0]}
+            alt="Image book"
+            borderRadius="20px"
+          />
+        </AspectRatio>
+      </Link>
       <VStack maxW='320px' position="absolute" left='30%' top='0'align="flex-start">
         <Flex>
             <Box className="book-category">{categoryName}</Box>

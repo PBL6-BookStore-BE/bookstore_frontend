@@ -49,7 +49,7 @@ const FeaturedBookList = ({ headerContent, books }) => {
             <Slider {...settings}>
                 {books.map((item, key) => {
                     return (
-                        <FeaturedBook key={key} {...item} />
+                        <FeaturedBook key={item.id} {...item} />
                     )
                 })}
             </Slider>
