@@ -5,7 +5,7 @@ import AddCart from '../../../../components/AddCart/AddCart';
 import { Link } from "react-router-dom";
 import './style.css';
 
-const BookTop10 = ({ urls, name, authors, price, rating }) => {
+const BookTop10 = ({ urls, name, authors, price, rating, id }) => {
     return (
     
       <VStack
@@ -14,7 +14,7 @@ const BookTop10 = ({ urls, name, authors, price, rating }) => {
         marginBottom='42px'
         marginLeft={{base: '102px', lg: '10px'}}
       >
-        <Link to="/books/book-detail">
+        <Link to={`/books/book-detail/${id}`}>
         <AspectRatio ratio={2/3} w={170}>
             <Image 
                 borderRadius='20px'

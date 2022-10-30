@@ -19,3 +19,6 @@ export { default as CircleElement } from './sliderbanner/CircleElement';
 
 export { default as ArrowDownIcon } from './cases/ArrowDownIcon';
 export { default as ArrowUpIcon } from './cases/ArrowUpIcon';
+
+export { default as AddIcon } from './cases/AddIcon';
+export { default as SubIcon } from './cases/SubIcon';

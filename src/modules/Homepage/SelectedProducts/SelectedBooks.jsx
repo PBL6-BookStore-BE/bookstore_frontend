@@ -10,7 +10,7 @@ const SelectedBooks = ({books}) => {
 
     const arr = books.map((item, i) =>{
         return {
-            key: i,
+            key: item.id,
             content: <SelectedBook {...item}/>
         }
     });

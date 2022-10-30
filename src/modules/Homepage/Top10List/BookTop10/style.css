@@ -1,10 +1,19 @@
 .book-title:hover {
     text-decoration: underline;
 }
+
 .a-start-icon path {
     fill: #E0E0E0;
 }
 
 .a-start-icon path:hover {
     fill: #FF7A00;
+}
+
+.a-start-icon-white path {
+    fill: #fff;
+}
+
+.rating-title {
+    margin-bottom: 18px;
 }
