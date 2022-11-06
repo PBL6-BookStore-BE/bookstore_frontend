@@ -12,6 +12,7 @@ import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { listBooks, listTopRating } from "../store/cases/book/action";
 import Loading from "../components/Loading/Loading";
+import Testimonials from "../modules/Homepage/Testimonials/Testimonials";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const Home = () => {
       <Top10List headerContent="10 Top Rated Books" books={topRating.data} />
       <BestSellerList headerContent="Best Sellers" booksData={list.data} />
       <FeaturedBookList headerContent="Featured Book" books={list.data} />
+      <Testimonials />
       <Footer />
     </Box>
   );
