@@ -3,7 +3,7 @@ import { Text, Button, Box } from "@chakra-ui/react";
 import { CartIcon } from "../icons";
 import './style.css'
 
-const ButtonAddCart = ({ text }) => {
+const ButtonAddCart = ({ text, onClick }) => {
   return (
     <Button
         bg="#8D28AD"
@@ -11,10 +11,10 @@ const ButtonAddCart = ({ text }) => {
         borderRadius='8px'
         minWidth="100px"
         alignItems='center'
-        padding={8,4}
+        padding={[8,4]}
         paddingLeft={2}
         _hover={{opacity: '0.6'}}
-        
+        onClick={onClick}
     >
       <Box
         width="30px"
@@ -22,7 +22,6 @@ const ButtonAddCart = ({ text }) => {
         alignItems="center"
         pos="relative"
         className="a-cart-icon"
-        marginLeft='8px'
       >
         <CartIcon />
       </Box>

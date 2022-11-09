@@ -1,0 +1,14 @@
+.cart-quantity{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 24px; 
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #FFF;
+    background-color: #8D28AD;
+    bottom: 0;
+    left: 70%;
+    transform: translateX(-70%);
+}
