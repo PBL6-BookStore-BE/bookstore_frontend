@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const BookBestSeller = ({bookData}) => {
   
   return (
-    <Link to="/books/book-detail">
+    <Link to={`/books/book-detail/${bookData.id}`}>
       <Grid
         h="280px"
         w="380px"

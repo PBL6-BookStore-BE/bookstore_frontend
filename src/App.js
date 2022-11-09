@@ -17,6 +17,7 @@ import './App.css';
 import Logout from "./pages/auth/Logout";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
+import BookDetail from "./pages/BookDetail";
 function App() {
   return (
     <div className="App">
@@ -29,6 +30,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/books/*" element={<Books />} />
         <Route path="/magazine/*" element={<Magazine />} />
+        <Route path="/books/book-detail/:id" element={<BookDetail />} />
         <Route path="/textbooks/*" element={<Textbooks />} />
         <Route path="/audiobooks/*" element={<Audiobooks />} />
         <Route path="/recommended/*" element={<Recommended />} />

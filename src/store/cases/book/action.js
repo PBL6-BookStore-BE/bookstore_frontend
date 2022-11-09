@@ -1,9 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getListBook, getListBookTop10 } from "../../../apis/book.api";
+import { getListBook, getListBookTop10, getBookById } from "../../../apis/book.api";
 
-const listBooks = createAsyncThunk("book/list", async () => getListBook());
+const listBooks = createAsyncThunk("books", async () => getListBook());
 
-const listTopRating = createAsyncThunk("book/topRating", async () =>
+const listTopRating = createAsyncThunk("topbook", async () =>
   getListBookTop10()
 );
-export { listBooks, listTopRating };
+
+const BookById = createAsyncThunk("book", async (id) =>
+  getBookById(id)
+);
+export { listBooks, listTopRating, BookById };

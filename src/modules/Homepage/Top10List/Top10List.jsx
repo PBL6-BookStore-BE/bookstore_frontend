@@ -51,7 +51,7 @@ return (
             >
                 {books.map((item, key) => {
                     return (
-                        <BookTop10 key={key} {...item} />
+                        <BookTop10 key={item.id} {...item} />
                     )
                     })}
             </Slider>

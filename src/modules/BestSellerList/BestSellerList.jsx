@@ -57,7 +57,7 @@ const BestSellerList = ({ headerContent, booksData }) => {
       </Flex>
       <Slider {...settings}>
         {booksData.map((item, key) => (
-          <BookBestSeller key={key} bookData={item} />
+          <BookBestSeller key={item.id} bookData={item} />
         ))}
       </Slider>
     </Box>

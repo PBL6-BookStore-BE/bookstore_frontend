@@ -6,10 +6,10 @@ import './style.css'
 import ButtonAddCart from "../../../components/ButtonAddCart/ButtonAddCart"
 
 
-const Book = ({ categoryName, publisherName, name, authors, rating, price, urls }) => {
+const Book = ({ categoryName, publisherName, name, authors, rating, price, urls, id }) => {
     return (
         <Box className='column-layout'>
-            <Link to='book/book-detail'>
+            <Link to={`/books/book-detail/${id}`}>
                 <Box className='column-item one'>
                     <AspectRatio ratio={2/3} w='150px'>
                         <Image 
@@ -26,7 +26,7 @@ const Book = ({ categoryName, publisherName, name, authors, rating, price, urls 
                         <Box fontWeight='600' className="book-category">{categoryName}</Box>
                         <Box fontWeight='600' className="book-category">{publisherName}</Box>
                     </HStack>
-                    <Link to='book/book-detail'>
+                    <Link to={`/books/book-detail/${id}`}>
                         <VStack align='flex-start' spacing={3}>
                             <Text
                                 marginLeft='0' 

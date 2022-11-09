@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { listBooks, listTopRating } from "./action";
+import { listBooks, listTopRating, BookById } from "./action";
 
 const initialBookState = {
   list: {
@@ -7,7 +7,8 @@ const initialBookState = {
     data: [],
   },
   details: {
-    isFetching: false,
+    isFetching: true,
+    data: {},
   },
   topRating: {
     isFetching: false,
@@ -44,6 +45,16 @@ export const bookSlice = createSlice({
       })
       .addCase(listTopRating.rejected, (state) => {
         state.topRating.isFetching = false;
+      })
+      .addCase(BookById.pending, (state) => {
+        state.details.isFetching = true;
+      })
+      .addCase(BookById.fulfilled, (state, action) => {
+        state.details.isFetching = false;
+        state.details.data = action.payload;
+      })
+      .addCase(BookById.rejected, (state) => {
+        state.details.isFetching = false;
       });
   },
 });

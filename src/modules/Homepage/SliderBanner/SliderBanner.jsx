@@ -108,7 +108,7 @@ const SliderBanner = ({ booksData }) => {
             className="slider"
           >
             {booksData.map((item, key) => {
-              return <BookBanner key={key} bookData={item} />;
+              return <BookBanner key={item.id} bookData={item} />;
             })}
           </Slider>
         </GridItem>
