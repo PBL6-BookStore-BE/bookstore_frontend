@@ -1,29 +1,37 @@
 import React from 'react'
-import { VStack, Image, Box, Text, Flex, AspectRatio } from '@chakra-ui/react';
+import { VStack, Image, Box, Text, Flex, AspectRatio, IconButton } from '@chakra-ui/react';
 import { StarIcon } from "../../../../components/icons";
 import AddCart from '../../../../components/AddCart/AddCart';
 import { Link } from "react-router-dom";
 import './style.css';
+import { useDispatch } from 'react-redux';
+import { AddToCart } from '../../../../store/cases/cart/slice';
+import { toast } from 'react-toastify';
 
-const BookTop10 = ({ urls, name, authors, price, rating, id }) => {
+const BookTop10 = ({ data }) => {
+    const dispatch = useDispatch();
+    const handleAddToCart = () => {
+        const item = { id: data.id, name: data.name, price: data.price, quantity: 1 }
+        dispatch(AddToCart(item));
+        toast.success("Product added to cart");
+    }
     return (
-    
       <VStack
         w='170px'
         align="flex-start"
         marginBottom='42px'
         marginLeft={{base: '102px', lg: '10px'}}
       >
-        <Link to={`/books/book-detail/${id}`}>
+        <Link to={`/books/book-detail/${data.id}`}>
         <AspectRatio ratio={2/3} w={170}>
             <Image 
                 borderRadius='20px'
-                src={urls[0] || './static-data/img-none.jpg'}
+                src={data.urls[0] || './static-data/img-none.jpg'}
             />
         </AspectRatio>
         <Flex spacing={1} marginTop='15px' >
-        { rating ? 
-            Array.from(Array(Math.floor(rating)), (e, i) => {
+        { data.rating ? 
+            Array.from(Array(Math.floor(data.rating)), (e, i) => {
                 return (<StarIcon key={i} /> )
             })
             : <span>0 <StarIcon /></span> 
@@ -36,14 +44,14 @@ const BookTop10 = ({ urls, name, authors, price, rating, id }) => {
                 lineHeight="30px"
                 className="book-title"
             >
-                {name || 'Null' }
+                {data.name || 'Null' }
             </Text>
             <Text 
                 marginTop='8px'
                 fontSize="16px" 
                 lineHeight="24px"
             >
-                {authors.map((item, key) =>{
+                {data.authors.map((item, key) =>{
                 return (
                   <span key={key}>{item}</span>
                 )
@@ -65,14 +73,11 @@ const BookTop10 = ({ urls, name, authors, price, rating, id }) => {
                 marginLeft='35px' 
                 position="relative"
                 >
-                ${price || '0'}
+                ${data.price || '0'}
                 </Text>
-                <Link to="/checkout">
-                    <Box marginTop='4px'>
-                        <AddCart />
-                    </Box>
-                
-                </Link>
+                <IconButton borderRadius="50%" marginLeft="26px" marginTop='4px' onClick={handleAddToCart}>
+                    <AddCart />
+                </IconButton>
             </Flex>
         </Box>
     </VStack>
