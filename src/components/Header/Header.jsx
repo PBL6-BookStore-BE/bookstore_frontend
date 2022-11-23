@@ -23,7 +23,7 @@ import './Header.css';
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useSelector((state) => state.auth);
-  const { items } = useSelector((state) => state.cart);
+  const items = useSelector((state) => state.cart.initialListCartState.data);
 
   const numberOfCartItems = items.reduce((curNumber, item) => {
     return curNumber + item.quantity;

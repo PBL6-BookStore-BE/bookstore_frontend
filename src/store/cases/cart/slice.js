@@ -1,15 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { listCartItems } from "./action";
+import { listCartItems, removeItemFromCart, saveItemToCart } from "./action";
 
 const initialCartState = {
-    isFetching: false,
-    items: [],
-    totalAmount: 0,
+  isFetching: false,
+  items: [],
+  totalAmount: 0,
 };
 
+const initialListCartState = {
+  isFetching: false,
+  data: [],
+  totalAmount: 0,
+}
 export const cartSlice = createSlice({
     name: "cart",
-    initialState: initialCartState,
+    initialState: {
+      initialCartState,
+      initialListCartState,
+    },
     reducers: {
         AddToCart: (state,action) => {
             const updatedTotalAmount = state.totalAmount + action.payload.price * action.payload.quantity;      
@@ -56,21 +64,56 @@ export const cartSlice = createSlice({
             state.totalAmount = updatedTotalAmount;
 
             localStorage.setItem("carts", JSON.stringify(state.items));
-        }
+        },
+        RemoveAllItems: (state, action) => {
+          const existingCartItemIndex = state.items.findIndex(
+            (item) => item.id === action.payload.id
+          );
+          console.log(existingCartItemIndex);
+          const updatedTotalAmount = state.totalAmount - state.items[existingCartItemIndex].quantity*state.items[existingCartItemIndex].price;
+          
+          state.items.splice(existingCartItemIndex, 1);
+          state.totalAmount = updatedTotalAmount;
+    
+          localStorage.setItem("carts", JSON.stringify(state.items));
+        },
     },
     extraReducers: (builder) => {
         builder
             .addCase(listCartItems.pending, (state) => {
-                state.isFetching = true;
+                state.initialListCartState.isFetching = true;
             })
             .addCase(listCartItems.fulfilled, (state, action) => {
-                state.isFetching = false;
-                AddToCart(action.payload);
+                state.initialListCartState.isFetching = false;
+                state.initialListCartState.data = action.payload;
+                state.initialListCartState.totalAmount = action.payload.reduce((curNumber, item) => {
+                  return curNumber + item.quantity;
+                }, 0);
             })
             .addCase(listCartItems.rejected, (state) => {
-                state.isFetching = false;
+                state.initialListCartState.isFetching = true;
+            })
+            .addCase(saveItemToCart.pending, (state) => {
+              state.initialListCartState.isFetching = true;
+            })
+            .addCase(saveItemToCart.fulfilled, (state, action) => {
+              state.initialListCartState.isFetching = false;
+              const idCartItem = action.payload;
+              
+              state.initialListCartState.data.map((data) => {
+                if (data.id === idCartItem) {
+                  data.quantity += 1;
+                }
+              })
+            })
+            .addCase(removeItemFromCart.fulfilled, (state, action) => {
+              state.initialListCartState.isFetching = false;
+              const existingCartItemIndex = state.initialListCartState.data.findIndex(
+                (item) => item.id === action.payload
+              );
+              state.initialListCartState.data.splice(existingCartItemIndex, 1);
             })
     }
 })
-export const { AddToCart, RemoveFromCart } = cartSlice.actions
+export const { AddToCart, RemoveFromCart, RemoveAllItems } = cartSlice.actions
 export const cartReducer = cartSlice.reducer;

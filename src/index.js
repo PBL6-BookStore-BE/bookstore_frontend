@@ -28,7 +28,7 @@ Sentry.init({
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
         <ChakraProvider theme={theme}>
@@ -36,5 +36,5 @@ root.render(
         </ChakraProvider>
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
