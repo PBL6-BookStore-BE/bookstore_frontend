@@ -115,6 +115,9 @@ export const cartSlice = createSlice({
                 (item) => item.id === action.payload
               );
               state.initialListCartState.data.splice(existingCartItemIndex, 1);
+              state.initialListCartState.totalAmount = state.initialListCartState.data.reduce((curNumber, item) => {
+                return curNumber + item.quantity;
+              }, 0);
             })
     }
 })
