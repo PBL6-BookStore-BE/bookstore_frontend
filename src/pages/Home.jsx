@@ -13,23 +13,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { listBooks, listTopRating } from "../store/cases/book/action";
 import Loading from "../components/Loading/Loading";
 import Testimonials from "../modules/Homepage/Testimonials/Testimonials";
+import { listCartItems } from "../store/cases/cart/action";
 
 const Home = () => {
   const dispatch = useDispatch();
   const { list, topRating } = useSelector((state) => state.book);
 
-  const loadBooks = useCallback(async () => {
+  const loadData = useCallback(async () => {
     try {
       dispatch(listBooks());
       dispatch(listTopRating());
+      dispatch(listCartItems());
     } catch (error) {
       console.log(error);
     }
   }, [dispatch]);
 
   useEffect(() => {
-    loadBooks();
-  }, [loadBooks]);
+    loadData();
+  }, [loadData]);
 
   if (list.isFetching || topRating.isFetching) {
     return <Loading />;

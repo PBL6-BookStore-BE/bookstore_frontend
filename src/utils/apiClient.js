@@ -1,7 +1,10 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "https://localhost:7075/gateway"
+  baseURL: "https://localhost:7075/gateway",
+  // headers: {
+  //   "content-type": "application/json",
+  // },
 });
 
 apiClient.interceptors.request.use((config) => {

@@ -7,8 +7,10 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Text,
 } from "@chakra-ui/react";
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -17,10 +19,13 @@ import BookLogo from "../common/BookLogo";
 import { CartIcon } from "../icons";
 import NavBar from "../NavBar/NavBar";
 import NavigationButton from "../NavigationButton/NavigationButton";
+import './Header.css';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useSelector((state) => state.auth);
+
+  const numberOfCartItems = useSelector((state) => state.cart.initialListCartState.totalAmount);
 
   return (
     <Box paddingTop="20px">
@@ -43,11 +48,17 @@ const Header = () => {
           <InputRightElement children={<SearchIcon color="#A4A4A4" />} />
         </InputGroup>
         <Link to="/checkout">
-          <IconButton
-            colorScheme="none"
-            aria-label="Cart"
-            icon={<CartIcon />}
-          />
+          <Box position="relative">
+            <IconButton
+              colorScheme='gray'
+              variant='ghost'
+              aria-label="Cart"
+              icon={<CartIcon />}
+            />
+            <Box className="cart-quantity">
+              <Text fontSize="14px" color="#FFFFFF" fontWeight="500">{numberOfCartItems}</Text>
+            </Box>
+          </Box>
         </Link>
         {user ? (
           <AccountButton username={user} />

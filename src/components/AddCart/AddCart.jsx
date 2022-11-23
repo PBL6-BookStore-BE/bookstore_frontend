@@ -6,7 +6,6 @@ import './style.css';
 const AddCart = () => {
   return (
     <Box
-        right='-20px'
         width="40px"
         height="40px"
         backgroundColor="#8D28AD"
