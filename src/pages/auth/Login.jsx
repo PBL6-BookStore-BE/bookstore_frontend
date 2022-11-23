@@ -11,6 +11,7 @@ import { GoogleIcon } from "../../components/icons";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { login } from "../../store/cases/auth/action";
+import * as Sentry from "@sentry/react"; //Add sentry
 
 const schemaLogin = yup.object({
   email: yup
@@ -57,6 +58,7 @@ const Login = () => {
           closeLoading();
         });
     } catch (error) {
+      Sentry.captureException(error); //Add Sentry
       closeLoading();
       toast.error(error);
     }
