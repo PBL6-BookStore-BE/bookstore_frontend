@@ -99,10 +99,9 @@ export const cartSlice = createSlice({
             .addCase(saveItemToCart.fulfilled, (state, action) => {
               state.initialListCartState.isFetching = false;
               const idCartItem = action.payload;
-              
               state.initialListCartState.data.map((data) => {
                 if (data.id === idCartItem) {
-                  data.quantity += 1;
+                  data.quantity += action.meta.arg.quantity;
                 }
               })
               state.initialListCartState.totalAmount = state.initialListCartState.data.reduce((curNumber, item) => {
@@ -111,7 +110,7 @@ export const cartSlice = createSlice({
             })
             .addCase(removeItemFromCart.fulfilled, (state, action) => {
               state.initialListCartState.isFetching = false;
-              const existingCartItemIndex = state.initialListCartState.data.findIndex(
+              const existingCartItemIndex = state.initialListCartState.findIndex(
                 (item) => item.id === action.payload
               );
               state.initialListCartState.data.splice(existingCartItemIndex, 1);
