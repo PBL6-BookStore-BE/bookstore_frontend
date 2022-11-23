@@ -10,6 +10,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -23,11 +24,8 @@ import './Header.css';
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useSelector((state) => state.auth);
-  const items = useSelector((state) => state.cart.initialListCartState.data);
 
-  const numberOfCartItems = items.reduce((curNumber, item) => {
-    return curNumber + item.quantity;
-  }, 0);
+  const numberOfCartItems = useSelector((state) => state.cart.initialListCartState.totalAmount);
 
   return (
     <Box paddingTop="20px">
