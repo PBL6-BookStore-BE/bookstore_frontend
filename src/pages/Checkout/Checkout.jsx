@@ -54,8 +54,7 @@ const Checkout = () => {
   useEffect(() => {
     try {
       if (!user) {
-        console.log("LOGIN");
-        navigate("/Login");
+        navigate("/login");
       } else {
         loadData();
       }

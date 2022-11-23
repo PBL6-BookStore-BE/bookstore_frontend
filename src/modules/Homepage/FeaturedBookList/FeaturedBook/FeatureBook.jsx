@@ -2,18 +2,25 @@ import React from 'react'
 import {HStack, VStack, Text, Box, Flex, Image, AspectRatio } from "@chakra-ui/react";
 import { StarIcon } from "../../../../components/icons";
 import ButtonAddCart from "../../../../components/ButtonAddCart/ButtonAddCart"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../../Top10List/BookTop10/style.css';
-import { useDispatch } from 'react-redux';
-import { AddToCart } from '../../../../store/cases/cart/slice';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { saveItemToCart } from '../../../../store/cases/cart/action';
 
 const FeatureBook = ({ data  }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+
   const handleAddToCart = () => {
-      const item = { id: data.id, name: data.name, price: data.price, quantity: 1 }
-      dispatch(AddToCart(item));
+    if (user) {
+      const item = { idBook: data.id, quantity: 1 }
+      dispatch(saveItemToCart(item));
       toast.success("Product added to cart");
+    } else {
+      navigate("/login");
+    }
   }
   return (
     <HStack
