@@ -26,31 +26,10 @@ import CheckoutItem from "./CheckoutItem/CheckoutItem";
 import "./style.css";
 
 const Checkout = () => {
-  const { items } = useSelector((state) => state.cart.initialCartState);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const listCartState = useSelector((state) => state.cart.initialListCartState)
   const navigate = useNavigate();
-
-  const loadData = useCallback(async () => {
-    try {
-      dispatch(listCartItems());
-    } catch (error) {
-      console.log(error);
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    try {
-      if (!user) {
-        navigate("/Login");
-      } else {
-        dispatch(listCartItems()).unwrap();
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }, [user, navigate, dispatch]);
 
   const cartItemRemoveHanlder = (id) => {
     dispatch(RemoveFromCart({ id: id }));
@@ -64,10 +43,26 @@ const Checkout = () => {
     dispatch(removeItemFromCart(id));
   };
 
-  useEffect(() => {
-    loadData();
-  }, [loadData])
+  const loadData = useCallback(async () => {
+    try {
+      dispatch(listCartItems());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
 
+  useEffect(() => {
+    try {
+      if (!user) {
+        console.log("LOGIN");
+        navigate("/Login");
+      } else {
+        loadData();
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }, [user, navigate, dispatch, loadData]);
   return (
     <Box>
       <Header />

@@ -105,6 +105,9 @@ export const cartSlice = createSlice({
                   data.quantity += 1;
                 }
               })
+              state.initialListCartState.totalAmount = state.initialListCartState.data.reduce((curNumber, item) => {
+                return curNumber + item.quantity;
+              }, 0);
             })
             .addCase(removeItemFromCart.fulfilled, (state, action) => {
               state.initialListCartState.isFetching = false;
