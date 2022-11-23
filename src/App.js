@@ -10,7 +10,6 @@ import Magazine from "./pages/Magazine";
 import Recommended from "./pages/Recommended";
 import Sale from "./pages/Sale";
 import Textbooks from "./pages/Textbooks";
-import Checkout from "./pages/Checkout";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import './App.css';
@@ -18,6 +17,7 @@ import Logout from "./pages/auth/Logout";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 import BookDetail from "./pages/BookDetail";
+import Checkout from "./pages/Checkout/Checkout";
 function App() {
   return (
     <div className="App">

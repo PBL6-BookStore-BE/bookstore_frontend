@@ -5,14 +5,14 @@ import AddCart from '../../../../components/AddCart/AddCart';
 import { Link } from "react-router-dom";
 import './style.css';
 import { useDispatch } from 'react-redux';
-import { AddToCart } from '../../../../store/cases/cart/slice';
 import { toast } from 'react-toastify';
+import { saveItemToCart } from '../../../../store/cases/cart/action';
 
 const BookTop10 = ({ data }) => {
     const dispatch = useDispatch();
     const handleAddToCart = () => {
-        const item = { id: data.id, name: data.name, price: data.price, quantity: 1 }
-        dispatch(AddToCart(item));
+        const item = { idBook: data.id, quantity: 1 }
+        dispatch(saveItemToCart(item));
         toast.success("Product added to cart");
     }
     return (
