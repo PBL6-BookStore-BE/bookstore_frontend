@@ -71,12 +71,15 @@ export const cartSlice = createSlice({
           );
           console.log(existingCartItemIndex);
           const updatedTotalAmount = state.totalAmount - state.items[existingCartItemIndex].quantity*state.items[existingCartItemIndex].price;
-          
+
           state.items.splice(existingCartItemIndex, 1);
           state.totalAmount = updatedTotalAmount;
     
           localStorage.setItem("carts", JSON.stringify(state.items));
         },
+        UpdateTotalAmount: (state, action) => {
+          state.initialListCartState.totalAmount += action.payload;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -104,14 +107,15 @@ export const cartSlice = createSlice({
                   data.quantity += action.meta.arg.quantity;
                 }
               })
-              state.initialListCartState.totalAmount = state.initialListCartState.data.reduce((curNumber, item) => {
-                return curNumber + item.quantity;
-              }, 0);
+              // state.initialListCartState.totalAmount = state.initialListCartState.data.reduce((curNumber, item) => {
+              //   return curNumber + item.quantity;
+              // }, 0);
             })
             .addCase(removeItemFromCart.fulfilled, (state, action) => {
               state.initialListCartState.isFetching = false;
-              const existingCartItemIndex = state.initialListCartState.findIndex(
-                (item) => item.id === action.payload
+              console.log(action.payload);
+              const existingCartItemIndex = state.initialListCartState.data.findIndex(
+                (item) => item.id === action.payload.data
               );
               state.initialListCartState.data.splice(existingCartItemIndex, 1);
               state.initialListCartState.totalAmount = state.initialListCartState.data.reduce((curNumber, item) => {
@@ -120,5 +124,5 @@ export const cartSlice = createSlice({
             })
     }
 })
-export const { AddToCart, RemoveFromCart, RemoveAllItems } = cartSlice.actions
+export const { AddToCart, RemoveFromCart, RemoveAllItems, UpdateTotalAmount } = cartSlice.actions
 export const cartReducer = cartSlice.reducer;

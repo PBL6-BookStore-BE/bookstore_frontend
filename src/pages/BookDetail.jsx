@@ -18,7 +18,7 @@ const BookDetail = () => {
 
     const loadBooks = useCallback(async () => {
     try {
-        dispatch(listBooks());
+        // dispatch(listBooks());
         dispatch(BookById(id));
     } catch (error) {
         console.log(error);

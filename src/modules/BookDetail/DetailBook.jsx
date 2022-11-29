@@ -12,6 +12,7 @@ import TopRatinginDetailBook from './TopRatinginDetailBook';
 import Loading from "../../components/Loading/Loading";
 import { useNavigate } from 'react-router-dom';
 import { saveItemToCart } from '../../store/cases/cart/action';
+import { UpdateTotalAmount } from '../../store/cases/cart/slice';
 
 const BookDetail = ({ id, urls, name, authors, price, rating, publicationDate, publisherName }) => {
   const dispatch = useDispatch();
@@ -33,15 +34,16 @@ const BookDetail = ({ id, urls, name, authors, price, rating, publicationDate, p
     if (user) {
       const item = { idBook: id, quantity: quantitiy }
       dispatch(saveItemToCart(item));
+      dispatch(UpdateTotalAmount(quantitiy));
       navigate("/checkout");
     } else {
       navigate("/login");
     }
   }
 
-  useEffect(() => {
-    loadBooks();
-  }, [loadBooks]);
+  // useEffect(() => {
+  //   loadBooks();
+  // }, [loadBooks]);
 
   if (topRating.isFetching) {
     return <Loading />;

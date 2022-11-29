@@ -21,7 +21,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import { AddIcon, SubIcon } from "../../components/icons";
 import { listCartItems, removeItemFromCart, saveItemToCart } from "../../store/cases/cart/action";
-import { AddToCart, RemoveAllItems, RemoveFromCart } from "../../store/cases/cart/slice";
+import { AddToCart, RemoveAllItems, RemoveFromCart, UpdateTotalAmount } from "../../store/cases/cart/slice";
 import CheckoutItem from "./CheckoutItem/CheckoutItem";
 import "./style.css";
 
@@ -37,6 +37,7 @@ const Checkout = () => {
 
   const cartItemAddHandler = (item) => {
     dispatch(saveItemToCart(item));
+    dispatch(UpdateTotalAmount(1));
   };
 
   const removeItems = (id) => {

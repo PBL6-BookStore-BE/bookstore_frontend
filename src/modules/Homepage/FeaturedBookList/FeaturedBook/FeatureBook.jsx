@@ -7,6 +7,7 @@ import '../../Top10List/BookTop10/style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { saveItemToCart } from '../../../../store/cases/cart/action';
+import { UpdateTotalAmount } from '../../../../store/cases/cart/slice';
 
 const FeatureBook = ({ data  }) => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const FeatureBook = ({ data  }) => {
     if (user) {
       const item = { idBook: data.id, quantity: 1 }
       dispatch(saveItemToCart(item));
+      dispatch(UpdateTotalAmount(1));
       toast.success("Product added to cart");
     } else {
       navigate("/login");
