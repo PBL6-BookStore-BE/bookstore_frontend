@@ -17,7 +17,7 @@ import { BrowserTracing } from "@sentry/tracing";
 
 //Add Sentry
 Sentry.init({
-  dsn: "https://d396429f27a149e19d80966bd8db28be@o4504185311002624.ingest.sentry.io/4504200551596032",
+  dsn: "https://2cb01d293f9d460b802e0e08b334c68b@o4504246018572288.ingest.sentry.io/4504246030696448",
   integrations: [new BrowserTracing()],
 
   // Set tracesSampleRate to 1.0 to capture 100%
