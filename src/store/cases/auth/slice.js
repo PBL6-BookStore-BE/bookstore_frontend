@@ -33,10 +33,10 @@ export const authSlice = createSlice({
     [register.fulfilled]: (state, action) => {
       state.loading = false;
       if (!action.payload.isSuccess) {
-        state.error = action.payload.message;
+        state.error = action.payload?.message;
       } else {
         state.error = "";
-        state.message = action.payload.message;
+        state.message = action.payload?.message;
       }
     },
     [register.rejected]: (state) => {
