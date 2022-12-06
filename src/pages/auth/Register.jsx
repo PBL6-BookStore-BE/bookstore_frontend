@@ -47,7 +47,7 @@ function Register() {
           });
           navigate("/login");
         } else {
-          toast.error(payload.data.message);
+          toast.error(payload.message);
         }
       } catch (error) {
         closeLoading();

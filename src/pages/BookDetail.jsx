@@ -18,7 +18,7 @@ const BookDetail = () => {
 
     const loadBooks = useCallback(async () => {
     try {
-        dispatch(listBooks());
+        // dispatch(listBooks());
         dispatch(BookById(id));
     } catch (error) {
         console.log(error);
@@ -29,7 +29,7 @@ const BookDetail = () => {
     loadBooks();
 }, [id, loadBooks]);
 
-if (list.isFetching || details.isFetching) {
+if (details.isFetching) {
 return <Loading />;
 }
   return (
@@ -55,7 +55,6 @@ return <Loading />;
             </Breadcrumb>
         </Box>
         <DetailBook {...details.data}/>
-        <BestSellerList headerContent="Best Sellers" booksData={list.data} />
         <StoreFeatures />
         <Footer />
     </div>
