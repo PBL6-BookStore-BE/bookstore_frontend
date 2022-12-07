@@ -11,10 +11,10 @@ import { saveItemToCart } from '../../../../store/cases/cart/action';
 const FeatureBook = ({ data  }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.auth);
+  const { isLogged } = useSelector((state) => state.auth);
 
   const handleAddToCart = () => {
-    if (user) {
+    if (isLogged) {
       const item = { idBook: data.id, quantity: 1 }
       dispatch(saveItemToCart(item));
       toast.success("Product added to cart");

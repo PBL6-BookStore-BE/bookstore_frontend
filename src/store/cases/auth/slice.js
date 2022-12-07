@@ -3,12 +3,13 @@ import { forgotPassword, login, register, resetPassword } from "./action";
 
 const initialState = {
   message: "",
-  user: "",
+  user: localStorage.getItem("user"),
   email: "",
   token: "",
   roles: "",
   loading: false,
   error: "",
+  isLogged: !!localStorage.getItem("token"),
 };
 
 export const authSlice = createSlice({
@@ -19,10 +20,11 @@ export const authSlice = createSlice({
       state.token = localStorage.getItem("token");
     },
     addUserName: (state) => {
-      state.user = localStorage.getItem("userName");
+      state.user = localStorage.getItem("user");
     },
     logout: (state) => {
       state.token = null;
+      state.isLogged = false;
       localStorage.clear();
     },
   },

@@ -18,7 +18,7 @@ const BookDetail = ({ id, urls, name, authors, price, rating, publicationDate, p
   const navigate = useNavigate();
   const [count, setCount] = useState(1);   
   const [quantitiy, setQuantitiy] = useState(1);
-  const { user } = useSelector((state) => state.auth);
+  const { isLogged } = useSelector((state) => state.auth);
   const { topRating } = useSelector((state) => state.book);
 
   const loadBooks = useCallback(async () => {
@@ -30,7 +30,7 @@ const BookDetail = ({ id, urls, name, authors, price, rating, publicationDate, p
   }, [dispatch]);
 
   const handleBuy = () => {
-    if (user) {
+    if (isLogged) {
       const item = { idBook: id, quantity: quantitiy }
       dispatch(saveItemToCart(item));
       navigate("/checkout");

@@ -15,7 +15,7 @@ async function updateItemtoCart(item) {
     return  apiClient.put('/details', {
         idBook: item.idBook,
         quantity: item.quantity,
-    }).then((response) => response.data);
+    }).then((response) => response);
 }
 export {
     getCartItems,

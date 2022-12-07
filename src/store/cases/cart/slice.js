@@ -104,13 +104,11 @@ export const cartSlice = createSlice({
                   data.quantity += action.meta.arg.quantity;
                 }
               })
-              state.initialListCartState.totalAmount = state.initialListCartState.data.reduce((curNumber, item) => {
-                return curNumber + item.quantity;
-              }, 0);
+              state.initialListCartState.totalAmount += action.meta.arg.quantity;
             })
             .addCase(removeItemFromCart.fulfilled, (state, action) => {
               state.initialListCartState.isFetching = false;
-              const existingCartItemIndex = state.initialListCartState.findIndex(
+              const existingCartItemIndex = state.initialListCartState.data.findIndex(
                 (item) => item.id === action.payload
               );
               state.initialListCartState.data.splice(existingCartItemIndex, 1);
@@ -121,13 +119,11 @@ export const cartSlice = createSlice({
             .addCase(updateItem.fulfilled, (state, action) => {
               state.initialListCartState.isFetching = false;
               state.initialListCartState.data.map((data) => {
-                if (data?.id === action.payload) {
+                if (data?.bookVM?.id === action.meta.arg.idBook) {
                   data.quantity -= 1;
                 }
               })
-              state.initialListCartState.totalAmount = state.initialListCartState.data.reduce((curNumber, item) => {
-                return curNumber + item.quantity;
-              }, 0);
+              state.initialListCartState.totalAmount -= 1;
             })
     }
 })
