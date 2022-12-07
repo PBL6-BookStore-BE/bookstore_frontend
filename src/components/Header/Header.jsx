@@ -56,7 +56,7 @@ const Header = () => {
               icon={<CartIcon />}
             />
             <Box className="cart-quantity">
-              <Text fontSize="14px" color="#FFFFFF" fontWeight="500">{numberOfCartItems}</Text>
+              <Text fontSize="14px" color="#FFFFFF" fontWeight="500">{user ? numberOfCartItems : 0}</Text>
             </Box>
           </Box>
         </Link>

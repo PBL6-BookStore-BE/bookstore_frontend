@@ -20,8 +20,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import { AddIcon, SubIcon } from "../../components/icons";
-import { listCartItems, removeItemFromCart, saveItemToCart } from "../../store/cases/cart/action";
-import { AddToCart, RemoveAllItems, RemoveFromCart } from "../../store/cases/cart/slice";
+import { listCartItems, removeItemFromCart, saveItemToCart, updateItem } from "../../store/cases/cart/action";
+import { UpdateTotalAmount } from "../../store/cases/cart/slice";
 import CheckoutItem from "./CheckoutItem/CheckoutItem";
 import "./style.css";
 
@@ -32,7 +32,7 @@ const Checkout = () => {
   const navigate = useNavigate();
 
   const cartItemRemoveHanlder = (id) => {
-    dispatch(RemoveFromCart({ id: id }));
+    dispatch(updateItem({ idBook: id, quantity: 1}));
   };
 
   const cartItemAddHandler = (item) => {
@@ -118,7 +118,7 @@ const Checkout = () => {
                           }}
                           mr={5}
                           onClick={() => {
-                            cartItemRemoveHanlder(item.id);
+                            cartItemRemoveHanlder(item.bookVM.id);
                           }}
                         >
                           <SubIcon />

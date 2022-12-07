@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { listCartItems, removeItemFromCart, saveItemToCart } from "./action";
+import { listCartItems, removeItemFromCart, saveItemToCart, updateItem } from "./action";
 
 const initialCartState = {
   isFetching: false,
@@ -114,6 +114,17 @@ export const cartSlice = createSlice({
                 (item) => item.id === action.payload
               );
               state.initialListCartState.data.splice(existingCartItemIndex, 1);
+              state.initialListCartState.totalAmount = state.initialListCartState.data.reduce((curNumber, item) => {
+                return curNumber + item.quantity;
+              }, 0);
+            })
+            .addCase(updateItem.fulfilled, (state, action) => {
+              state.initialListCartState.isFetching = false;
+              state.initialListCartState.data.map((data) => {
+                if (data?.id === action.payload) {
+                  data.quantity -= 1;
+                }
+              })
               state.initialListCartState.totalAmount = state.initialListCartState.data.reduce((curNumber, item) => {
                 return curNumber + item.quantity;
               }, 0);
