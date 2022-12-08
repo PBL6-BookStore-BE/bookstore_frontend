@@ -22,8 +22,8 @@ import { getInforUser } from '../../../store/cases/user/action';
 
 const PaymentPage = ({ cart, subtitle }) => {
   const product = {
-    description: "Design+Code React Hooks Course",
-    price: 19
+    description: "Thanh toán đơn hàng Clevr Store",
+    price: Number(subtitle) + 2.35,
   };
 
   const dispatch = useDispatch();
