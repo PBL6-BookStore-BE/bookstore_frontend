@@ -29,13 +29,15 @@ const Header = () => {
 
   const numberOfCartItems = useSelector((state) => state.cart.initialListCartState.totalAmount);
 
-  // useEffect(() => {
-  //   try {
-  //     dispatch(listCartItems());
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, [dispatch])
+  useEffect(() => {
+    try {
+      if (isLogged) {
+        dispatch(listCartItems());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch, isLogged])
   return (
     <Box paddingTop="20px">
       <Box

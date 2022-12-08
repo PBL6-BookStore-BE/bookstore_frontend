@@ -18,31 +18,35 @@ import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 import BookDetail from "./pages/BookDetail";
 import Checkout from "./pages/Checkout/Checkout";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+
 function App() {
   return (
-    <div className="App">
-      <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password/:token" element={<ResetPassword />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/books/*" element={<Books />} />
-        <Route path="/magazine/*" element={<Magazine />} />
-        <Route path="/books/book-detail/:id" element={<BookDetail />} />
-        <Route path="/textbooks/*" element={<Textbooks />} />
-        <Route path="/audiobooks/*" element={<Audiobooks />} />
-        <Route path="/recommended/*" element={<Recommended />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/sale/*" element={<Sale />} />
-      </Routes>
-      <ToastContainer
-        position={toast.POSITION.TOP_RIGHT}
-        autoClose={3000}
-        icon
-      />
-    </div>
+    <PayPalScriptProvider options={{ "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID }}>
+      <div className="App">
+        <Routes>
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/books/*" element={<Books />} />
+          <Route path="/magazine/*" element={<Magazine />} />
+          <Route path="/books/book-detail/:id" element={<BookDetail />} />
+          <Route path="/textbooks/*" element={<Textbooks />} />
+          <Route path="/audiobooks/*" element={<Audiobooks />} />
+          <Route path="/recommended/*" element={<Recommended />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/sale/*" element={<Sale />} />
+        </Routes>
+        <ToastContainer
+          position={toast.POSITION.TOP_RIGHT}
+          autoClose={3000}
+          icon
+        />
+      </div>
+    </PayPalScriptProvider>
   );
 }
 

@@ -5,6 +5,7 @@ import { cartReducer } from "./cases/cart/slice";
 import { categoryReducer } from "./cases/category/slice";
 import { filterReducer } from "./cases/filter/slice";
 import { publisherReducer } from "./cases/publisher/slice";
+import { userReducer } from "./cases/user/slice";
 
 const combinedReducer = combineReducers({
   auth: authReducer,
@@ -13,6 +14,7 @@ const combinedReducer = combineReducers({
   filter: filterReducer,
   publisher: publisherReducer,
   category: categoryReducer,
+  user: userReducer,
 });
 
 const rootReducer = (state, action) => {

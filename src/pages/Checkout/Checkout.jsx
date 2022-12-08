@@ -35,7 +35,7 @@ import "./style.css";
 
 const Checkout = () => {
   const dispatch = useDispatch();
-  const { isLogged } = useSelector((state) => state.auth);
+  const { isLogged, email } = useSelector((state) => state.auth);
   const listCartState = useSelector((state) => state.cart.initialListCartState);
   const [total, setTotal] = useState();
   const [isCheckout, setIsCheckout] = useState(false);
@@ -247,6 +247,7 @@ const Checkout = () => {
                     opacity: "0.8",
                   }}
                   onClick={handleCheckout}
+                  disabled={listCartState.isFetching ? true : false}
                 >
                   Checkout
                 </Button>
@@ -259,7 +260,7 @@ const Checkout = () => {
         </Container>
       )}
       {isCheckout && (
-        <PaymentPage cart={listCartState?.data}/>
+        <PaymentPage cart={listCartState?.data} subtitle={total} />
       )}
       <Footer />
     </Box>

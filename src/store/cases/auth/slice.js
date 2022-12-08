@@ -50,6 +50,7 @@ export const authSlice = createSlice({
     },
     [login.fulfilled]: (state, action) => {
       state.loading = false;
+      state.isLogged = true;
       if (!action.payload.data.isSuccess) {
         state.error = action.payload.data.message;
       } else {

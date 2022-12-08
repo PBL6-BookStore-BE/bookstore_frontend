@@ -23,7 +23,7 @@ const Home = () => {
     try {
       dispatch(listBooks());
       dispatch(listTopRating());
-      dispatch(listCartItems());
+      // dispatch(listCartItems());
     } catch (error) {
       console.log(error);
     }
