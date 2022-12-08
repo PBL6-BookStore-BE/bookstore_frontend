@@ -109,7 +109,7 @@ export const cartSlice = createSlice({
             .addCase(removeItemFromCart.fulfilled, (state, action) => {
               state.initialListCartState.isFetching = false;
               const existingCartItemIndex = state.initialListCartState.data.findIndex(
-                (item) => item.id === action.payload
+                (item) => item.id === action.payload.data
               );
               state.initialListCartState.data.splice(existingCartItemIndex, 1);
               state.initialListCartState.totalAmount = state.initialListCartState.data.reduce((curNumber, item) => {

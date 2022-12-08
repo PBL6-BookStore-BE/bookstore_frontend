@@ -1,11 +1,15 @@
 import { PayPalButtons } from '@paypal/react-paypal-js';
 import React from 'react';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { removeItemFromCart } from '../../store/cases/cart/action';
 
 const PaypalButton = ({ product }) => {
     const [paidFor, setPaidFor] = useState(false);
     const [error, setError] = useState(null);
+    const dispatch = useDispatch();
+    const { listCartState } = useSelector((state) => state.cart);
 
     const handleApprove = (orderID) => {
         // Send a request to backend server to fulfill the order
@@ -20,6 +24,7 @@ const PaypalButton = ({ product }) => {
     if (paidFor) {
         // Display success message, modal or redirect user to success page
         toast.success("Thank you for your purchase!");
+        window.location.href = "/";
     }
     if (error) {
         // Display error message, modal or redirect user to error page

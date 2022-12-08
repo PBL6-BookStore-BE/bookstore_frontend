@@ -41,7 +41,7 @@ const PaymentPage = ({ cart, subtitle }) => {
     }
   }, [dispatch, email])
   return (
-      <Flex className='container' marginTop="20" marginBottom="20">
+      <Flex className='container' marginTop="40px" marginBottom="20">
         <Flex flexDirection="column" w="60%">
           <Box padding="50px 40px" boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px">
                 <Text fontWeight="600" fontSize="22px">Shipping Information</Text>
