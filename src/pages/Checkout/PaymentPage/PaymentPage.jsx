@@ -16,30 +16,71 @@ import {
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { getMethodPayment } from '../../../apis/payment.api';
 import PaypalButton from '../../../components/PaypalButton/PaypalButton';
+import { createNewOrder } from '../../../store/cases/order/action';
 import { getInforUser } from '../../../store/cases/user/action';
 
 const PaymentPage = ({ cart, subtitle }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [paymentMethod, setPaymentMethod] = useState("cod");
+  const { error } = useSelector((state) => state.order);
+  const [userInfo, setUserInfo] = useState([]);
+  const [payment, setPayment] = useState();
+
   const product = {
     description: "Thanh toán đơn hàng Clevr Store",
     price: Number(subtitle) + 2.35,
   };
 
-  const dispatch = useDispatch();
-  const [paymentMethod, setPaymentMethod] = useState("cash");
-  const { email } = useSelector((state) => state.auth);
-  const [userInfo, setUserInfo] = useState([]);
-
   const handleBuy = () => {
-    console.log(userInfo);
+    const listOrder = [];
+    // Create order
+    if (cart) {
+      cart.map((item) => (
+        listOrder.push({
+          quantity: item.quantity,
+          idBook: item.bookVM.id
+        })
+      ));
+      const idPayment = payment.filter((item) => item.name.toLowerCase() === paymentMethod);
+      const order = {
+        status: false,
+        idPayment: idPayment[0].id,
+        orderDetails: listOrder
+      }
+      dispatch(createNewOrder(order));
+      if (error) {
+        toast.error(error);
+      } else {
+        // redirect user to success page 
+        toast.success("Thank you for your order");
+      }
+    } else {
+      toast.error("Your cart is empty");
+      navigate("/checkout");
+    }
   }
 
   useEffect(() => {
+    const email = localStorage.getItem("email") || "";
     if (email) {
       dispatch(getInforUser(email)).then(res => setUserInfo(res.payload));
     }
-  }, [dispatch, email])
+  }, [dispatch]);
+
+  useEffect(() => {
+    try {
+      console.log("Run");
+      getMethodPayment().then(res => setPayment(res));
+    } catch(err) {
+      console.log(err);
+    }
+  }, [])
+  
   return (
       <Flex className='container' marginTop="40px" marginBottom="20">
         <Flex flexDirection="column" w="60%">
@@ -50,7 +91,8 @@ const PaymentPage = ({ cart, subtitle }) => {
                     <FormControl mt={4} w="45%">
                       <FormLabel mb={2}>Full Name *</FormLabel>
                       <Input
-                        value={userInfo.fullName}
+                        defaultValue={userInfo.fullName}
+                        value={userInfo.fullName || ""}
                         name="fullName"
                         type="text"
                         placeholder="Full Name"
@@ -64,7 +106,8 @@ const PaymentPage = ({ cart, subtitle }) => {
                     <FormControl mt={4}  w="45%">
                       <FormLabel mb={2}>Email *</FormLabel>
                       <Input
-                        value={userInfo.email}
+                        defaultValue={userInfo.email}
+                        value={userInfo.email || ""}
                         name="email"
                         type="email"
                         placeholder="Email"
@@ -79,7 +122,8 @@ const PaymentPage = ({ cart, subtitle }) => {
                     <FormControl mt={4} w="45%">
                       <FormLabel mb={2}>Address *</FormLabel>
                       <Input
-                        value={userInfo.address}
+                        defaultValue={userInfo.address}
+                        value={userInfo.address || ""}
                         name="address"
                         type="text"
                         placeholder="Address"
@@ -93,7 +137,8 @@ const PaymentPage = ({ cart, subtitle }) => {
                     <FormControl mt={4} w="45%">
                       <FormLabel mb={2}>City *</FormLabel>
                       <Input
-                        value={userInfo.city}
+                        defaultValue={userInfo.city}
+                        value={userInfo.city || ""}
                         name="city"
                         type="text"
                         placeholder="City"
@@ -108,7 +153,8 @@ const PaymentPage = ({ cart, subtitle }) => {
                   <FormControl mt={4}>
                       <FormLabel mb={2}>Phone Number *</FormLabel>
                       <Input
-                        value={userInfo.phoneNumber}
+                        defaultValue={userInfo.phoneNumber}
+                        value={userInfo.phoneNumber || ""}
                         name="phoneNumber"
                         type="text"
                         placeholder="Phone Number"
@@ -126,10 +172,10 @@ const PaymentPage = ({ cart, subtitle }) => {
               <Select name="paymentMethod" onChange={(e) => {
                 setPaymentMethod(e.target.value)
               }}>
-                <option value="cash">Cash</option>
+                <option value="cod">Cash On Delivery</option>
                 <option value="paypal">Paypal</option>
               </Select>
-              {paymentMethod === "cash" && (
+              {paymentMethod === "cod" && (
                 <Button
                     type="submit"
                     className="btn-submit"

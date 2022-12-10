@@ -61,7 +61,7 @@ export const authSlice = createSlice({
         state.email = action.payload.data.email;
         state.roles = action.payload.data.roles;
 
-        localStorage.setItem("message", action.payload.data.message);
+        localStorage.setItem("email", action.payload.data.email);
         localStorage.setItem("user", action.payload.data.userName);
         localStorage.setItem("token", action.payload.data.token);
       }
