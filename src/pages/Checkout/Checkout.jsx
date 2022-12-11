@@ -35,7 +35,7 @@ import "./style.css";
 
 const Checkout = () => {
   const dispatch = useDispatch();
-  const { isLogged, email } = useSelector((state) => state.auth);
+  const { isLogged } = useSelector((state) => state.auth);
   const listCartState = useSelector((state) => state.cart.initialListCartState);
   const [total, setTotal] = useState();
   const [isCheckout, setIsCheckout] = useState(false);
@@ -67,6 +67,7 @@ const Checkout = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     try {
       if (!isLogged) {
         navigate("/login");

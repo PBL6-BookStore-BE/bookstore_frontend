@@ -36,6 +36,8 @@ const PaymentPage = ({ cart, subtitle }) => {
     price: Number(subtitle) + 2.35,
   };
 
+  const idPayPal = payment?.filter((item) => item.name.toLowerCase() === "paypal");
+
   const handleBuy = () => {
     const listOrder = [];
     // Create order
@@ -57,7 +59,8 @@ const PaymentPage = ({ cart, subtitle }) => {
         toast.error(error);
       } else {
         // redirect user to success page 
-        toast.success("Thank you for your order");
+        navigate("/order-complete");
+        // remove all items in the cart
       }
     } else {
       toast.error("Your cart is empty");
@@ -73,8 +76,8 @@ const PaymentPage = ({ cart, subtitle }) => {
   }, [dispatch]);
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     try {
-      console.log("Run");
       getMethodPayment().then(res => setPayment(res));
     } catch(err) {
       console.log(err);
@@ -187,7 +190,7 @@ const PaymentPage = ({ cart, subtitle }) => {
               )}
               {paymentMethod === "paypal" && (
                 <Box marginTop="20px">
-                  <PaypalButton product={product} />
+                  <PaypalButton product={product} cart={cart} idPayment={idPayPal} />
                 </Box>
               )}
           </Box>

@@ -19,6 +19,7 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import BookDetail from "./pages/BookDetail";
 import Checkout from "./pages/Checkout/Checkout";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import OrderComplete from "./pages/OrderComplete";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/audiobooks/*" element={<Audiobooks />} />
           <Route path="/recommended/*" element={<Recommended />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="order-complete" element={<OrderComplete />} />
           <Route path="/sale/*" element={<Sale />} />
         </Routes>
         <ToastContainer

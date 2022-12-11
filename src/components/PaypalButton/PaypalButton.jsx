@@ -2,33 +2,54 @@ import { PayPalButtons } from '@paypal/react-paypal-js';
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { removeItemFromCart } from '../../store/cases/cart/action';
+import { createNewOrder } from '../../store/cases/order/action';
 
-const PaypalButton = ({ product }) => {
+const PaypalButton = ({ product, cart, idPayment }) => {
+    const navigate = useNavigate();
     const [paidFor, setPaidFor] = useState(false);
-    const [error, setError] = useState(null);
+    const [err, setErr] = useState(null);
     const dispatch = useDispatch();
-    const { listCartState } = useSelector((state) => state.cart);
+    const { error } = useSelector((state) => state.order);
 
     const handleApprove = (orderID) => {
         // Send a request to backend server to fulfill the order
-
-        // If response is success => set paid to true
-        setPaidFor(true);
-        // Refresh user's account or subscription status
-
-        // If the response is error
-        // => setError("Your payment was processed successfully. However, we are unable to fulfill your purchase. Please contact us at xyz@gmail.com for assistance")
+        const listOrder = [];
+        // Create order
+        if (cart && idPayment) {
+            cart.map((item) => (
+                listOrder.push({
+                quantity: item.quantity,
+                idBook: item.bookVM.id
+                })
+            ));
+            const order = {
+                status: false,
+                idPayment: idPayment[0].id,
+                orderDetails: listOrder
+            }
+            dispatch(createNewOrder(order));
+            if (error) {
+                // If the response is error
+                setErr("Your payment was processed successfully. However, we are unable to fulfill your purchase. Please contact us at clevr@gmail.com for assistance")
+            } else {
+                // If response is success => set paid to true
+                setPaidFor(true);
+                // remove all items in the cart
+            }
+        } else {
+            toast.error("Your cart is empty");
+            navigate("/checkout");
+        }
     };
     if (paidFor) {
-        // Display success message, modal or redirect user to success page
-        toast.success("Thank you for your purchase!");
-        window.location.href = "/";
+        // redirect user to success page 
+        navigate("/order-complete");
     }
-    if (error) {
+    if (err) {
         // Display error message, modal or redirect user to error page
-        toast.error(error);
+        toast.error(err);
     }
     return (
         <PayPalButtons
@@ -38,8 +59,7 @@ const PaypalButton = ({ product }) => {
                 const hasAlreadyBoughtProduct = false;
 
                 if (hasAlreadyBoughtProduct) {
-                    setError("You already bought this books. Go to your account to view your list of books");
-
+                    setErr("You already bought this books. Go to your account to view your list of books");
                     return actions.reject();
                 } else {
                     return actions.resolve();
@@ -68,7 +88,7 @@ const PaypalButton = ({ product }) => {
 
             }}
             onError={(err) => {
-                setError(err);
+                setErr(err);
                 console.log("Paypal Checkout Error: ",err);
             }}
         />
