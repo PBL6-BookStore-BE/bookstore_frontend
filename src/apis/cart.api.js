@@ -17,9 +17,13 @@ async function updateItemtoCart(item) {
         quantity: item.quantity,
     }).then((response) => response);
 }
+async function deleteAllCart() {
+    return apiClient.delete("/cart/all").then((response) => response);
+}
 export {
     getCartItems,
     addItemToCart,
     removeItem,
-    updateItemtoCart
+    updateItemtoCart,
+    deleteAllCart
 }

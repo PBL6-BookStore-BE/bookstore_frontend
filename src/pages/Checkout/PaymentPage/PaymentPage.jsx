@@ -11,7 +11,8 @@ import {
   Button,
   Image,
   Divider,
-  Center
+  Center,
+  FormErrorMessage
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
@@ -19,7 +20,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getMethodPayment } from '../../../apis/payment.api';
+import ErrorMessage from '../../../components/common/ErrorMessage';
 import PaypalButton from '../../../components/PaypalButton/PaypalButton';
+import { deleteCart } from '../../../store/cases/cart/action';
 import { createNewOrder } from '../../../store/cases/order/action';
 import { getInforUser } from '../../../store/cases/user/action';
 
@@ -40,6 +43,10 @@ const PaymentPage = ({ cart, subtitle }) => {
 
   const handleBuy = () => {
     const listOrder = [];
+    if (!userInfo.address || !userInfo.city) {
+      toast.error("Please input all fields!");
+      return;
+    }
     // Create order
     if (cart) {
       cart.map((item) => (
@@ -52,15 +59,15 @@ const PaymentPage = ({ cart, subtitle }) => {
       const order = {
         status: false,
         idPayment: idPayment[0].id,
-        orderDetails: listOrder
+        orderDetails: listOrder,
+        orderAddress: `${userInfo?.address}, ${userInfo?.city}`
       }
       dispatch(createNewOrder(order));
       if (error) {
         toast.error(error);
       } else {
-        // redirect user to success page 
-        navigate("/order-complete");
-        // remove all items in the cart
+        // remove all items in the cart and redirect user to success page 
+        dispatch(deleteCart()).then(() => navigate("/order-complete"));
       }
     } else {
       toast.error("Your cart is empty");
@@ -94,8 +101,8 @@ const PaymentPage = ({ cart, subtitle }) => {
                     <FormControl mt={4} w="45%">
                       <FormLabel mb={2}>Full Name *</FormLabel>
                       <Input
-                        defaultValue={userInfo.fullName}
-                        value={userInfo.fullName || ""}
+                        defaultValue={userInfo?.fullName}
+                        value={userInfo?.fullName || ""}
                         name="fullName"
                         type="text"
                         placeholder="Full Name"
@@ -103,14 +110,16 @@ const PaymentPage = ({ cart, subtitle }) => {
                           ...userInfo,
                           fullName: event.target.value,
                         })}
+                        isInvalid={!userInfo.fullName ? true : false}
+                        errorBorderColor='red.300'
                       />
                     </FormControl>
                     <Spacer  />
                     <FormControl mt={4}  w="45%">
                       <FormLabel mb={2}>Email *</FormLabel>
                       <Input
-                        defaultValue={userInfo.email}
-                        value={userInfo.email || ""}
+                        defaultValue={userInfo?.email}
+                        value={userInfo?.email || ""}
                         name="email"
                         type="email"
                         placeholder="Email"
@@ -118,6 +127,8 @@ const PaymentPage = ({ cart, subtitle }) => {
                           ...userInfo,
                           email: event.target.value,
                         })}
+                        isInvalid={!userInfo.email ? true : false}
+                        errorBorderColor='red.300'
                       />
                     </FormControl>
                   </Flex>
@@ -125,8 +136,8 @@ const PaymentPage = ({ cart, subtitle }) => {
                     <FormControl mt={4} w="45%">
                       <FormLabel mb={2}>Address *</FormLabel>
                       <Input
-                        defaultValue={userInfo.address}
-                        value={userInfo.address || ""}
+                        defaultValue={userInfo?.address}
+                        value={userInfo?.address || ""}
                         name="address"
                         type="text"
                         placeholder="Address"
@@ -134,14 +145,16 @@ const PaymentPage = ({ cart, subtitle }) => {
                           ...userInfo,
                           address: event.target.value,
                         })}
+                        isInvalid={!userInfo.address ? true : false}
+                        errorBorderColor='red.300'
                       />
                     </FormControl>
                     <Spacer />
                     <FormControl mt={4} w="45%">
                       <FormLabel mb={2}>City *</FormLabel>
                       <Input
-                        defaultValue={userInfo.city}
-                        value={userInfo.city || ""}
+                        defaultValue={userInfo?.city}
+                        value={userInfo?.city || ""}
                         name="city"
                         type="text"
                         placeholder="City"
@@ -149,15 +162,16 @@ const PaymentPage = ({ cart, subtitle }) => {
                           ...userInfo,
                           city: event.target.value,
                         })}
+                        isInvalid={!userInfo.city ? true : false}
+                        errorBorderColor='red.300'
                       />
-                    
                     </FormControl>
                   </Flex>
                   <FormControl mt={4}>
                       <FormLabel mb={2}>Phone Number *</FormLabel>
                       <Input
-                        defaultValue={userInfo.phoneNumber}
-                        value={userInfo.phoneNumber || ""}
+                        defaultValue={userInfo?.phoneNumber}
+                        value={userInfo?.phoneNumber || ""}
                         name="phoneNumber"
                         type="text"
                         placeholder="Phone Number"
@@ -165,6 +179,8 @@ const PaymentPage = ({ cart, subtitle }) => {
                           ...userInfo,
                           phoneNumber: event.target.value,
                         })}
+                        isInvalid={!userInfo.phoneNumber ? true : false}
+                        errorBorderColor='red.300'
                       />
                     </FormControl>
                 </Box>
@@ -190,7 +206,12 @@ const PaymentPage = ({ cart, subtitle }) => {
               )}
               {paymentMethod === "paypal" && (
                 <Box marginTop="20px">
-                  <PaypalButton product={product} cart={cart} idPayment={idPayPal} />
+                  <PaypalButton
+                    product={product}
+                    cart={cart}
+                    idPayment={idPayPal}
+                    orderAddress={!userInfo.address || !userInfo.city ? "" : `${userInfo?.address}, ${userInfo?.city}`}
+                  />
                 </Box>
               )}
           </Box>

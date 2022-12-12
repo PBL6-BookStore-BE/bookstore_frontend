@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { listCartItems, removeItemFromCart, saveItemToCart, updateItem } from "./action";
+import { deleteCart, listCartItems, removeItemFromCart, saveItemToCart, updateItem } from "./action";
 
 const initialCartState = {
   isFetching: false,
@@ -124,6 +124,15 @@ export const cartSlice = createSlice({
                 }
               })
               state.initialListCartState.totalAmount -= 1;
+            })
+            .addCase(deleteCart.fulfilled, (state) => {
+              state.initialListCartState.isFetching = false;
+              state.initialListCartState.data = [];
+              state.initialCartState.totalAmount = 0;
+            })
+            .addCase(deleteCart.rejected, (state, action) => {
+              state.initialListCartState.isFetching = true;
+              console.log("Error: ", action);
             })
     }
 })

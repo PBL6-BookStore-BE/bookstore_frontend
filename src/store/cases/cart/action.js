@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { addItemToCart, getCartItems, removeItem, updateItemtoCart } from "../../../apis/cart.api";
+import { addItemToCart, deleteAllCart, getCartItems, removeItem, updateItemtoCart } from "../../../apis/cart.api";
 
 const listCartItems = createAsyncThunk("cart/getListCart", async () => getCartItems());
 
@@ -9,4 +9,6 @@ const removeItemFromCart = createAsyncThunk("cart/removeItem", async (idBook) =>
 
 const updateItem = createAsyncThunk("cart/updateItem", async (item) => updateItemtoCart(item));
 
-export { listCartItems, saveItemToCart, removeItemFromCart, updateItem };
+const deleteCart = createAsyncThunk("cart/deleteCart", async () => deleteAllCart());
+
+export { listCartItems, saveItemToCart, removeItemFromCart, updateItem, deleteCart };

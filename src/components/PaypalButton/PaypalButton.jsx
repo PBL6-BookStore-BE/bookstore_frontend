@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { deleteCart } from '../../store/cases/cart/action';
 import { createNewOrder } from '../../store/cases/order/action';
 
-const PaypalButton = ({ product, cart, idPayment }) => {
+const PaypalButton = ({ product, cart, idPayment, orderAddress }) => {
     const navigate = useNavigate();
     const [paidFor, setPaidFor] = useState(false);
     const [err, setErr] = useState(null);
@@ -16,6 +17,10 @@ const PaypalButton = ({ product, cart, idPayment }) => {
     const handleApprove = (orderID) => {
         // Send a request to backend server to fulfill the order
         const listOrder = [];
+        if (!orderAddress) {
+            toast.error("Please input all fields!");
+            return;
+        }
         // Create order
         if (cart && idPayment) {
             cart.map((item) => (
@@ -27,7 +32,8 @@ const PaypalButton = ({ product, cart, idPayment }) => {
             const order = {
                 status: false,
                 idPayment: idPayment[0].id,
-                orderDetails: listOrder
+                orderDetails: listOrder,
+                orderAddress: orderAddress,
             }
             dispatch(createNewOrder(order));
             if (error) {
@@ -35,8 +41,8 @@ const PaypalButton = ({ product, cart, idPayment }) => {
                 setErr("Your payment was processed successfully. However, we are unable to fulfill your purchase. Please contact us at clevr@gmail.com for assistance")
             } else {
                 // If response is success => set paid to true
-                setPaidFor(true);
                 // remove all items in the cart
+                dispatch(deleteCart()).then(() => setPaidFor(true));
             }
         } else {
             toast.error("Your cart is empty");
