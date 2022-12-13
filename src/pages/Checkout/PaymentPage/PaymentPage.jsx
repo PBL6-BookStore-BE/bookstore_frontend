@@ -12,7 +12,6 @@ import {
   Image,
   Divider,
   Center,
-  FormErrorMessage
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
@@ -20,7 +19,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getMethodPayment } from '../../../apis/payment.api';
-import ErrorMessage from '../../../components/common/ErrorMessage';
 import PaypalButton from '../../../components/PaypalButton/PaypalButton';
 import { deleteCart } from '../../../store/cases/cart/action';
 import { createNewOrder } from '../../../store/cases/order/action';

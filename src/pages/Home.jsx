@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header/Header";
 import BestSellerList from "../modules/BestSellerList/BestSellerList";
 import StoreFeatures from "../components/Features/StoreFeatures";
@@ -13,25 +13,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { listBooks, listTopRating } from "../store/cases/book/action";
 import Loading from "../components/Loading/Loading";
 import Testimonials from "../modules/Homepage/Testimonials/Testimonials";
-import { listCartItems } from "../store/cases/cart/action";
 
 const Home = () => {
   const dispatch = useDispatch();
   const { list, topRating } = useSelector((state) => state.book);
 
-  const loadData = useCallback(async () => {
-    try {
-      dispatch(listBooks());
-      dispatch(listTopRating());
-      // dispatch(listCartItems());
-    } catch (error) {
-      console.log(error);
-    }
-  }, [dispatch]);
-
   useEffect(() => {
-    loadData();
-  }, [loadData]);
+    try {
+      if (list.data.length <= 0) {
+        dispatch(listBooks());
+      }
+      if (topRating.data.length <= 0) {
+        dispatch(listTopRating());
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }, [dispatch, list.data.length, topRating.data.length]);
 
   if (list.isFetching || topRating.isFetching) {
     return <Loading />;
