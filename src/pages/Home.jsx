@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header/Header";
 import BestSellerList from "../modules/BestSellerList/BestSellerList";
 import StoreFeatures from "../components/Features/StoreFeatures";
@@ -18,18 +18,18 @@ const Home = () => {
   const dispatch = useDispatch();
   const { list, topRating } = useSelector((state) => state.book);
 
-  const loadBooks = useCallback(async () => {
-    try {
-      dispatch(listBooks());
-      dispatch(listTopRating());
-    } catch (error) {
-      console.log(error);
-    }
-  }, [dispatch]);
-
   useEffect(() => {
-    loadBooks();
-  }, [loadBooks]);
+    try {
+      if (list.data.length <= 0) {
+        dispatch(listBooks());
+      }
+      if (topRating.data.length <= 0) {
+        dispatch(listTopRating());
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }, [dispatch, list.data.length, topRating.data.length]);
 
   if (list.isFetching || topRating.isFetching) {
     return <Loading />;

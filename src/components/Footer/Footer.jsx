@@ -61,8 +61,8 @@ const Footer = () => {
 
         <hr />
         <div className="row copyright">
-          <p>CLEVR - © 2020 All Rights Reserved</p>
-          <p className="text-copy">Made with <span className="heart">♥</span> by Peterdraw</p>
+          <p>CLEVR - © 2022 All Rights Reserved</p>
+          <p className="text-copy">Made with <span className="heart">♥</span> by Ngoc-Linh-Nhi-Yen-Huong</p>
         </div>
       </footer>
   )

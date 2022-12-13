@@ -10,24 +10,36 @@ import { useDispatch, useSelector } from "react-redux";
 import { listTopRating } from "../../store/cases/book/action";
 import TopRatinginDetailBook from './TopRatinginDetailBook';
 import Loading from "../../components/Loading/Loading";
+import { useNavigate } from 'react-router-dom';
+import { saveItemToCart } from '../../store/cases/cart/action';
 
-const BookDetail = ({ urls, name, authors, price, rating, publicationDate, publisherName }) => {
+const BookDetail = ({ id, urls, name, authors, price, rating, publicationDate, publisherName }) => {
   const dispatch = useDispatch();
-  const { topRating } = useSelector((state) => state.book);
+  const navigate = useNavigate();
   const [count, setCount] = useState(1);   
   const [quantitiy, setQuantitiy] = useState(1);
+  const { isLogged } = useSelector((state) => state.auth);
+  const { topRating } = useSelector((state) => state.book);
 
-  const loadBooks = useCallback(async () => {
+  const handleBuy = () => {
+    if (isLogged) {
+      const item = { idBook: id, quantity: quantitiy }
+      dispatch(saveItemToCart(item));
+      navigate("/checkout");
+    } else {
+      navigate("/login");
+    }
+  }
+
+  useEffect(() => {
     try {
-      dispatch(listTopRating());
+      if (topRating.data.length <= 0) {
+        dispatch(listTopRating());
+      }
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch]);
-
-  useEffect(() => {
-    loadBooks();
-  }, [loadBooks]);
+  }, [dispatch, topRating.data.length]);
 
   if (topRating.isFetching) {
     return <Loading />;
@@ -145,7 +157,7 @@ const BookDetail = ({ urls, name, authors, price, rating, publicationDate, publi
                         <AddIcon />
                       </Button>
                   </Box>
-                  <ButtonAddCart text='Buy'/>
+                  <ButtonAddCart text='Buy' onClick={handleBuy}/>
                 </HStack>
               </VStack>
             </GridItem>

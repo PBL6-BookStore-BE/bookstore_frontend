@@ -2,10 +2,26 @@ import React from 'react'
 import {HStack, VStack, Text, Box, Flex, Image, AspectRatio } from "@chakra-ui/react";
 import { StarIcon } from "../../../../components/icons";
 import ButtonAddCart from "../../../../components/ButtonAddCart/ButtonAddCart"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../../Top10List/BookTop10/style.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { saveItemToCart } from '../../../../store/cases/cart/action';
 
-const FeatureBook = ({ urls, name, price, rating, categoryName, id  }) => {
+const FeatureBook = ({ data  }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isLogged } = useSelector((state) => state.auth);
+
+  const handleAddToCart = () => {
+    if (isLogged) {
+      const item = { idBook: data.id, quantity: 1 }
+      dispatch(saveItemToCart(item));
+      toast.success("Product added to cart");
+    } else {
+      navigate("/login");
+    }
+  }
   return (
     <HStack
       cursor="pointer"
@@ -14,10 +30,10 @@ const FeatureBook = ({ urls, name, price, rating, categoryName, id  }) => {
       align="flex-start"
       marginBottom='38px'
     >
-      <Link to={`/books/book-detail/${id}`}>
+      <Link to={`/books/book-detail/${data.id}`}>
         <AspectRatio ratio={2/3} w='170px'>
           <Image
-            src={urls[0]}
+            src={data.urls[0]}
             alt="Image book"
             borderRadius="20px"
           />
@@ -25,10 +41,10 @@ const FeatureBook = ({ urls, name, price, rating, categoryName, id  }) => {
       </Link>
       <VStack maxW='320px' position="absolute" left='30%' top='0'align="flex-start">
         <Flex>
-            <Box className="book-category">{categoryName}</Box>
+            <Box className="book-category">{data.categoryName}</Box>
             <Box marginLeft='20px' marginTop='5px' >
-              { rating ? 
-                Array.from(Array(Math.floor(rating)), (e, i) => {
+              { data.rating ? 
+                Array.from(Array(Math.floor(data.rating)), (e, i) => {
                   return (
                     <StarIcon  key={i} /> 
                     )
@@ -37,8 +53,8 @@ const FeatureBook = ({ urls, name, price, rating, categoryName, id  }) => {
               }
             </Box>
             <Box className="a-start-icon" marginTop='5px'>
-              { rating < 5 ? 
-                  Array.from(Array(Math.ceil(5-rating)), (e, i) => {
+              { data.rating < 5 ? 
+                  Array.from(Array(Math.ceil(5-data.rating)), (e, i) => {
                   return (
                     <StarIcon  key={i} /> 
                     )
@@ -56,7 +72,7 @@ const FeatureBook = ({ urls, name, price, rating, categoryName, id  }) => {
             fontSize='21px' 
             fontWeight='bold'
           >
-            {name || 'Null'}
+            {data.name || 'Null'}
           </Text>
           <Text fontSize='14px'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reiciendis voluptate officiis.</Text>
@@ -70,13 +86,13 @@ const FeatureBook = ({ urls, name, price, rating, categoryName, id  }) => {
             color='#8d28ad'
             marginBottom={6}
           >
-            ${price || '0'}
+            ${data.price || '0'}
           </Text>
         </HStack>
         <HStack spacing={5}>
-          <Link to="/checkout">
-            <ButtonAddCart text='Add to cart' />
-          </Link>
+          {/* <Link to="/checkout"> */}
+            <ButtonAddCart text='Add to cart' onClick={handleAddToCart} />
+          {/* </Link> */}
           <Link to="/books/book-detail">
             <Text className='book-title'
               fontSize='14px'

@@ -92,11 +92,10 @@ li {
 .next {
   margin-left: 24px;
 }
-@media (min-width: 1024px) {
+@media (min-width: 1200px) {
   .container {
     max-width: 1320px;
   }
-  
 }
 @media (max-width: 768px) {
   .top10-book-overlay {

@@ -3,12 +3,13 @@ import { forgotPassword, login, register, resetPassword } from "./action";
 
 const initialState = {
   message: "",
-  user: "",
+  user: localStorage.getItem("user"),
   email: "",
   token: "",
   roles: "",
   loading: false,
   error: "",
+  isLogged: !!localStorage.getItem("token"),
 };
 
 export const authSlice = createSlice({
@@ -19,10 +20,11 @@ export const authSlice = createSlice({
       state.token = localStorage.getItem("token");
     },
     addUserName: (state) => {
-      state.user = localStorage.getItem("userName");
+      state.user = localStorage.getItem("user");
     },
     logout: (state) => {
       state.token = null;
+      state.isLogged = false;
       localStorage.clear();
     },
   },
@@ -33,10 +35,10 @@ export const authSlice = createSlice({
     [register.fulfilled]: (state, action) => {
       state.loading = false;
       if (!action.payload.isSuccess) {
-        state.error = action.payload.message;
+        state.error = action.payload?.message;
       } else {
         state.error = "";
-        state.message = action.payload.message;
+        state.message = action.payload?.message;
       }
     },
     [register.rejected]: (state) => {
@@ -48,6 +50,7 @@ export const authSlice = createSlice({
     },
     [login.fulfilled]: (state, action) => {
       state.loading = false;
+      state.isLogged = true;
       if (!action.payload.data.isSuccess) {
         state.error = action.payload.data.message;
       } else {
@@ -58,7 +61,7 @@ export const authSlice = createSlice({
         state.email = action.payload.data.email;
         state.roles = action.payload.data.roles;
 
-        localStorage.setItem("message", action.payload.data.message);
+        localStorage.setItem("email", action.payload.data.email);
         localStorage.setItem("user", action.payload.data.userName);
         localStorage.setItem("token", action.payload.data.token);
       }

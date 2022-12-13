@@ -1,34 +1,12 @@
 import { Box, Grid, GridItem, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
-import React, { useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header/Header";
-import Pagination from "../components/Pagination/Pagination";
 import StoreFeatures from "../components/Features/StoreFeatures";
 import Footer from "../components/Footer/Footer";
-import { useDispatch, useSelector } from "react-redux";
-import { listBooks } from "../store/cases/book/action";
-import Loading from "../components/Loading/Loading";
 import LeftSide from '../components/LeftSide/LeftSide';
+import PaginationContainer from "../components/PaginationContainer/PaginationContainer";
 
 const Books = () => {
-  const dispatch = useDispatch();
-  const { list } = useSelector((state) => state.book);
-
-  const loadBooks = useCallback(async () => {
-    try {
-      dispatch(listBooks());
-    } catch (error) {
-      console.log(error);
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    loadBooks();
-  }, [loadBooks]);
-
-  if (list.isFetching) {
-    return <Loading />;
-  }
 
   return (
     <div>
@@ -51,9 +29,7 @@ const Books = () => {
         <GridItem colSpan={1} >
           <LeftSide/>
         </GridItem>
-        <GridItem colSpan={4} align='left'>
-          <Pagination itemsPerPage={3} items={list.data}/> 
-        </GridItem>
+        <PaginationContainer />
       </Grid>
       <StoreFeatures />
       <Footer />
