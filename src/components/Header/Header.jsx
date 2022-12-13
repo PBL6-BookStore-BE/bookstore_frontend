@@ -12,8 +12,9 @@ import {
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { listCartItems } from "../../store/cases/cart/action";
 import AccountButton from "../AccountButton/AccountButton";
 import BookLogo from "../common/BookLogo";
 import { CartIcon } from "../icons";
@@ -22,11 +23,21 @@ import NavigationButton from "../NavigationButton/NavigationButton";
 import './Header.css';
 
 const Header = () => {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useSelector((state) => state.auth);
+  const { user, isLogged } = useSelector((state) => state.auth);
 
   const numberOfCartItems = useSelector((state) => state.cart.initialListCartState.totalAmount);
 
+  useEffect(() => {
+    try {
+      if (isLogged) {
+        dispatch(listCartItems());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch, isLogged])
   return (
     <Box paddingTop="20px">
       <Box
@@ -56,11 +67,11 @@ const Header = () => {
               icon={<CartIcon />}
             />
             <Box className="cart-quantity">
-              <Text fontSize="14px" color="#FFFFFF" fontWeight="500">{numberOfCartItems}</Text>
+              <Text fontSize="14px" color="#FFFFFF" fontWeight="500">{isLogged ? numberOfCartItems : 0}</Text>
             </Box>
           </Box>
         </Link>
-        {user ? (
+        {isLogged ? (
           <AccountButton username={user} />
         ) : (
           <Flex alignItems="center">

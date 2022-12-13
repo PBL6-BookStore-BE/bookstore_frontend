@@ -18,19 +18,11 @@ const BookDetail = ({ id, urls, name, authors, price, rating, publicationDate, p
   const navigate = useNavigate();
   const [count, setCount] = useState(1);   
   const [quantitiy, setQuantitiy] = useState(1);
-  const { user } = useSelector((state) => state.auth);
+  const { isLogged } = useSelector((state) => state.auth);
   const { topRating } = useSelector((state) => state.book);
 
-  const loadBooks = useCallback(async () => {
-    try {
-      dispatch(listTopRating());
-    } catch (error) {
-      console.log(error);
-    }
-  }, [dispatch]);
-
   const handleBuy = () => {
-    if (user) {
+    if (isLogged) {
       const item = { idBook: id, quantity: quantitiy }
       dispatch(saveItemToCart(item));
       navigate("/checkout");
@@ -40,8 +32,14 @@ const BookDetail = ({ id, urls, name, authors, price, rating, publicationDate, p
   }
 
   useEffect(() => {
-    loadBooks();
-  }, [loadBooks]);
+    try {
+      if (topRating.data.length <= 0) {
+        dispatch(listTopRating());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch, topRating.data.length]);
 
   if (topRating.isFetching) {
     return <Loading />;

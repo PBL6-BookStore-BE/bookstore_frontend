@@ -11,8 +11,19 @@ async function removeItem(idBook) {
         data: {idBook: idBook}
       }).then((response) => response);
 };
+async function updateItemtoCart(item) {
+    return  apiClient.put('/details', {
+        idBook: item.idBook,
+        quantity: item.quantity,
+    }).then((response) => response);
+}
+async function deleteAllCart() {
+    return apiClient.delete("/cart/all").then((response) => response);
+}
 export {
     getCartItems,
     addItemToCart,
     removeItem,
+    updateItemtoCart,
+    deleteAllCart
 }
