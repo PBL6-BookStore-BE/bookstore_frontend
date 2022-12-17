@@ -58,7 +58,9 @@ const PaymentPage = ({ cart, subtitle }) => {
         status: false,
         idPayment: idPayment[0].id,
         orderDetails: listOrder,
-        orderAddress: `${userInfo?.address}, ${userInfo?.city}`
+        orderAddress: `${userInfo?.address}, ${userInfo?.city}`,
+        receiverName: userInfo?.fullName,
+        number: userInfo?.phoneNumber,
       }
       dispatch(createNewOrder(order));
       if (error) {
@@ -209,6 +211,8 @@ const PaymentPage = ({ cart, subtitle }) => {
                     cart={cart}
                     idPayment={idPayPal}
                     orderAddress={!userInfo.address || !userInfo.city ? "" : `${userInfo?.address}, ${userInfo?.city}`}
+                    receiverName={userInfo?.fullName}
+                    number={userInfo?.phoneNumber}
                   />
                 </Box>
               )}
