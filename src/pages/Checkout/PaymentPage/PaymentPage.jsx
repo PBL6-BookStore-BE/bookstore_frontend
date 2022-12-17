@@ -34,7 +34,7 @@ const PaymentPage = ({ cart, subtitle }) => {
 
   const product = {
     description: "Thanh toán đơn hàng Clevr Store",
-    price: Number(subtitle) + 2.35,
+    price: (Number(subtitle) + 2.35).toFixed(2),
   };
 
   const idPayPal = payment?.filter((item) => item.name.toLowerCase() === "paypal");
@@ -108,7 +108,7 @@ const PaymentPage = ({ cart, subtitle }) => {
                           ...userInfo,
                           fullName: event.target.value,
                         })}
-                        isInvalid={!userInfo.fullName ? true : false}
+                        isInvalid={!userInfo?.fullName ? true : false}
                         errorBorderColor='red.300'
                       />
                     </FormControl>
@@ -125,7 +125,7 @@ const PaymentPage = ({ cart, subtitle }) => {
                           ...userInfo,
                           email: event.target.value,
                         })}
-                        isInvalid={!userInfo.email ? true : false}
+                        isInvalid={!userInfo?.email ? true : false}
                         errorBorderColor='red.300'
                       />
                     </FormControl>
@@ -143,7 +143,7 @@ const PaymentPage = ({ cart, subtitle }) => {
                           ...userInfo,
                           address: event.target.value,
                         })}
-                        isInvalid={!userInfo.address ? true : false}
+                        isInvalid={!userInfo?.address ? true : false}
                         errorBorderColor='red.300'
                       />
                     </FormControl>
@@ -160,7 +160,7 @@ const PaymentPage = ({ cart, subtitle }) => {
                           ...userInfo,
                           city: event.target.value,
                         })}
-                        isInvalid={!userInfo.city ? true : false}
+                        isInvalid={!userInfo?.city ? true : false}
                         errorBorderColor='red.300'
                       />
                     </FormControl>
@@ -177,7 +177,7 @@ const PaymentPage = ({ cart, subtitle }) => {
                           ...userInfo,
                           phoneNumber: event.target.value,
                         })}
-                        isInvalid={!userInfo.phoneNumber ? true : false}
+                        isInvalid={!userInfo?.phoneNumber ? true : false}
                         errorBorderColor='red.300'
                       />
                     </FormControl>
@@ -239,7 +239,7 @@ const PaymentPage = ({ cart, subtitle }) => {
                         <Flex flexDirection="column" alignItems="flex-end">
                           <Text fontWeight="600">${item.bookVM.price}</Text>
                           <Text fontWeight="600">Quantity {item.quantity}</Text>
-                          <Link fontSize="12px">Remove</Link>
+                          {/* <Link fontSize="12px">Remove</Link> */}
                         </Flex>
                       </Flex>
                     </Box>
@@ -272,7 +272,7 @@ const PaymentPage = ({ cart, subtitle }) => {
                 </Center>
                 <Spacer />
                 <Center>
-                  <Text fontWeight="700">${Number(subtitle) + 2.35}</Text>
+                  <Text fontWeight="700">${(Number(subtitle) + 2.35).toFixed(2)}</Text>
                 </Center>
               </Flex>
             </Box>

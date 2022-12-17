@@ -12,6 +12,7 @@ import TopRatinginDetailBook from './TopRatinginDetailBook';
 import Loading from "../../components/Loading/Loading";
 import { useNavigate } from 'react-router-dom';
 import { saveItemToCart } from '../../store/cases/cart/action';
+import { toast } from 'react-toastify';
 
 const BookDetail = ({ id, urls, name, authors, price, rating, publicationDate, publisherName }) => {
   const dispatch = useDispatch();
@@ -25,7 +26,8 @@ const BookDetail = ({ id, urls, name, authors, price, rating, publicationDate, p
     if (isLogged) {
       const item = { idBook: id, quantity: quantitiy }
       dispatch(saveItemToCart(item));
-      navigate("/checkout");
+      toast.success("Product added to cart");
+      // navigate("/checkout");
     } else {
       navigate("/login");
     }
