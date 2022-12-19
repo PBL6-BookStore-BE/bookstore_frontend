@@ -61,6 +61,7 @@ const PaymentPage = ({ cart, subtitle }) => {
         orderAddress: `${userInfo?.address}, ${userInfo?.city}`,
         receiverName: userInfo?.fullName,
         number: userInfo?.phoneNumber,
+        total: (Number(subtitle) + 2.35).toFixed(2)
       }
       dispatch(createNewOrder(order));
       if (error) {
