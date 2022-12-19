@@ -36,6 +36,7 @@ const PaypalButton = ({ product, cart, idPayment, orderAddress, number, receiver
                 orderAddress: orderAddress,
                 receiverName: receiverName,
                 number: number,
+                total: product.price,
               }
             dispatch(createNewOrder(order));
             if (error) {
