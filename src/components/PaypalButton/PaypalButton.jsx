@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { deleteCart } from '../../store/cases/cart/action';
 import { createNewOrder } from '../../store/cases/order/action';
 
-const PaypalButton = ({ product, cart, idPayment, orderAddress }) => {
+const PaypalButton = ({ product, cart, idPayment, orderAddress, number, receiverName }) => {
     const navigate = useNavigate();
     const [paidFor, setPaidFor] = useState(false);
     const [err, setErr] = useState(null);
@@ -34,7 +34,10 @@ const PaypalButton = ({ product, cart, idPayment, orderAddress }) => {
                 idPayment: idPayment[0].id,
                 orderDetails: listOrder,
                 orderAddress: orderAddress,
-            }
+                receiverName: receiverName,
+                number: number,
+                total: product.price,
+              }
             dispatch(createNewOrder(order));
             if (error) {
                 // If the response is error
