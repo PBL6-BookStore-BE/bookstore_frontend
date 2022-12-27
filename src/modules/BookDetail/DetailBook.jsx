@@ -78,7 +78,7 @@ const BookDetail = ({ id, urls, name, authors, price, rating, publicationDate, p
                     : <span></span> 
                   }
                 </HStack>
-                  <Text fontWeight='500' fontSize='13px' color='#FF7A00'>{rating}</Text>
+                  <Text fontWeight='500' fontSize='13px' color='#FF7A00'>{rating.toFixed(1)}</Text>
                 </HStack>
                 <Box
                   marginLeft='20px'

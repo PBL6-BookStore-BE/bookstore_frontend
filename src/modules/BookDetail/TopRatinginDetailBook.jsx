@@ -27,7 +27,7 @@ const TopRatinginDetailBook = ({ urls, rating, name, price, id }) => {
                             paddingRight='20px'
                             >
                                 <StarIcon/> 
-                                <Text color='#FFFFFF' fontWeight='500'>{rating}</Text>
+                                <Text color='#FFFFFF' fontWeight='500'>{rating.toFixed(1)}</Text>
                             </HStack>
                             <Text className="book-title" fontSize='18px' fontWeight='bold'>{name}</Text>
                         </VStack>

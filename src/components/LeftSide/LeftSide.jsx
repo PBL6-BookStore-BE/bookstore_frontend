@@ -16,10 +16,10 @@ const LeftSide = () => {
                 <SubMenu {...item} key={i}/>
             )
         })}
-        <Box className='btn search'>
+        <Box className='btn search' w={52}>
             Refine Search
         </Box>
-        <Box className='btn reset' type='submit' onClick={() => dispatch(clearValue())}>
+        <Box className='btn reset' w={52} type='submit' onClick={() => dispatch(clearValue())}>
             Reset Filter
         </Box>
     </div>

@@ -51,7 +51,7 @@ const Book = ({ categoryName, publisherName, name, authors, rating, price, urls,
                                 <Text lineHeight='12px'>
                                     <StarIcon />
                                 </Text>
-                                <Text fontWeight='bold'>{rating}</Text>
+                                <Text fontWeight='bold'>{rating.toFixed(1)}</Text>
                                 <Text
                                     color='#755A7D' 
                                 >
