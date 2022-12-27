@@ -10,6 +10,10 @@ async function getOrderByUser(id) {
 
 async function getOrderById(id) {
   return apiClient.get(`/order/${id}`).then(res => res.data);
-}
+};
 
-export { createOrder, getOrderByUser, getOrderById }
+async function updateStatus(data) {
+  return apiClient.post('/order/changestatus', data).then(res => res.data);
+};
+
+export { createOrder, getOrderByUser, getOrderById, updateStatus }

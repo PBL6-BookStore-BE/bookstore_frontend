@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 const OrderDetails = () => {
     const dispatch = useDispatch();
     const { userInfo } = useSelector((state) => state.user);
-    const { orderDetails } = useSelector((state) => state.order);
+    const { orderDetails, success } = useSelector((state) => state.order);
     const [page, setPage] = useState(1);
     const loadOrderByUser = useCallback(async () => {
         const email = localStorage.getItem("email") || "";
@@ -30,11 +30,11 @@ const OrderDetails = () => {
 
     useEffect(() => {
         loadOrderByUser();
-    }, [userInfo.id, loadOrderByUser]);
+    }, [userInfo.id, loadOrderByUser, success]);
 
-    if (orderDetails.isLoading) {
-        return <Loading />;
-    }
+    // if (orderDetails.isLoading) {
+    //     return <Loading />;
+    // }
 
     const numDescending = [...orderDetails.data].sort((a, b) => b.id - a.id);
 
@@ -145,6 +145,10 @@ const OrderDetails = () => {
             </Box>
             <Box  m={[0, 24]}>
                 <Heading mt={-14} mb={4} textAlign='left' size='md'>My Orders</Heading>
+                {(orderDetails.data.length === 0) 
+                ? 
+                <Heading size='md' fontWeight='600' color='#8D28AD'>No order to display.....</Heading>
+                :
                 <Table
                     colorScheme="purple"
                     totalRegisters={orderDetails.data.length}
@@ -153,6 +157,8 @@ const OrderDetails = () => {
                     columns={tableColumns}
                     data={tableData}
                 />
+        
+                }
             </Box>
             <FormOrderDetails />
             <Footer />

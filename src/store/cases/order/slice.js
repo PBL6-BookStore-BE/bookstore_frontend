@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createNewOrder, getDetailOrder, getOrderByUserId } from "./action";
+import { toast } from "react-toastify";
+import { createNewOrder, getDetailOrder, getOrderByUserId, updateStatusThunk } from "./action";
 
 const initialState = {
     isFetching: false,
     isFetching1: false,
+    isFetching2: false,
     order: [],
     error: "",
     isModalOpen: false,
@@ -11,8 +13,11 @@ const initialState = {
     orderDetails:{
         isLoading: false,
         data: [],
-    }
+    },
+    success: false,
 }
+
+export const updateStatus = createAsyncThunk('order/updateStatus', updateStatusThunk);
 
 // export const getOrderById = createAsyncThunk('order/getOrderDetails', getDetailOrderThunk);
 
@@ -58,6 +63,19 @@ export const orderSlice = createSlice({
             })
             .addCase(getDetailOrder.rejected, (state) => {
                 state.isFetching1 = false;
+            })
+            .addCase(updateStatus.pending, (state) => {
+                state.isFetching2 = true;
+            })
+            .addCase(updateStatus.fulfilled, (state) => {
+                state.isFetching2 = false;
+                state.isModalOpen = !state.isModalOpen;
+                state.success = !state.success;
+                toast.success('Thank you for your purchase!!');
+            })
+            .addCase(updateStatus.rejected, (state) => {
+                state.isFetching2 = false;
+                toast.error('Can not update status!');
             })
     }
 });
