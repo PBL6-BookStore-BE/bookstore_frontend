@@ -24,6 +24,7 @@ import Loading from "../../components/Loading/Loading";
 import { useNavigate } from "react-router-dom";
 import { saveItemToCart } from "../../store/cases/cart/action";
 import { toast } from "react-toastify";
+import CustomerReviews from "../../components/CustomerReviews/CustomerReviews";
 
 const BookDetail = ({
   id,
@@ -240,6 +241,7 @@ const BookDetail = ({
               <Text padding="16px 48px">{publisherName}</Text>
             </GridItem>
           </Grid>
+          <CustomerReviews id={id} mt={6} />
         </GridItem>
         <GridItem colSpan={2} marginLeft={8}>
           <Text fontWeight="bold">Related books</Text>

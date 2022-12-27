@@ -2,7 +2,6 @@ import { ArrowDownIcon, StarIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
-  Divider,
   Flex,
   FormControl,
   FormErrorMessage,
