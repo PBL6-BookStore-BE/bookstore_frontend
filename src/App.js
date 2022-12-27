@@ -20,6 +20,7 @@ import BookDetail from "./pages/BookDetail";
 import Checkout from "./pages/Checkout/Checkout";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import OrderComplete from "./pages/OrderComplete";
+import OrderDetails from "./pages/OrderDetails";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/recommended/*" element={<Recommended />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="order-complete" element={<OrderComplete />} />
+          <Route path="order-details" element={<OrderDetails />} />
           <Route path="/sale/*" element={<Sale />} />
         </Routes>
         <ToastContainer

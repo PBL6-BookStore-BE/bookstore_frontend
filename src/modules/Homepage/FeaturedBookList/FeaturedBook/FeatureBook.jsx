@@ -67,15 +67,18 @@ const FeatureBook = ({ data  }) => {
             </Text>
         </Flex>
         <VStack align='flex-start' spacing={2} >
-          <Text className='book-title'
-            marginTop='8px'
-            fontSize='21px' 
-            fontWeight='bold'
-          >
-            {data.name || 'Null'}
-          </Text>
-          <Text fontSize='14px'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reiciendis voluptate officiis.</Text>
+          <Link to={`/books/book-detail/${data.id}`}>
+            <Text className='book-title'
+              marginTop='8px'
+              fontSize='21px' 
+              fontWeight='bold'
+            >
+              {data.name || 'Null'}
+            </Text>
+            <Text fontSize='14px'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reiciendis voluptate officiis.
+            </Text>
+          </Link>
         </VStack>
         <HStack >
           <Text 
@@ -93,7 +96,7 @@ const FeatureBook = ({ data  }) => {
           {/* <Link to="/checkout"> */}
             <ButtonAddCart text='Add to cart' onClick={handleAddToCart} />
           {/* </Link> */}
-          <Link to="/books/book-detail">
+          <Link to={`/books/book-detail/${data.id}`}>
             <Text className='book-title'
               fontSize='14px'
               color='#8d28ad' 

@@ -58,7 +58,7 @@ const Login = () => {
           closeLoading();
         });
     } catch (error) {
-      Sentry.captureException(error); //Add Sentry
+      // Sentry.captureException(error); //Add Sentry
       closeLoading();
       toast.error(error);
     }
