@@ -12,9 +12,10 @@ import {
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { createReview, getReviewOfBook } from "../../apis/review.api";
-import { UserIcon } from "../icons";
 import Rating from "../Rating/Rating";
 import RatingProgress from "../RatingProgress/RatingProgress";
+import Loading from "../Loading/Loading";
+import Pagination from "../Pagination/Pagination";
 
 const DUMMY_STAR = {
   fiveStar: 86,
@@ -32,9 +33,14 @@ const CustomerReviews = ({ id }) => {
   const [isErrorRating, setIsErrorRating] = useState(false);
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
   const stars = Array(5).fill(0);
 
   console.log("idBook: ", id);
+
+  const fetchingReviews = () => {
+    getReviewOfBook(id).then((res) => setListReview(res));
+  };
 
   const handleInputChange = (e) => {
     setIsError(false);
@@ -61,6 +67,7 @@ const CustomerReviews = ({ id }) => {
     if (currentValue === 0) {
       setIsErrorRating(true);
     } else {
+      setIsLoading(true);
       try {
         createReview({
           rating: currentValue,
@@ -69,21 +76,26 @@ const CustomerReviews = ({ id }) => {
         })
           .then(() => {
             toast.success("Thank you for your review!");
+            setIsLoading(false);
             setCurrentValue(0);
             setInput("");
+            fetchingReviews();
           })
-          .catch((error) => toast.error("Cannot create a review!"));
+          .catch((error) => {
+            toast.error("Cannot create a review!");
+            setIsLoading(false);
+          });
       } catch (error) {
         toast.error(error);
+        setIsLoading(false);
       }
     }
   };
 
   useEffect(() => {
-    getReviewOfBook(id).then((res) => setListReview(res));
+    getReviewOfBook(id).then((reviews) => setListReview(reviews));
   }, [id]);
 
-  console.log(listReview);
   return (
     <Box>
       <Box fontSize="20px" fontWeight="600" color="#000000">
@@ -191,85 +203,28 @@ const CustomerReviews = ({ id }) => {
             )}
           </FormControl>
           <Flex justifyContent="flex-end">
-            <Button mt={4} colorScheme="purple" onClick={handleSendReview}>
+            <Button
+              mt={4}
+              colorScheme="purple"
+              onClick={handleSendReview}
+              isLoading={isLoading}
+            >
               Send
             </Button>
           </Flex>
         </Box>
       </Box>
-      <Box display={showReview}>
-        {/* {listReview.map((review, index) => (
-          <Flex padding="32px 0" key={review.id}>
-            <UserIcon size="30" />
-            <Box ml="2">
-              <Box color="#000" fontSize="12px" fontWeight="400">
-                {review.username}
-              </Box>
-              <Rating start={review.rating} height="14px" />
-              <Box
-                color="rgba(0,0,0,.87)"
-                fontSize="12px"
-                fontWeight="400"
-                mt="12px"
-              >
-                2022-12-21
-              </Box>
-              <Box fontSize="14px" color="#000" mt={2}>
-                {review.comment}
-              </Box>
-            </Box>
-          </Flex>
-        ))} */}
-        <Flex padding="32px 0">
-          <UserIcon size="30" />
-          <Box ml="2">
-            <Box color="#000" fontSize="12px" fontWeight="400">
-              Quynhhuong
-            </Box>
-            <Rating start={3} height="14px" />
-            <Box
-              color="rgba(0,0,0,.87)"
-              fontSize="12px"
-              fontWeight="400"
-              mt="12px"
-            >
-              2022-12-21
-            </Box>
-            <Box fontSize="14px" color="#000" mt={2}>
-              Clever ko bao giờ làm mình thất vọng. sách giữ kỹ sạch sẽ, ko quăn
-              mép, bọc plastic. đặt nay mai giao liền. mình đọc phần 1 trên app
-              bookstore thấy hút quá nên quất lun e này về cày cho nhẹ mắt. sách
-              rất đẹp, in rõ nét, giấy ok ko bị thấy chữ bên kia. thích sợi dây
-              làm dấu trang.
-            </Box>
-          </Box>
-        </Flex>
-        <Divider />
-        <Flex padding="32px 0">
-          <UserIcon size="30" />
-          <Box ml="2">
-            <Box color="#000" fontSize="12px" fontWeight="400">
-              Quynhhuong
-            </Box>
-            <Rating start={3} height="14px" />
-            <Box
-              color="rgba(0,0,0,.87)"
-              fontSize="12px"
-              fontWeight="400"
-              mt="12px"
-            >
-              2022-12-21
-            </Box>
-            <Box fontSize="14px" color="#000" mt={2}>
-              Clever ko bao giờ làm mình thất vọng. sách giữ kỹ sạch sẽ, ko quăn
-              mép, bọc plastic. đặt nay mai giao liền. mình đọc phần 1 trên app
-              bookstore thấy hút quá nên quất lun e này về cày cho nhẹ mắt. sách
-              rất đẹp, in rõ nét, giấy ok ko bị thấy chữ bên kia. thích sợi dây
-              làm dấu trang.
-            </Box>
-          </Box>
-        </Flex>
-      </Box>
+      {!listReview && <Loading />}
+      {listReview && (
+        <>
+          <Pagination
+            itemsPerPage={4}
+            items={listReview}
+            showReview={showReview}
+            isReview
+          />
+        </>
+      )}
     </Box>
   );
 };
