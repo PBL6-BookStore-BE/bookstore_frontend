@@ -22,3 +22,4 @@ export { default as ArrowUpIcon } from './cases/ArrowUpIcon';
 
 export { default as AddIcon } from './cases/AddIcon';
 export { default as SubIcon } from './cases/SubIcon';
+export { default as DetailsIcon } from './cases/DetailsIcon';
