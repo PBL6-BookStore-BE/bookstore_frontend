@@ -71,7 +71,6 @@ export const cartSlice = createSlice({
       }
       state.items = updatedItems;
       state.totalAmount = updatedTotalAmount;
-
       localStorage.setItem("carts", JSON.stringify(state.items));
     },
     RemoveAllItems: (state, action) => {
@@ -89,6 +88,9 @@ export const cartSlice = createSlice({
 
       localStorage.setItem("carts", JSON.stringify(state.items));
     },
+    UpdateTotalAmount: (state, action) => {
+      state.initialListCartState.totalAmount += action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -103,10 +105,6 @@ export const cartSlice = createSlice({
             return curNumber + item.quantity;
           },
           0
-        );
-        localStorage.setItem(
-          "carts",
-          JSON.stringify(state.initialListCartState)
         );
       })
       .addCase(listCartItems.rejected, (state) => {
@@ -123,14 +121,13 @@ export const cartSlice = createSlice({
             data.quantity += action.meta.arg.quantity;
           }
         });
-        state.initialListCartState.totalAmount += action.meta.arg.quantity;
-        localStorage.setItem(
-          "carts",
-          JSON.stringify(state.initialListCartState)
-        );
+        // state.initialListCartState.totalAmount = state.initialListCartState.data.reduce((curNumber, item) => {
+        //   return curNumber + item.quantity;
+        // }, 0);
       })
       .addCase(removeItemFromCart.fulfilled, (state, action) => {
         state.initialListCartState.isFetching = false;
+        console.log(action.payload);
         const existingCartItemIndex = state.initialListCartState.data.findIndex(
           (item) => item.id === action.payload.data
         );
@@ -139,38 +136,9 @@ export const cartSlice = createSlice({
           state.initialListCartState.data.reduce((curNumber, item) => {
             return curNumber + item.quantity;
           }, 0);
-        localStorage.setItem(
-          "carts",
-          JSON.stringify(state.initialListCartState)
-        );
-      })
-      .addCase(updateItem.fulfilled, (state, action) => {
-        state.initialListCartState.isFetching = false;
-        state.initialListCartState.data.map((data) => {
-          if (data?.bookVM?.id === action.meta.arg.idBook) {
-            data.quantity -= 1;
-          }
-        });
-        state.initialListCartState.totalAmount -= 1;
-        localStorage.setItem(
-          "carts",
-          JSON.stringify(state.initialListCartState)
-        );
-      })
-      .addCase(deleteCart.fulfilled, (state) => {
-        state.initialListCartState.isFetching = false;
-        state.initialListCartState.data = [];
-        state.initialCartState.totalAmount = 0;
-        localStorage.setItem(
-          "carts",
-          JSON.stringify(state.initialListCartState)
-        );
-      })
-      .addCase(deleteCart.rejected, (state, action) => {
-        state.initialListCartState.isFetching = true;
-        console.log("Error: ", action);
       });
   },
 });
-export const { AddToCart, RemoveFromCart, RemoveAllItems } = cartSlice.actions;
+export const { AddToCart, RemoveFromCart, RemoveAllItems, UpdateTotalAmount } =
+  cartSlice.actions;
 export const cartReducer = cartSlice.reducer;
