@@ -27,7 +27,12 @@ import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import { AddIcon, SubIcon } from "../../components/icons";
-import { listCartItems, removeItemFromCart, saveItemToCart, updateItem } from "../../store/cases/cart/action";
+import {
+  listCartItems,
+  removeItemFromCart,
+  saveItemToCart,
+  updateItem,
+} from "../../store/cases/cart/action";
 import { UpdateTotalAmount } from "../../store/cases/cart/slice";
 import CheckoutItem from "./CheckoutItem/CheckoutItem";
 import PaymentPage from "./PaymentPage/PaymentPage";
@@ -43,15 +48,15 @@ const Checkout = () => {
 
   const handleCheckout = () => {
     setIsCheckout(true);
-    
-  }
+  };
 
   const cartItemRemoveHanlder = (id, quantity) => {
-    dispatch(updateItem({ idBook: id, quantity: quantity - 1}));
+    dispatch(updateItem({ idBook: id, quantity: quantity - 1 }));
   };
 
   const cartItemAddHandler = (item) => {
     dispatch(saveItemToCart(item));
+    dispatch(UpdateTotalAmount(1));
   };
 
   const removeItems = (id) => {
@@ -67,7 +72,7 @@ const Checkout = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
     try {
       if (!isLogged) {
         navigate("/login");
@@ -75,15 +80,15 @@ const Checkout = () => {
         loadData();
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }, [isLogged, navigate, dispatch, loadData]);
 
   useEffect(() => {
     let temp = 0;
     listCartState?.data.map((item) => {
-      temp += item.bookVM.price * item.quantity
-    })
+      temp += item.bookVM.price * item.quantity;
+    });
     setTotal(temp?.toFixed(2));
   }, [listCartState.data]);
 
@@ -107,13 +112,18 @@ const Checkout = () => {
       {!isCheckout && (
         <Container maxW="container.lg" marginTop="10">
           {listCartState.isFetching && (
-            <Flex alignItems="center" justifyContent="center" w="100%" height="100%">
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              w="100%"
+              height="100%"
+            >
               <Spinner
-                thickness='4px'
-                speed='0.65s'
-                emptyColor='gray.200'
-                color='#8D28AD'
-                size='xl'
+                thickness="4px"
+                speed="0.65s"
+                emptyColor="gray.200"
+                color="#8D28AD"
+                size="xl"
               />
             </Flex>
           )}
@@ -136,64 +146,67 @@ const Checkout = () => {
                 </Thead>
                 <Tbody>
                   {listCartState.data.map((item) => (
-                      <Tr key={item.id}>
-                        <Td>
-                          <CheckoutItem bookData={item.bookVM} />
-                        </Td>
-                        <Td>
-                          <Box
-                            display="inline-flex"
-                            padding="8px 0px"
-                            bg="#EBEBEB"
-                            borderRadius="8px"
-                          >
-                            <Button
-                              color="brand"
-                              variant="link"
-                              _hover={{
-                                opacity: 0.6,
-                              }}
-                              mr={5}
-                              onClick={() => {
-                                cartItemRemoveHanlder(item.bookVM.id, item.quantity);
-                              }}
-                              disabled={item.quantity === 1 ? true : false}
-                            >
-                              <SubIcon />
-                            </Button>
-                            <Text fontWeight="bold">{item.quantity}</Text>
-                            <Button
-                              color="brand"
-                              variant="link"
-                              _hover={{
-                                opacity: 0.6,
-                              }}
-                              ml={5}
-                              onClick={() => {
-                                cartItemAddHandler({
-                                  idBook: item.bookVM.id,
-                                  quantity: 1
-                                });
-                              }}
-                            >
-                              <AddIcon />
-                            </Button>
-                          </Box>
-                        </Td>
-                        <Td>${item.bookVM.price.toFixed(2)}</Td>
-                        <Td>${(item.bookVM.price * item.quantity).toFixed(2)}</Td>
-                        <Td>
-                          <IconButton
-                            colorScheme="gray"
-                            variant="ghost"
-                            aria-label="Cart"
-                            icon={<DeleteIcon />}
-                            onClick={() => {
-                              removeItems(item.bookVM.id)
+                    <Tr key={item.id}>
+                      <Td>
+                        <CheckoutItem bookData={item.bookVM} />
+                      </Td>
+                      <Td>
+                        <Box
+                          display="inline-flex"
+                          padding="8px 0px"
+                          bg="#EBEBEB"
+                          borderRadius="8px"
+                        >
+                          <Button
+                            color="brand"
+                            variant="link"
+                            _hover={{
+                              opacity: 0.6,
                             }}
-                          />
-                        </Td>
-                      </Tr>
+                            mr={5}
+                            onClick={() => {
+                              cartItemRemoveHanlder(
+                                item.bookVM.id,
+                                item.quantity
+                              );
+                            }}
+                            disabled={item.quantity === 1 ? true : false}
+                          >
+                            <SubIcon />
+                          </Button>
+                          <Text fontWeight="bold">{item.quantity}</Text>
+                          <Button
+                            color="brand"
+                            variant="link"
+                            _hover={{
+                              opacity: 0.6,
+                            }}
+                            ml={5}
+                            onClick={() => {
+                              cartItemAddHandler({
+                                idBook: item.bookVM.id,
+                                quantity: 1,
+                              });
+                            }}
+                          >
+                            <AddIcon />
+                          </Button>
+                        </Box>
+                      </Td>
+                      <Td>${item.bookVM.price.toFixed(2)}</Td>
+                      <Td>${(item.bookVM.price * item.quantity).toFixed(2)}</Td>
+                      <Td>
+                        <IconButton
+                          colorScheme="gray"
+                          variant="ghost"
+                          aria-label="Cart"
+                          icon={<DeleteIcon />}
+                          onClick={() => {
+                            removeItems(item.bookVM.id);
+                          }}
+                        />
+                      </Td>
+                    </Tr>
                   ))}
                 </Tbody>
               </Table>
@@ -207,42 +220,64 @@ const Checkout = () => {
             />
             <Flex>
               <Box w="50%">
-                <Text fontSize='2xl' fontWeight="600">Shopping Summary</Text>
-                <Text marginTop="30px" color="rgba(0, 0, 0, 0.5)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
+                <Text fontSize="2xl" fontWeight="600">
+                  Shopping Summary
+                </Text>
+                <Text marginTop="30px" color="rgba(0, 0, 0, 0.5)">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </Text>
               </Box>
               <Spacer />
               <Box w="50%">
                 <Flex>
                   <Center>
-                    <Text color="#755A7D" fontWeight="500">Subtitle</Text>
+                    <Text color="#755A7D" fontWeight="500">
+                      Subtitle
+                    </Text>
                   </Center>
                   <Spacer />
                   <Center>
-                    <Text fontWeight="700">${listCartState.isFetching ? 0 : total}</Text>
+                    <Text fontWeight="700">
+                      ${listCartState.isFetching ? 0 : total}
+                    </Text>
                   </Center>
                 </Flex>
                 <Flex marginTop="16px">
                   <Center>
-                    <Text color="#755A7D" fontWeight="500">Shipping</Text>
+                    <Text color="#755A7D" fontWeight="500">
+                      Shipping
+                    </Text>
                   </Center>
                   <Spacer />
                   <Center>
-                    <Text fontWeight="700">${listCartState.isFetching ? 0 : 2.35}</Text>
+                    <Text fontWeight="700">
+                      ${listCartState.isFetching ? 0 : 2.35}
+                    </Text>
                   </Center>
                 </Flex>
-                <Divider orientation='horizontal' marginTop="16px" borderColor="#D5A4E4" />
+                <Divider
+                  orientation="horizontal"
+                  marginTop="16px"
+                  borderColor="#D5A4E4"
+                />
                 <Flex marginTop="16px">
                   <Center>
-                    <Text color="#755A7D" fontWeight="500">Total</Text>
+                    <Text color="#755A7D" fontWeight="500">
+                      Total
+                    </Text>
                   </Center>
                   <Spacer />
                   <Center>
-                    <Text fontWeight="700">${listCartState.isFetching ? 0 : (Number(total) + 2.35)}</Text>
+                    <Text fontWeight="700">
+                      ${listCartState.isFetching ? 0 : Number(total) + 2.35}
+                    </Text>
                   </Center>
                 </Flex>
                 <Button
                   bgColor="#8D28AD"
-                  color="#FFF" w="100%"
+                  color="#FFF"
+                  w="100%"
                   marginTop="20px"
                   _hover={{
                     opacity: "0.8",
@@ -252,10 +287,24 @@ const Checkout = () => {
                 >
                   Checkout
                 </Button>
-                <Flex alignItems="center" justifyContent="center" className="link-shopping">
-                  <Link to="/books" style={{ color: "#8D28AD", fontWeight: "600", fontSize: "14px", marginTop: "10px" }}>Continue Shopping</Link>
+                <Flex
+                  alignItems="center"
+                  justifyContent="center"
+                  className="link-shopping"
+                >
+                  <Link
+                    to="/books"
+                    style={{
+                      color: "#8D28AD",
+                      fontWeight: "600",
+                      fontSize: "14px",
+                      marginTop: "10px",
+                    }}
+                  >
+                    Continue Shopping
+                  </Link>
                 </Flex>
-              </Box>          
+              </Box>
             </Flex>
           </Box>
         </Container>

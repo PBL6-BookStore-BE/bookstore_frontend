@@ -22,10 +22,11 @@ import { listTopRating } from "../../store/cases/book/action";
 import TopRatinginDetailBook from "./TopRatinginDetailBook";
 import Loading from "../../components/Loading/Loading";
 import { useNavigate } from "react-router-dom";
-import { saveItemToCart } from "../../store/cases/cart/action";
 import { toast } from "react-toastify";
 import CustomerReviews from "../../components/CustomerReviews/CustomerReviews";
 import { getReviewOfBook } from "../../apis/review.api";
+import { saveItemToCart } from "../../store/cases/cart/action";
+import { UpdateTotalAmount } from "../../store/cases/cart/slice";
 
 const BookDetail = ({
   id,
@@ -50,8 +51,7 @@ const BookDetail = ({
     if (isLogged) {
       const item = { idBook: id, quantity: quantitiy };
       dispatch(saveItemToCart(item));
-      toast.success("Product added to cart");
-      // navigate("/checkout");
+      dispatch(UpdateTotalAmount(quantitiy));
     } else {
       navigate("/login");
     }
