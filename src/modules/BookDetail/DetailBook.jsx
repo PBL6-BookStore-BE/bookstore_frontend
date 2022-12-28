@@ -25,6 +25,7 @@ import { useNavigate } from "react-router-dom";
 import { saveItemToCart } from "../../store/cases/cart/action";
 import { toast } from "react-toastify";
 import CustomerReviews from "../../components/CustomerReviews/CustomerReviews";
+import { getReviewOfBook } from "../../apis/review.api";
 
 const BookDetail = ({
   id,
@@ -35,11 +36,13 @@ const BookDetail = ({
   rating,
   publicationDate,
   publisherName,
+  description,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [count, setCount] = useState(1);
   const [quantitiy, setQuantitiy] = useState(1);
+  const [listReview, setListReview] = useState();
   const { isLogged } = useSelector((state) => state.auth);
   const { topRating } = useSelector((state) => state.book);
 
@@ -62,7 +65,11 @@ const BookDetail = ({
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch, topRating.data.length]);
+  }, [dispatch, topRating.data.length, rating]);
+
+  useEffect(() => {
+    getReviewOfBook(id).then((reviews) => setListReview(reviews));
+  }, [id]);
 
   if (topRating.isFetching) {
     return <Loading />;
@@ -107,7 +114,7 @@ const BookDetail = ({
               color="#4D4D4D"
               borderRadius="12px"
             >
-              127 Reviews
+              {listReview?.length} Reviews
             </Box>
           </Flex>
           <VStack align="flex-start" spacing={5} mb={10}>
@@ -127,10 +134,7 @@ const BookDetail = ({
               </Text>
             </Flex>
             <Text>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut
-              dicta maiores voluptatibus itaque dolores repellat ratione. Rerum
-              officiis deleniti corrupti nobis similique fugiat explicabo, iure,
-              iusto optio ab esse quisquam.
+              {description}
             </Text>
           </VStack>
           <VStack align="flex-start" spacing={5}>

@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Box, Text, VStack, HStack, Image, AspectRatio } from "@chakra-ui/react";
 import { StarIcon } from "../../../components/icons";
 import { Link } from "react-router-dom";
 import './style.css'
 import ButtonAddCart from "../../../components/ButtonAddCart/ButtonAddCart"
+import { getReviewOfBook } from '../../../apis/review.api';
 
 
-const Book = ({ categoryName, publisherName, name, authors, rating, price, urls, id }) => {
+const Book = ({ categoryName, publisherName, name, authors, rating, price, urls, id, description }) => {
+    const [listReview, setListReview] = useState();
+    useEffect(() => {
+        getReviewOfBook(id).then((reviews) => setListReview(reviews));
+    }, [id]);
+
     return (
         <Box className='column-layout'>
             <Link to={`/books/book-detail/${id}`}>
@@ -55,11 +61,11 @@ const Book = ({ categoryName, publisherName, name, authors, rating, price, urls,
                                 <Text
                                     color='#755A7D' 
                                 >
-                                    (166 reviews)
+                                    ({listReview?.length} reviews)
                                 </Text>
                             </HStack>
                             <Text fontSize='14px'>
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                                {description}
                             </Text>
                         </VStack>
                     </Link>
