@@ -3,7 +3,6 @@ import React from "react";
 import { StarIcon } from "../icons";
 
 const RatingProgress = ({ value }) => {
-  console.log(value.fiveStar);
   return (
     <Box>
       <Flex alignItems="center" justifyContent="space-between">
