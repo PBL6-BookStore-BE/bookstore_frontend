@@ -133,9 +133,7 @@ const BookDetail = ({
                 {authors[0]}
               </Text>
             </Flex>
-            <Text>
-              {description}
-            </Text>
+            <Text>{description}</Text>
           </VStack>
           <VStack align="flex-start" spacing={5}>
             <Text fontSize="35px" fontWeight="bold" color="#8D28AD">
@@ -245,7 +243,7 @@ const BookDetail = ({
               <Text padding="16px 48px">{publisherName}</Text>
             </GridItem>
           </Grid>
-          <CustomerReviews id={id} mt={6} />
+          <CustomerReviews id={id} rating={rating} mt={6} />
         </GridItem>
         <GridItem colSpan={2} marginLeft={8}>
           <Text fontWeight="bold">Related books</Text>

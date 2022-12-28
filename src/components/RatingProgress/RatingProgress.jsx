@@ -20,7 +20,7 @@ const RatingProgress = ({ value }) => {
           </Box>
         </Box>
         <Progress
-          value={value.fiveStar}
+          value={value[5] || 0}
           size="xs"
           colorScheme="orange"
           minW="200px"
@@ -28,7 +28,7 @@ const RatingProgress = ({ value }) => {
           borderRadius="15px"
         />
         <Box color="#000000" fontWeight="500" fontSize="16px">
-          {value.fiveStar} %
+          {value[5] || 0} %
         </Box>
       </Flex>
       <Flex alignItems="center" justifyContent="space-between" mt={2}>
@@ -45,7 +45,7 @@ const RatingProgress = ({ value }) => {
           </Box>
         </Box>
         <Progress
-          value={value.fourStar}
+          value={value[4] || 0}
           size="xs"
           colorScheme="orange"
           minW="200px"
@@ -53,7 +53,7 @@ const RatingProgress = ({ value }) => {
           borderRadius="15px"
         />
         <Box color="#000000" fontWeight="500" fontSize="16px">
-          {value.fourStar} %
+          {value[4] || 0} %
         </Box>
       </Flex>
       <Flex alignItems="center" justifyContent="space-between" mt={2}>
@@ -70,7 +70,7 @@ const RatingProgress = ({ value }) => {
           </Box>
         </Box>
         <Progress
-          value={value.threeStar}
+          value={value[3] || 0}
           size="xs"
           colorScheme="orange"
           minW="200px"
@@ -78,7 +78,7 @@ const RatingProgress = ({ value }) => {
           borderRadius="15px"
         />
         <Box color="#000000" fontWeight="500" fontSize="16px">
-          {value.threeStar} %
+          {value[3] || 0} %
         </Box>
       </Flex>
       <Flex alignItems="center" justifyContent="space-between" mt={2}>
@@ -95,7 +95,7 @@ const RatingProgress = ({ value }) => {
           </Box>
         </Box>
         <Progress
-          value={value.twoStar}
+          value={value[2] || 0}
           size="xs"
           colorScheme="orange"
           minW="200px"
@@ -103,7 +103,7 @@ const RatingProgress = ({ value }) => {
           borderRadius="15px"
         />
         <Box color="#000000" fontWeight="500" fontSize="16px">
-          {value.twoStar} %
+          {value[2] || 0} %
         </Box>
       </Flex>
       <Flex alignItems="center" justifyContent="space-between" mt={2}>
@@ -120,7 +120,7 @@ const RatingProgress = ({ value }) => {
           </Box>
         </Box>
         <Progress
-          value={value.oneStar}
+          value={value[1] || 0}
           size="xs"
           colorScheme="orange"
           minW="200px"
@@ -128,7 +128,7 @@ const RatingProgress = ({ value }) => {
           borderRadius="15px"
         />
         <Box color="#000000" fontWeight="500" fontSize="16px">
-          {value.oneStar} %
+          {value[1] || 0} %
         </Box>
       </Flex>
     </Box>

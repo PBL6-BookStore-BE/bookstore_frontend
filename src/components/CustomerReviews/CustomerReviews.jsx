@@ -15,6 +15,8 @@ import Rating from "../Rating/Rating";
 import RatingProgress from "../RatingProgress/RatingProgress";
 import Loading from "../Loading/Loading";
 import Pagination from "../Pagination/Pagination";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const DUMMY_STAR = {
   fiveStar: 86,
@@ -23,7 +25,9 @@ const DUMMY_STAR = {
   twoStar: 5,
   oneStar: 8,
 };
-const CustomerReviews = ({ id }) => {
+const CustomerReviews = ({ id, rating }) => {
+  const navigate = useNavigate();
+  const [percentStar, setPercentStar] = useState();
   const [showReview, setShowReview] = useState("none");
   const [showBtn, setShowBtn] = useState("flex");
   const [listReview, setListReview] = useState();
@@ -33,6 +37,7 @@ const CustomerReviews = ({ id }) => {
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
+  const { isLogged } = useSelector((state) => state.auth);
   const stars = Array(5).fill(0);
 
   console.log("idBook: ", id);
@@ -60,41 +65,68 @@ const CustomerReviews = ({ id }) => {
   };
 
   const handleSendReview = () => {
-    if (!input) {
-      setIsError(true);
-    }
-    if (currentValue === 0) {
-      setIsErrorRating(true);
+    if (!isLogged) {
+      toast.warning("Please login to send a review!!!");
+      navigate("/login");
     } else {
-      setIsLoading(true);
-      try {
-        createReview({
-          rating: currentValue,
-          comment: input,
-          idBook: id,
-        })
-          .then(() => {
-            toast.success("Thank you for your review!");
-            setIsLoading(false);
-            setCurrentValue(0);
-            setInput("");
-            fetchingReviews();
+      if (!input) {
+        setIsError(true);
+      }
+      if (currentValue === 0) {
+        setIsErrorRating(true);
+      } else {
+        setIsLoading(true);
+        try {
+          createReview({
+            rating: currentValue,
+            comment: input,
+            idBook: id,
           })
-          .catch((error) => {
-            toast.error("Cannot create a review!");
-            setIsLoading(false);
-          });
-      } catch (error) {
-        toast.error(error);
-        setIsLoading(false);
+            .then(() => {
+              toast.success("Thank you for your review!");
+              setIsLoading(false);
+              setCurrentValue(0);
+              setInput("");
+              fetchingReviews();
+            })
+            .catch((error) => {
+              toast.error("Cannot create a review!");
+              setIsLoading(false);
+            });
+        } catch (error) {
+          toast.error(error);
+          setIsLoading(false);
+        }
       }
     }
   };
 
   useEffect(() => {
-    getReviewOfBook(id).then((reviews) => setListReview(reviews));
+    getReviewOfBook(id).then((reviews) => {
+      setListReview(reviews);
+      const countedHash = reviews.reduce((acc, curr) => {
+        if (!acc[curr.rating]) acc[curr.rating] = 1;
+        else acc[curr.rating] += 1;
+        return acc;
+      }, {});
+      const values = Object.values(countedHash);
+
+      const sum = values.reduce((accumulator, value) => {
+        return accumulator + value;
+      }, 0);
+
+      for (let i = 1; i < 6; i++) {
+        if (countedHash[i]) {
+          countedHash[i] = ((countedHash[i] * 100) / sum).toFixed(0);
+        } else {
+          countedHash[i] = 0;
+        }
+      }
+      setPercentStar(countedHash);
+    });
   }, [id]);
 
+  console.log(percentStar);
   return (
     <Box>
       <Box fontSize="20px" fontWeight="600" color="#000000">
@@ -114,13 +146,13 @@ const CustomerReviews = ({ id }) => {
         <Flex flexDirection="column">
           <Box color="#4D4D4D" mb={1}>
             <Box fontWeight="600" fontSize="30px" display="inline">
-              4.7
-            </Box>
+              {rating}
+            </Box>{" "}
             <Box fontWeight="500" fontSize="20px" display="inline">
               out of 5
             </Box>
           </Box>
-          <Rating start={3} />
+          <Rating start={rating} />
         </Flex>
         <Box
           fontSize="14px"
@@ -133,7 +165,7 @@ const CustomerReviews = ({ id }) => {
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim"
         </Box>
-        <RatingProgress value={DUMMY_STAR} />
+        <RatingProgress value={percentStar} />
         <Button
           leftIcon={<ArrowDownIcon />}
           w="160px"
