@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {HStack, VStack, Text, Box, Flex, Image, AspectRatio } from "@chakra-ui/react";
 import { StarIcon } from "../../../../components/icons";
 import ButtonAddCart from "../../../../components/ButtonAddCart/ButtonAddCart"
@@ -7,10 +7,12 @@ import '../../Top10List/BookTop10/style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { saveItemToCart } from '../../../../store/cases/cart/action';
+import { getReviewOfBook } from '../../../../apis/review.api';
 
 const FeatureBook = ({ data  }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [listReview, setListReview] = useState();
   const { isLogged } = useSelector((state) => state.auth);
 
   const handleAddToCart = () => {
@@ -22,6 +24,10 @@ const FeatureBook = ({ data  }) => {
       navigate("/login");
     }
   }
+  useEffect(() => {
+    getReviewOfBook(data.id).then((reviews) => setListReview(reviews));
+  }, [data.id]);
+
   return (
     <HStack
       cursor="pointer"
@@ -63,7 +69,7 @@ const FeatureBook = ({ data  }) => {
             }
             </Box>
             <Text color='#755A7D' marginLeft='16px' fontSize='14px' alignSelf='center'>
-              459 Reviews
+              {listReview?.length} Reviews
             </Text>
         </Flex>
         <VStack align='flex-start' spacing={2} >
