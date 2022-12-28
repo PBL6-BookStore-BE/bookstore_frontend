@@ -117,7 +117,7 @@ const CustomerReviews = ({ id, rating }) => {
 
       for (let i = 1; i < 6; i++) {
         if (countedHash[i]) {
-          countedHash[i] = ((countedHash[i] * 100) / sum).toFixed(0);
+          countedHash[i] = Number(((countedHash[i] * 100) / sum).toFixed(0));
         } else {
           countedHash[i] = 0;
         }
